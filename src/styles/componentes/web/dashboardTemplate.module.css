@@ -1,0 +1,42 @@
+.bgDashboard {
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: #181818;
+}
+.bgSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.HeaderContainer {
+  width: 100%;
+  background-color: rebeccapurple;
+}
+
+.sidebarContainer {
+  width: 62px;
+}
+.appModuleContainer {
+  width: 95%;
+  background-color: red;
+}
+.appGadgetsContainer {
+}
+.appModuleSection {
+}
+
+.dropPomoContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.pomodoroContainer {
+  display: flex;
+  align-items: center;
+}
+
+.TasksViewContainer {
+}

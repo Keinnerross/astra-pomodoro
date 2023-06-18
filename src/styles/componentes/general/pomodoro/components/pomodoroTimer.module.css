@@ -1,0 +1,13 @@
+.pomodoroContainer {
+  align-items: center;
+  justify-content: center;
+}
+
+.pomoTimeContainer {
+  font-size: 70px;
+  font-weight: 700;
+}
+
+.focusWarrior {
+  font-size: 20px;
+}

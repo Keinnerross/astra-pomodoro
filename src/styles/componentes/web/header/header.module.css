@@ -1,0 +1,47 @@
+.headerContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.headerSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.elementsHeaderSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.searchBar {
+  width: 350px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.textInput {
+  width: 100%;
+  color: gray;
+  margin-left: 5px;
+}
+
+.userHeaderSection {
+  padding-left: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.iconContainer {
+  padding: 10px;
+  margin: 3px;
+}

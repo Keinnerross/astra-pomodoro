@@ -1,0 +1,16 @@
+.taskContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.taskTitleSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputTitleTask {
+  width: 120px;
+}

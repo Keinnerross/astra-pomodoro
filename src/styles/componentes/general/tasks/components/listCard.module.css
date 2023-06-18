@@ -1,0 +1,29 @@
+.TaskCardContainer {
+  width: 250px;
+  min-width: 250px;
+  padding: 15px;
+}
+
+.titleListSection {
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  width: 100%;
+}
+
+.inputTextList {
+  max-width: 120px;
+  font-size: 20px;
+}
+
+.addTaskInput {
+  max-width: 120px;
+  font-size: 16px;
+}
+
+.addTaskSection {
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
