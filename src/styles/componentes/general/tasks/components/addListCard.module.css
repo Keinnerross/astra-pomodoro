@@ -1,6 +1,13 @@
 .addListContainer {
-  width: 60%;
+  width: 600px;
   height: 50px;
   margin-bottom: 20px;
   border-radius: 9px;
+}
+
+.addListContainerform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

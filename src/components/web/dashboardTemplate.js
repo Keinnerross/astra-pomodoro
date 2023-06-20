@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import styles from "@/styles/componentes/web/dashboardTemplate.module.css";
 import SidebarNav from "@/components/web/SidebarNav/sidebarNav";
 import Header from "@/components/web/header/header";
@@ -60,17 +62,15 @@ const DashboardTemplate = () => {
             <div className={styles.HeaderContainer}>
               <Header />
             </div>
-            <div className={styles.appModuleSection}>
-              <div className={styles.appGadgetsContainer}>
-                <div className={styles.pomodoroContainer}>
-                  <MainPomodoro
-                    ifOpen={ifOpenPomo}
-                    settingConfig={settingResult}
-                  />
-                </div>
-                <div className={styles.TasksViewContainer}>
-                  <MainTasks />
-                </div>
+            <div className={styles.appGadgetsContainer}>
+              <div className={styles.pomodoroContainer}>
+                <MainPomodoro
+                  ifOpen={ifOpenPomo}
+                  settingConfig={settingResult}
+                />
+              </div>
+              <div className={styles.TasksViewContainer}>
+                <MainTasks />
               </div>
             </div>
           </div>

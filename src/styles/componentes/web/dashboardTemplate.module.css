@@ -1,31 +1,39 @@
 .bgDashboard {
   width: 100vw;
   max-width: 100%;
-  min-height: 100vh;
   background-color: #181818;
+  min-height: 100vh;
 }
 .bgSection {
   width: 100%;
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100%;
 }
 .HeaderContainer {
   width: 100%;
-  background-color: rebeccapurple;
 }
 
 .sidebarContainer {
-  width: 62px;
+  width: 5%;
+  justify-content: space-between;
+  display: flex;
 }
 .appModuleContainer {
-  width: 95%;
-  background-color: red;
+  width: 100vw;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .appGadgetsContainer {
-}
-.appModuleSection {
+  padding-top: 40px;
+  width: 80vw;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .dropPomoContainer {
@@ -34,9 +42,8 @@
 }
 
 .pomodoroContainer {
-  display: flex;
-  align-items: center;
 }
 
 .TasksViewContainer {
+  padding-top: 20px;
 }

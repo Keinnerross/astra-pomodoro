@@ -143,10 +143,10 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
         restPomo={restPomo}
         stopPomo={stopPomo}
       />
-      <h3 style={{ color: "white" }}>
-        <CyclePomo cyclePomo={cyclePomo} />
-        /4 {pomoSession}
+      <h3 style={{ color: "white", display: "flex" }}>
+        <CyclePomo cyclePomo={cyclePomo} /> /4
       </h3>
+      {pomoSession}
       <ProgressBar time={time} barValue={barValue} />
     </div>
   );

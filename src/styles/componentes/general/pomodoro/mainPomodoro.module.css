@@ -1,5 +1,7 @@
 .pomodoroMainContainer {
-  width: 40%;
-  min-width: 40%;
+  min-width: 600px;
   border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

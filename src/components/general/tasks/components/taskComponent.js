@@ -62,10 +62,10 @@ const Task = ({ title, ifDone, idTask, idList }) => {
       <div className={styles.taskTitleSection}>
         <input
           type="checkbox"
-          style={{ marginRight: 5 }}
+          style={{ marginRight: 5, backgroundColor: "white" }}
           value={checkValue}
           onChange={() => handleCheck(idList, idTask)}
-        ></input>
+        />
         <input
           className={styles.inputTitleTask}
           style={{ color: configTheme.iconColor }}
@@ -73,8 +73,8 @@ const Task = ({ title, ifDone, idTask, idList }) => {
           onChange={handleInputName}
         />
       </div>
+      <button className={styles.deleteTaskBtn}>x</button>
 
-      <button>Elipsis</button>
       {/* <Text style={{ color: configTheme.iconColor }}>CheckInput</Text> */}
     </div>
   );

@@ -1,7 +1,11 @@
 import styles from "@/styles/componentes/web/header/header.module.css";
+import { BiSearch, BiRefresh } from "react-icons/bi";
+import { IoMdNotifications } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const iconSize = 25;
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerSection}>
@@ -10,7 +14,9 @@ const Header = () => {
         </div>
         <div className={styles.elementsHeaderSection}>
           <div className={styles.searchBar}>
-            <button>search</button>
+            <button>
+              <BiSearch size={iconSize} />
+            </button>
             <input
               type="text"
               className={styles.textInput}
@@ -19,13 +25,19 @@ const Header = () => {
           </div>
           <div className={styles.userHeaderSection}>
             <div className={styles.iconContainer}>
-              <button>Refresh</button>
+              <button>
+                <BiRefresh size={iconSize} />
+              </button>
             </div>
             <div className={styles.iconContainer}>
-              <button>Notification</button>
+              <button>
+                <IoMdNotifications size={iconSize} />
+              </button>
             </div>
             <div className={styles.iconContainer}>
-              <button>User</button>
+              <button>
+                <FaUserCircle size={iconSize} />
+              </button>
             </div>
           </div>
         </div>

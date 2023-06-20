@@ -1,16 +1,30 @@
 .taskContainer {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  padding: 5px 0;
 }
 
+.taskSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 .taskTitleSection {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .inputTitleTask {
-  width: 120px;
+  width: 150px;
+  font-size: 16px;
+}
+
+.deleteTaskBtn {
+  display: none;
+}
+
+.taskContainer:hover > .deleteTaskBtn {
+  display: inline;
 }

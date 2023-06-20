@@ -1,6 +1,9 @@
 .sidebarMain {
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sidebarSection {
@@ -11,16 +14,27 @@
 
 .navSection {
   height: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 30px;
 }
 
 .settingSection {
   height: 30%;
-  display: flex ;
+  display: flex;
+  flex-wrap: wrap-reverse;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 10px;
 }
 
 .iconContainer {
-  padding: 10px;
+  max-width: 50px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   /* margin: 3px; */
 }

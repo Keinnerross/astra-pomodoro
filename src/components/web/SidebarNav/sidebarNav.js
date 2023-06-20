@@ -1,5 +1,14 @@
 import styles from "@/styles/componentes/web/sidebar/sidebar.module.css";
 
+/*Import Icons */
+import { AiOutlineMenu } from "react-icons/ai";
+import { FaPaintBrush } from "react-icons/fa";
+
+import { TbMessageLanguage } from "react-icons/tb";
+import { MdHelp, MdLogout, MdSettings } from "react-icons/md";
+
+// import { BiSolidHelpCircle, BiLogOut } from "react-icons/bi";
+
 const SidebarNav = ({ theme, ifActive }) => {
   const themeSelect = theme[1];
 
@@ -7,30 +16,31 @@ const SidebarNav = ({ theme, ifActive }) => {
     themeColor: themeSelect.themeColor,
     iconSize: 25,
     iconColor: themeSelect.iconColor,
+    
   };
   return (
     <div className={styles.sidebarMain}>
       <div className={styles.sidebarSection}>
         <div className={styles.navSection}>
           <button className={styles.iconContainer}>
-            <p>Icono Menu</p>
+            <AiOutlineMenu size={configTheme.iconSize} />
           </button>
           <button className={styles.iconContainer} onClick={() => ifActive()}>
-            <p>Icono broch</p>
+            <FaPaintBrush size={configTheme.iconSize} />
           </button>
           <button className={styles.iconContainer}>
-            <p>Icono Globo</p>
+            <TbMessageLanguage size={configTheme.iconSize} />
           </button>
           <button className={styles.iconContainer}>
-            <p>Icono Ayuda</p>
+            <MdHelp size={configTheme.iconSize} />
           </button>
         </div>
         <div className={styles.settingSection}>
           <button className={styles.iconContainer}>
-            <p>Icono settings</p>
+            <MdSettings size={configTheme.iconSize} />
           </button>
           <button className={styles.iconContainer}>
-            <p>Icono LogOut</p>
+            <MdLogout size={configTheme.iconSize} />
           </button>
         </div>
       </div>

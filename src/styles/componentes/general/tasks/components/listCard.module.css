@@ -2,18 +2,41 @@
   width: 250px;
   min-width: 250px;
   padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 7px 10px 7px;
+  text-align: left;
+  height: auto;
+  max-height: 300px;
+  overflow: auto;
+  break-inside: avoid-column;
+  border-radius: 9px;
 }
 
 .titleListSection {
+  width: 100%;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 2px;
-  width: 100%;
+  padding: 10px 0;
 }
 
 .inputTextList {
   max-width: 120px;
   font-size: 20px;
+  background-color: transparent;
+}
+
+.taskListSectionForm {
+  width: 100%;
+}
+
+.taskListSection {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .addTaskInput {
@@ -26,4 +49,5 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 5px;
+  break-inside: avoid-column;
 }

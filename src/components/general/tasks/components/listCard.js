@@ -15,6 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import ListSettingMenu from "./listSettingMenu";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const ListCard = ({
   idList,
@@ -22,7 +23,7 @@ const ListCard = ({
   updateList,
   deleteLista,
   tasksDt,
-  // addNewTaskProp,
+  addNewTaskProp,
 }) => {
   /*Configuracion Theme */
   const themeSelect = themes[1];
@@ -81,7 +82,6 @@ const ListCard = ({
       className={styles.TaskCardContainer}
       style={{
         backgroundColor: configTheme.themeColor,
-        margin: 6,
       }}
     >
       <ListSettingMenu
@@ -98,38 +98,43 @@ const ListCard = ({
         />
 
         <button onClick={() => setSettingActive(!settingActive)}>
-          <p>settings</p>
+          <BsThreeDotsVertical />
         </button>
       </div>
-
-      <div className={styles.taskListSection}>
-        <div className={styles.addTaskSection}>
-          <input
-            className={styles.addTaskInput}
-            style={{ color: configTheme.iconColor }}
-            defaultValue="Add a Task"
-            onChange={handleInputTask}
-          />
-          <button onClick={() => addNewTaskProp(idList, values)}></button>
+      <form
+        className={styles.taskListSectionForm}
+        onSubmit={(e) => {
+          e.preventDefault();
+          addNewTaskProp(idList, values);
+        }}
+      >
+        <div className={styles.taskListSection}>
+          {tasksDt
+            ? tasksDt.map((task, i) => {
+                return (
+                  <Task
+                    style={{ color: configTheme.iconColor }}
+                    idTask={task.taskId}
+                    title={task.taskName}
+                    ifDone={task.done}
+                    idList={idList}
+                    key={task.taskId}
+                  />
+                );
+              })
+            : console.log("noapasaonaa")}
+          {/* Por Corregir el condicional
+           */}
+          <div className={styles.addTaskSection}>
+            <input
+              className={styles.addTaskInput}
+              style={{ color: configTheme.iconColor }}
+              defaultValue="+ Add new task"
+              onChange={handleInputTask}
+            />
+          </div>
         </div>
-
-        {tasksDt
-          ? tasksDt.map((task, i) => {
-              return (
-                <Task
-                  style={{ color: configTheme.iconColor }}
-                  idTask={task.taskId}
-                  title={task.taskName}
-                  ifDone={task.done}
-                  idList={idList}
-                  key={task.taskId}
-                />
-              );
-            })
-          : console.log("noapasaonaa")}
-        {/* Por Corregir el condicional
-         */}
-      </div>
+      </form>
     </div>
   );
 };

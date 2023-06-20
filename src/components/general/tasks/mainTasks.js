@@ -1,4 +1,11 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  FC,
+  forwardRef,
+} from "react";
 import styles from "@/styles/componentes/general/tasks/mainTasks.module.css";
 import ListCard from "./components/listCard";
 import AddListCard from "./components/addListCard";
@@ -15,6 +22,11 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { ReactSortable } from "react-sortablejs";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const MainTasks = () => {
   const [lists, setLists] = useState([]);
@@ -131,33 +143,78 @@ const MainTasks = () => {
     }
   };
 
-  console.log(lists);
+  const reorder = (list, startIndex, endIndex) => {
+    const result = [...list];
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+
+    return result;
+  };
+
+  const dragEnd = (result) => {
+    const { source, destination } = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    ) {
+      return;
+    }
+    setLists((prevTaskArr) =>
+      reorder(prevTaskArr, source.index, destination.index)
+    );
+  };
+
+  const handleWheel = (event) => {
+    const container = event.currentTarget;
+    container.scrollLeft += event.deltaY;
+  };
 
   return (
     <div className={styles.mainTasksContainer}>
       <AddListCard addList={addList} />
-      <div className={styles.some}>
-        <div
-          style={{
-            maxWidth: 1150,
-            height: "auto",
-            maxHeight: 340,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          {lists.map((item) => (
-            <ListCard
-              key={item.id}
-              listName={item.listName}
-              idList={item.id}
-              tasksDt={item.tasks}
-              updateList={updateList}
-              addNewTaskProp={addNewTask}
-              data-id={item.id}
-            />
-          ))}
-        </div>
+      <div className={styles.listContainer}>
+        <DragDropContext onDragEnd={dragEnd}>
+          <Droppable droppableId="tasksArr" direction="horizontal">
+            {(provided) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className={styles.listContainer}
+                onWheel={handleWheel}
+              >
+                {lists.map((item, i) => (
+                  <Draggable
+                    className={styles.dragableItem}
+                    key={item.id}
+                    draggableId={item.id.toString()}
+                    index={i}
+                  >
+                    {(provided) => (
+                      <div
+                        {...provided.draggableProps}
+                        ref={provided.innerRef}
+                        {...provided.dragHandleProps}
+                      >
+                        <ListCard
+                          key={item.id}
+                          listName={item.listName}
+                          idList={item.id}
+                          tasksDt={item.tasks}
+                          updateList={updateList}
+                          addNewTaskProp={addNewTask}
+                          data-id={item.id}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   );

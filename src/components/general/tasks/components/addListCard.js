@@ -24,14 +24,22 @@ const AddListCard = ({ addList }) => {
       className={styles.addListContainer}
       style={{ backgroundColor: configTheme.themeColor }}
     >
-      <input
-        style={{ color: configTheme.iconColor }}
-        defaultValue="+ New xd"
-        onChange={handleInputChange}
-      />
-      <button onClick={() => addList(values)}>
-        <h3 style={{ color: configTheme.iconColor }}>Done</h3>
-      </button>
+      <form
+        className={styles.addListContainerform}
+        onSubmit={(e) => {
+          addList(values);
+          e.preventDefault();
+        }}
+      >
+        <input
+          style={{ color: configTheme.iconColor }}
+          defaultValue="+ New xd"
+          onChange={handleInputChange}
+        />
+        <button type="submit">
+          <h3 style={{ color: configTheme.themeColor }}>Done</h3>
+        </button>
+      </form>
     </div>
   );
 };
