@@ -1,15 +1,14 @@
 .TaskCardContainer {
-  width: 250px;
-  min-width: 250px;
-  padding: 15px;
+  width: 180px;
+  min-width: 180px;
+  max-height: 45vh;
+  padding: 12px;
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   margin: 0 7px 10px 7px;
-  text-align: left;
-  overflow: auto;
-  border-radius: 9px;
+  border-radius: 7px;
   height: auto;
-  max-height: 100%;
 }
 
 .titleListSection {
@@ -18,7 +17,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 2px;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .inputTextList {
@@ -29,24 +28,15 @@
 
 .taskListSectionForm {
   width: 100%;
-}
-
-.taskListSection {
-  width: 100%;
-  min-width: 100%;
-  display: flex;
-  flex-direction: column;
+  max-height: 20vh;
+  overflow: auto;
 }
 
 .addTaskInput {
-  max-width: 120px;
-  font-size: 16px;
+  width: 100%;
+  font-size: 0.9rem;
 }
 
 .addTaskSection {
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  break-inside: avoid-column;
 }

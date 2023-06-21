@@ -73,7 +73,7 @@ const Task = ({ title, ifDone, idTask, idList }) => {
           onChange={handleInputName}
         />
       </div>
-      <button className={styles.deleteTaskBtn}>x</button>
+      <h3 className={styles.deleteTaskBtn}>x</h3>
 
       {/* <Text style={{ color: configTheme.iconColor }}>CheckInput</Text> */}
     </div>

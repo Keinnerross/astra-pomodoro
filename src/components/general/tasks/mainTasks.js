@@ -24,8 +24,6 @@ import {
 import { db } from "../../../../firebase";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import { ReactSortable } from "react-sortablejs";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const MainTasks = () => {
@@ -38,7 +36,6 @@ const MainTasks = () => {
     try {
       const orderValue = lists.length + 1;
 
-      console.log();
       await addDoc(collection(db, "lists"), {
         listName: values,
         order: orderValue,
@@ -103,13 +100,11 @@ const MainTasks = () => {
     try {
       const tasks = await getTasks(idList);
       const orderValue = tasks.length + 1;
-      console.log(orderValue);
       const newTask = {
         taskName: tasksName,
         done: false,
         order: orderValue,
       };
-      console.log(idList);
       const docRef = doc(db, "lists", idList);
       const tasksColl = collection(docRef, "tasks");
       await addDoc(tasksColl, newTask);
@@ -162,8 +157,8 @@ const MainTasks = () => {
     ) {
       return;
     }
-    setLists((prevTaskArr) =>
-      reorder(prevTaskArr, source.index, destination.index)
+    setLists((prevListArr) =>
+      reorder(prevListArr, source.index, destination.index)
     );
   };
 
@@ -177,7 +172,7 @@ const MainTasks = () => {
       <AddListCard addList={addList} />
       <div className={styles.listContainer}>
         <DragDropContext onDragEnd={dragEnd}>
-          <Droppable droppableId="tasksArr" direction="horizontal">
+          <Droppable droppableId="listArr" direction="horizontal">
             {(provided) => (
               <div
                 {...provided.droppableProps}
@@ -205,6 +200,7 @@ const MainTasks = () => {
                           idList={item.id}
                           tasksDt={item.tasks}
                           updateList={updateList}
+                          deleteLista={deletelist}
                           addNewTaskProp={addNewTask}
                           data-id={item.id}
                         />

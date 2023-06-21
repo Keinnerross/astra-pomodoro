@@ -1,11 +1,16 @@
 .taskContainer {
   display: flex;
+  min-height: 35px;
   padding: 5px 0;
+}
+
+.taskContainer:hover {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .taskSection {
   width: 100%;
-  display: flex;
 }
 .taskTitleSection {
   width: 100%;
@@ -14,8 +19,8 @@
 }
 
 .inputTitleTask {
-  width: 150px;
-  font-size: 16px;
+  width: 110px;
+  font-size: .9rem;
 }
 
 .deleteTaskBtn {
@@ -24,4 +29,6 @@
 
 .taskContainer:hover > .deleteTaskBtn {
   display: inline;
+  color: white;
+  cursor: pointer;
 }
