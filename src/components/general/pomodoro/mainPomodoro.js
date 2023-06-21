@@ -142,6 +142,7 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
         playPomo={playPomo}
         restPomo={restPomo}
         stopPomo={stopPomo}
+        ifActive={isActive}
       />
       <h3 style={{ color: "white", display: "flex" }}>
         <CyclePomo cyclePomo={cyclePomo} /> /4

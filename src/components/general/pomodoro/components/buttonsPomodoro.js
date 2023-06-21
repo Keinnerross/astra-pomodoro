@@ -1,6 +1,14 @@
 import styles from "@/styles/componentes/general/pomodoro/components/buttonsPomodoro.module.css";
+import { BsFillPlayFill, BsFillStopFill } from "react-icons/bs";
+import { FaPause } from "react-icons/fa";
+import { MdOutlineRestartAlt } from "react-icons/md";
 
-const ButtonsPomo = ({ playPomo, restPomo, stopPomo }) => {
+const icons = {
+  size: 24,
+  color: "white",
+};
+
+const ButtonsPomo = ({ playPomo, restPomo, stopPomo, ifActive }) => {
   const ifRestPomo = () => {
     restPomo(); /*Agregar Condicional */
   };
@@ -12,17 +20,21 @@ const ButtonsPomo = ({ playPomo, restPomo, stopPomo }) => {
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={() => ifRestPomo()}>
-        0
+        <BsFillStopFill size={icons.size} fill={icons.color} />
       </button>
       <button
         className={styles.button}
         style={{ width: 40, height: 40 }}
         onClick={() => playPomo()}
       >
-        Play
+        {ifActive ? (
+          <FaPause size={icons.size - 7} fill={icons.color} />
+        ) : (
+          <BsFillPlayFill size={icons.size} fill={icons.color} />
+        )}
       </button>
       <button className={styles.button} onClick={() => ifStopPomo()}>
-        X
+        <MdOutlineRestartAlt size={icons.size} fill={icons.color} />
       </button>
     </div>
   );
