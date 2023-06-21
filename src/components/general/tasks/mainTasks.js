@@ -194,6 +194,7 @@ const MainTasks = () => {
                   >
                     {(provided) => (
                       <div
+                        style={styles.listSectionItem}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                         {...provided.dragHandleProps}

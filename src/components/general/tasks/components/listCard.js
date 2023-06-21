@@ -73,9 +73,12 @@ const ListCard = ({
   // };
 
   // ESTAMOS EN PRUEBAAAA!!!!!!!!!!!!!!!!
-
-  const altura = (Math.floor(Math.random() * 3) + 1) * 100;
-  console.log(altura);
+  const handleWheel = (event) => {
+    if (onMouse) {
+      const container = event.currentTarget;
+      container.scrollLeft = 0;
+    }
+  };
 
   return (
     <div
@@ -83,6 +86,7 @@ const ListCard = ({
       style={{
         backgroundColor: configTheme.themeColor,
       }}
+      onWheel={handleWheel}
     >
       <ListSettingMenu
         active={settingActive}

@@ -6,11 +6,10 @@
   flex-wrap: wrap;
   margin: 0 7px 10px 7px;
   text-align: left;
-  height: auto;
-  max-height: 300px;
   overflow: auto;
-  break-inside: avoid-column;
   border-radius: 9px;
+  height: auto;
+  max-height: 100%;
 }
 
 .titleListSection {
