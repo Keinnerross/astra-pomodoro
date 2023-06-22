@@ -1,5 +1,5 @@
 .TaskCardContainer {
-  width: 180px;
+  width: 250px;
   min-width: 180px;
   max-height: 45vh;
   padding: 12px;
@@ -21,7 +21,7 @@
 }
 
 .inputTextList {
-  max-width: 120px;
+  max-width: 210px;
   font-size: 20px;
   background-color: transparent;
 }

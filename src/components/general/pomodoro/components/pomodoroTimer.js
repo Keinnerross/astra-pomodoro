@@ -15,12 +15,6 @@ const PomoTimer = ({ time, theme }) => {
       >
         {showTime(time)}
       </p>
-      <p
-        className={styles.focusWarrio}
-        style={{ color: theme.iconColor }}
-      >
-        Focus Warrior{" "}
-      </p>
     </div>
   );
 };

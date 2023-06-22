@@ -144,10 +144,15 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
         stopPomo={stopPomo}
         ifActive={isActive}
       />
-      <h3 style={{ color: "white", display: "flex" }}>
+      <h5 style={{ color: "white", display: "flex" }}>
         <CyclePomo cyclePomo={cyclePomo} /> /4
-      </h3>
-      {pomoSession}
+      </h5>
+      <p
+        className={styles.focusWarrio}
+        style={{ color: "white", fontSize: "14px", marginBottom: "5px" }}
+      >
+        Focus Warrior{" "}
+      </p>
       <ProgressBar time={time} barValue={barValue} />
     </div>
   );

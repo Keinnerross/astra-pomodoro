@@ -8,15 +8,11 @@
   margin-bottom: 20px;
 }
 
-.listContainer::-webkit-scrollbar {
-}
-
-.listSectionItem {
-}
 .listContainer {
   overflow-x: hidden;
   width: 100%;
   max-width: 80vw;
+  min-width: 80vw;
   display: flex;
   margin-top: 5px;
 }

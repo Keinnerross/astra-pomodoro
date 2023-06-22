@@ -13,6 +13,12 @@
   flex-direction: row;
   width: 100%;
 }
+
+.bgDashboard {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .HeaderContainer {
   width: 100%;
 }
