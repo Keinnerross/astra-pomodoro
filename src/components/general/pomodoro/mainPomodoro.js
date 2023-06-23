@@ -144,12 +144,16 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
         stopPomo={stopPomo}
         ifActive={isActive}
       />
-      <h5 style={{ color: "white", display: "flex" }}>
+      <h5 style={{ color: configTheme.iconColor, display: "flex" }}>
         <CyclePomo cyclePomo={cyclePomo} /> /4
       </h5>
       <p
         className={styles.focusWarrio}
-        style={{ color: "white", fontSize: "14px", marginBottom: "5px" }}
+        style={{
+          color: configTheme.iconColor,
+          fontSize: "14px",
+          marginBottom: "5px",
+        }}
       >
         Focus Warrior{" "}
       </p>

@@ -14,6 +14,17 @@ export const wallpapers = [
 ];
 
 export const themes = [
-  { themeColor: "white", iconColor: "black" },
-  { themeColor: "black", iconColor: "white " },
+  {
+    themeColor: "rgba(999, 999, 999, 0.7)",
+    secundaryColor: "rgba(999, 999, 999, 0.4)",
+    iconColor: "black",
+  },
+  {
+    themeColor: "rgba(1, 1, 15, 0.7)",
+    secundaryColor: "rgba(1, 1, 15, 0.4)",
+    iconColor: "white ",
+    // themeColor: "rgba(999, 999, 999, 0.4)",
+    // secundaryColor: "rgba(999, 999, 999, 0.4)",
+    // iconColor: "black",
+  },
 ];

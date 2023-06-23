@@ -4,7 +4,7 @@ import { FaPause } from "react-icons/fa";
 import { MdOutlineRestartAlt } from "react-icons/md";
 
 const icons = {
-  size: 24,
+  size: 22,
   color: "white",
 };
 
@@ -24,13 +24,13 @@ const ButtonsPomo = ({ playPomo, restPomo, stopPomo, ifActive }) => {
       </button>
       <button
         className={styles.button}
-        style={{ width: 40, height: 40 }}
+        style={{ width: 38, height: 38 }}
         onClick={() => playPomo()}
       >
         {ifActive ? (
-          <FaPause size={icons.size - 7} fill={icons.color} />
+          <FaPause size={icons.size - 6} fill={icons.color} />
         ) : (
-          <BsFillPlayFill size={icons.size} fill={icons.color} />
+          <BsFillPlayFill size={icons.size + 8} fill={icons.color} />
         )}
       </button>
       <button className={styles.button} onClick={() => ifStopPomo()}>

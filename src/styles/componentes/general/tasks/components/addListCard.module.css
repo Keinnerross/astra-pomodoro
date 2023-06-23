@@ -2,14 +2,17 @@
   width: 550px;
   height: 35px;
   min-height: 35px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .addListContainerform {
+  width: 90%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  justify-content: space-between;
 }

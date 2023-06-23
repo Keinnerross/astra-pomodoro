@@ -29,4 +29,17 @@
 .settingPomoButton {
   background-color: #636366;
   border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.navItem {
+  font-weight: 500;
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 7px;
+  font-size: 0.8rem;
 }

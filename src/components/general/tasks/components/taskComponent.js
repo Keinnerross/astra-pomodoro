@@ -4,6 +4,7 @@ import { themes } from "../../userTemplates/mainUserTemplates";
 import { db } from "../../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { MdDragIndicator } from "react-icons/md";
 
 const Task = ({ title, ifDone, idTask, idList }) => {
   const themeSelect = themes[1];
@@ -60,6 +61,13 @@ const Task = ({ title, ifDone, idTask, idList }) => {
   return (
     <div className={styles.taskContainer}>
       <div className={styles.taskTitleSection}>
+        <div className={styles.dragButtonContainer}>
+          <MdDragIndicator
+            className={styles.dragButton}
+            fill={configTheme.iconColor}
+            size={15}
+          />
+        </div>
         <input
           type="checkbox"
           style={{ marginRight: 5, backgroundColor: "white" }}

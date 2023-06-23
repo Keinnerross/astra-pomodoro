@@ -162,10 +162,10 @@ const MainTasks = () => {
     );
   };
 
-  const handleWheel = (event) => {
-    const container = event.currentTarget;
-    container.scrollLeft += event.deltaY;
-  };
+  // const handleWheel = (event) => {
+  //   const container = event.currentTarget;
+  //   container.scrollLeft += event.deltaY;
+  // };
 
   return (
     <div className={styles.mainTasksContainer}>
@@ -178,7 +178,7 @@ const MainTasks = () => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
                 className={styles.listContainer}
-                onWheel={handleWheel}
+                // onWheel={handleWheel} Por corregir
               >
                 {lists.map((item, i) => (
                   <Draggable
@@ -189,7 +189,7 @@ const MainTasks = () => {
                   >
                     {(provided) => (
                       <div
-                        style={styles.listSectionItem}
+                        className={styles.listSectionItem}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
                         {...provided.dragHandleProps}

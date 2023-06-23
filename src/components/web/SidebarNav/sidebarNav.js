@@ -16,31 +16,45 @@ const SidebarNav = ({ theme, ifActive }) => {
     themeColor: themeSelect.themeColor,
     iconSize: 25,
     iconColor: themeSelect.iconColor,
-    
   };
   return (
     <div className={styles.sidebarMain}>
       <div className={styles.sidebarSection}>
         <div className={styles.navSection}>
           <button className={styles.iconContainer}>
-            <AiOutlineMenu size={configTheme.iconSize} />
+            <AiOutlineMenu
+              size={configTheme.iconSize}
+              fill={configTheme.iconColor}
+            />
           </button>
           <button className={styles.iconContainer} onClick={() => ifActive()}>
-            <FaPaintBrush size={configTheme.iconSize} />
+            <FaPaintBrush
+              size={configTheme.iconSize}
+              fill={configTheme.iconColor}
+            />
           </button>
           <button className={styles.iconContainer}>
-            <TbMessageLanguage size={configTheme.iconSize} />
+            <TbMessageLanguage
+              size={configTheme.iconSize}
+              fill={configTheme.iconColor}
+            />
           </button>
           <button className={styles.iconContainer}>
-            <MdHelp size={configTheme.iconSize} />
+            <MdHelp size={configTheme.iconSize} fill={configTheme.iconColor} />
           </button>
         </div>
         <div className={styles.settingSection}>
           <button className={styles.iconContainer}>
-            <MdSettings size={configTheme.iconSize} />
+            <MdSettings
+              size={configTheme.iconSize}
+              fill={configTheme.iconColor}
+            />
           </button>
           <button className={styles.iconContainer}>
-            <MdLogout size={configTheme.iconSize} />
+            <MdLogout
+              size={configTheme.iconSize}
+              fill={configTheme.iconColor}
+            />
           </button>
         </div>
       </div>

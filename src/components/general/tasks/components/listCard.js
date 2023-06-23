@@ -132,7 +132,7 @@ const ListCard = ({
         />
 
         <button onClick={() => setSettingActive(!settingActive)}>
-          <BsThreeDotsVertical />
+          <BsThreeDotsVertical fill={themeSelect.iconColor} />
         </button>
       </div>
       <DragDropContext onDragEnd={dragEnd}>
@@ -171,26 +171,26 @@ const ListCard = ({
                 : console.log("noapasaonaa")}
 
               {/* Por Corregir el condicional*/}
-              <form
-                className={styles.addTaskSection}
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  addNewTaskProp(idList, values);
-                  inputAddTaskRef.current.value = "";
-                }}
-              >
-                <input
-                  className={styles.addTaskInput}
-                  style={{ color: configTheme.iconColor }}
-                  placeholder="+ Add new task"
-                  onChange={handleInputTask}
-                  ref={inputAddTaskRef}
-                />
-              </form>
             </div>
           )}
         </Droppable>
       </DragDropContext>
+      <form
+        className={styles.addTaskSection}
+        onSubmit={(e) => {
+          e.preventDefault();
+          addNewTaskProp(idList, values);
+          inputAddTaskRef.current.value = "";
+        }}
+      >
+        <input
+          className={styles.addTaskInput}
+          style={{ color: configTheme.iconColor }}
+          placeholder="+ Add new task"
+          onChange={handleInputTask}
+          ref={inputAddTaskRef}
+        />
+      </form>
     </div>
   );
 };

@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  background-color: black;
   flex: 1;
+
 }
 
 .settingContainer {

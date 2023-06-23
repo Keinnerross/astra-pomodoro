@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "@/styles/componentes/general/tasks/components/addListCard.module.css";
 import { themes } from "../../userTemplates/mainUserTemplates";
-
+import { BsRocketTakeoff } from "react-icons/bs";
 const AddListCard = ({ addList }) => {
   const [values, setValues] = useState("");
 
@@ -32,12 +32,12 @@ const AddListCard = ({ addList }) => {
         }}
       >
         <input
-          style={{ color: configTheme.iconColor }}
-          defaultValue="+ New xd"
+          style={{ color: configTheme.iconColor, width: "90%" }}
+          placeholder="Add A new list..."
           onChange={handleInputChange}
         />
         <button type="submit">
-          <h3 style={{ color: configTheme.themeColor }}>Done</h3>
+          <BsRocketTakeoff fill={configTheme.iconColor} size={20} />
         </button>
       </form>
     </div>

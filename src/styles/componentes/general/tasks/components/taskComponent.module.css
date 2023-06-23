@@ -2,6 +2,7 @@
   display: flex;
   min-height: 35px;
   padding: 5px 0;
+  cursor: default !important;
 }
 
 .taskContainer:hover {
@@ -13,14 +14,26 @@
   width: 100%;
 }
 .taskTitleSection {
-  width: 100%;
+  width: 92%;
   display: flex;
+  align-items: center;
   flex-direction: row;
+  cursor: default !important;
 }
 
+.dragButtonContainer {
+  width: 20px;
+  cursor: grab;
+}
+.dragButton {
+  display: none;
+}
+.taskContainer:hover .dragButton {
+  display: block;
+}
 .inputTitleTask {
-  width: 110px;
-  font-size: .9rem;
+  width: 150px;
+  font-size: 0.9rem;
 }
 
 .deleteTaskBtn {

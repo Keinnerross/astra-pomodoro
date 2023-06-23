@@ -51,27 +51,31 @@ const DashboardTemplate = () => {
       <div
         style={{
           backgroundImage:
-            'url("https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")',
+            'url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")',
+          // background: " #80CBC4",
         }}
         className={styles.bgDashboard}
       >
         <div className={styles.bgSection}>
           <div className={styles.sidebarContainer}>
             <SidebarNav theme={themes} ifActive={ifActiveBrush} />
+            xd
           </div>
-          <div className={styles.appModuleContainer}>
+          <div>
             <div className={styles.HeaderContainer}>
-              <Header />
+              <Header theme={themes} />
             </div>
-            <div className={styles.appGadgetsContainer}>
-              <div className={styles.pomodoroContainer}>
-                <MainPomodoro
-                  ifOpen={ifOpenPomo}
-                  settingConfig={settingResult}
-                />
-              </div>
-              <div className={styles.TasksViewContainer}>
-                <MainTasks />
+            <div className={styles.appModuleContainer}>
+              <div className={styles.appGadgetsContainer}>
+                <div className={styles.pomodoroContainer}>
+                  <MainPomodoro
+                    ifOpen={ifOpenPomo}
+                    settingConfig={settingResult}
+                  />
+                </div>
+                <div className={styles.TasksViewContainer}>
+                  <MainTasks />
+                </div>
               </div>
             </div>
           </div>
