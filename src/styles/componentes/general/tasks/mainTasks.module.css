@@ -6,6 +6,7 @@
 }
 .listSectionItem {
   height: auto;
+  min-height: 19vh;
   cursor: context-menu !important;
 }
 

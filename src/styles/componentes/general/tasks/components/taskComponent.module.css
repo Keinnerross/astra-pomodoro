@@ -1,6 +1,5 @@
 .taskContainer {
   display: flex;
-  min-height: 35px;
   padding: 5px 0;
   cursor: default !important;
 }

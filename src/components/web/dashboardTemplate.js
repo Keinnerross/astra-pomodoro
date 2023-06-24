@@ -59,7 +59,6 @@ const DashboardTemplate = () => {
         <div className={styles.bgSection}>
           <div className={styles.sidebarContainer}>
             <SidebarNav theme={themes} ifActive={ifActiveBrush} />
-            xd
           </div>
           <div>
             <div className={styles.HeaderContainer}>
