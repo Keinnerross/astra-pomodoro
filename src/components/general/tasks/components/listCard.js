@@ -17,6 +17,7 @@ import {
 import ListSettingMenu from "./listSettingMenu";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { v4 as uuidv4 } from "uuid";
 
 const ListCard = ({
   idList,
@@ -24,7 +25,7 @@ const ListCard = ({
   updateList,
   deleteLista,
   tasksDt,
-  addNewTaskProp,
+  getData,
 }) => {
   /*Configuracion Theme */
   const themeSelect = themes[1];
@@ -38,7 +39,10 @@ const ListCard = ({
   /*Controles de lista y tareas */
 
   const [values, setValues] = useState("");
-  const [tasks, setTasks] = useState([]);
+
+  /*Estado dónde se guardan las tareas */
+  const [taskDtArr, setTaskDtArr] = useState([]);
+
   const [settingActive, setSettingActive] = useState(false);
   const inputAddTaskRef = useRef(null);
 
@@ -54,37 +58,92 @@ const ListCard = ({
     console.log(value);
     setValues(value);
   };
-  // ESTAMOS EL PRUEBAAAA!!!!!!!!!!!!!!!!!
 
-  // /*Función Obtener Tareas */
-  // const getTasks = async (idList) => {
-  //   try {
-  //     const tasks = [];
-  //     const q = query(
-  //       collection(db, "lists", idList, "tasks"),
-  //       orderBy("order", "desc")
-  //     );
+  /*Función Agregar nueva tarea. */
+  const addNewTask = async (idList, tasksName) => {
+    try {
+      const temporalID = uuidv4();
 
-  //     const querySnapshot = await getDocs(q);
-  //     querySnapshot.docs.map((doc) => {
-  //       tasks.push({ ...doc.data(), taskId: doc.id });
-  //     });
-  //     setTasks(tasks);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+      const newTask = {
+        taskName: tasksName,
+        done: false,
+        order: 0,
+        taskId:
+          temporalID /*Este es un ID Temporar para poder renderizar correctamente */,
+      };
 
-  // ESTAMOS EN PRUEBAAAA!!!!!!!!!!!!!!!!
+      const newDataTask = [newTask, ...taskDtArr];
 
-  // Funciones para el dnd de las tareas /
+      const listOrderFn = newDataTask.forEach((list, i) => {
+        list.order = i;
+      });
 
-  const [taskDtArr, setTaskDtArr] = useState([]);
+      setTaskDtArr(newDataTask);
+
+      const docRef = doc(db, "lists", idList);
+      const tasksColl = collection(docRef, "tasks");
+      const newTaskUpdate = await addDoc(tasksColl, {
+        taskName: tasksName,
+        done: false,
+        order: 0,
+      });
+      console.log(newTaskUpdate.id);
+
+      newDataTask.forEach((task, i) => {
+        if (task.taskId == temporalID) {
+          task.taskId = newTaskUpdate.id;
+        } else {
+          return;
+        }
+      });
+
+      setTaskDtArr(newDataTask);
+      pushOrderData(newDataTask);
+      getData();
+
+      console.log("Tarea agregada con exito");
+    } catch (e) {
+      console.log("Algo salió mal", e);
+    }
+  };
+
+  /*Funcion para eliminar una tarea */
+
+  const deleteTask = async (idList, idTask) => {
+    const confirmation = confirm("Estas seguro de eliminar esta tarea?");
+    if (confirmation) {
+      try {
+        const docRef = doc(db, "lists", idList, "tasks", idTask);
+        const newlistTasks = taskDtArr.filter(
+          (tasks) => tasks.taskId !== idTask
+        );
+        setTaskDtArr(newlistTasks);
+        await deleteDoc(docRef);
+        console.log("Eliminado Sadisfactoriamente");
+      } catch (e) {
+        alert("Hubo un problema en eliminar");
+      }
+    } else {
+      return;
+    }
+  };
+
   useEffect(() => {
     setTaskDtArr(tasksDt);
   }, [tasksDt]);
 
-  console.log(taskDtArr);
+  /*Funcion de orden dnd para las listas: */
+
+  const pushOrderData = async (newOrder) => {
+    if (newOrder) {
+      newOrder.map(async (task, i) => {
+        const docRef = doc(db, "lists", idList, "tasks", task.taskId);
+        await updateDoc(docRef, {
+          order: i,
+        });
+      });
+    }
+  };
 
   const reorder = (list, startIndex, endIndex) => {
     const result = [...list];
@@ -105,9 +164,13 @@ const ListCard = ({
     ) {
       return;
     }
-    setTaskDtArr((prevTaskArr) =>
-      reorder(prevTaskArr, source.index, destination.index)
+    let newTasksOrder;
+
+    setTaskDtArr(
+      (prevTask) =>
+        (newTasksOrder = reorder(prevTask, source.index, destination.index))
     );
+    pushOrderData(newTasksOrder);
   };
 
   return (
@@ -131,7 +194,10 @@ const ListCard = ({
           onChange={handleInputChange}
         />
 
-        <button onClick={() => setSettingActive(!settingActive)}>
+        <button
+          className={styles.dotSettingButton}
+          onClick={() => setSettingActive(!settingActive)}
+        >
           <BsThreeDotsVertical fill={themeSelect.iconColor} />
         </button>
       </div>
@@ -163,6 +229,7 @@ const ListCard = ({
                             ifDone={task.done}
                             idList={idList}
                             key={task.taskId}
+                            deleteTask={deleteTask}
                           />
                         </div>
                       )}
@@ -179,7 +246,7 @@ const ListCard = ({
         className={styles.addTaskSection}
         onSubmit={(e) => {
           e.preventDefault();
-          addNewTaskProp(idList, values);
+          addNewTask(idList, values);
           inputAddTaskRef.current.value = "";
         }}
       >

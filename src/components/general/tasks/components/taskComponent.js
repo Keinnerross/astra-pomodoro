@@ -3,10 +3,10 @@ import styles from "@/styles/componentes/general/tasks/components/taskComponent.
 import { themes } from "../../userTemplates/mainUserTemplates";
 import { db } from "../../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
 
-const Task = ({ title, ifDone, idTask, idList }) => {
+const Task = ({ title, ifDone, idTask, idList, deleteTask }) => {
   const themeSelect = themes[1];
 
   const configTheme = {
@@ -18,23 +18,25 @@ const Task = ({ title, ifDone, idTask, idList }) => {
   /**Funcion para actualizar el Nombre de una tarea */
 
   const [checkValue, setCheckValue] = useState(false);
-  const updateName = async (idLista, idTarea, newTaskName) => {
+
+  /*Funcion para acutalizar nombre de la tarea */
+  const updateName = async (idList, idTarea, newTaskName) => {
     try {
-      const task = doc(db, "lists", idLista, "tasks", idTarea);
+      const task = doc(db, "lists", idList, "tasks", idTarea);
       await updateDoc(task, {
         taskName: newTaskName,
       });
     } catch (e) {
-      console.log("error:", e, idLista, idTask);
+      console.log("error:", e, idList, idTask);
     }
   };
-
+  /*Funcion para manejar el valor del input de la tarea, su titulo. */
   const handleInputName = (e) => {
     const { value } = e.target;
     updateName(idList, idTask, value);
   };
 
-  /**Funcion para actualizar el completado de una tarea */
+  /**Funcion para actualizar el completado de la tarea */
   const handleCheck = async (idLista, idTarea) => {
     try {
       const task = doc(db, "lists", idLista, "tasks", idTarea);
@@ -46,6 +48,8 @@ const Task = ({ title, ifDone, idTask, idList }) => {
     }
   };
 
+  /* Funcion para el chek de completado, ((((no implementado ))))*/
+
   const updateCheck = async (idLista, idTarea, value) => {
     const task = doc(db, "lists", idLista, "tasks", idTarea);
     console.log("ejecutada");
@@ -53,10 +57,6 @@ const Task = ({ title, ifDone, idTask, idList }) => {
       done: value,
     });
   };
-
-  // useEffect(() => {
-  //   updateCheck(idList, idTask, checkValue);
-  // }, [checkValue]);
 
   return (
     <div className={styles.taskContainer}>
@@ -81,9 +81,14 @@ const Task = ({ title, ifDone, idTask, idList }) => {
           onChange={handleInputName}
         />
       </div>
-      <h3 className={styles.deleteTaskBtn}>x</h3>
+      <span
+        className={styles.deleteTaskBtn}
+        onClick={() => deleteTask(idList, idTask)}
+      >
+        x
+      </span>
 
-      {/* <Text style={{ color: configTheme.iconColor }}>CheckInput</Text> */}
+      {/* Este es el que causa el cambio de los margenes cuando se hace hover sobre la tarjeta de la tarea */}
     </div>
   );
 };

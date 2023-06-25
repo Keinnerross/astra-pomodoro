@@ -1,6 +1,8 @@
 .taskContainer {
   display: flex;
   padding: 5px 0;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
   cursor: default !important;
 }
 
@@ -43,4 +45,6 @@
   display: inline;
   color: white;
   cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
 }

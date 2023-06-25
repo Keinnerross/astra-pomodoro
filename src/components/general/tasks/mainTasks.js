@@ -22,35 +22,18 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { v4 as uuidv4 } from "uuid";
 
 const MainTasks = () => {
   const [lists, setLists] = useState([]);
 
   /* Functions Controllers List and Task */
-
-  /* Añadir lista */
-  const addList = async (values) => {
-    try {
-      const orderValue = lists.length + 1;
-
-      await addDoc(collection(db, "lists"), {
-        listName: values,
-        order: orderValue,
-      });
-      getData();
-      // console.log(newListsArr);
-      console.log("add or update success");
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
+  /*Listas: */
 
   /* Obtener Listas */
   const getData = async () => {
-    const q = query(collection(db, "lists"), orderBy("order", "desc"));
+    const q = query(collection(db, "lists"), orderBy("order", "asc"));
     const querySnapshot = await getDocs(q);
     const listsArr = [];
 
@@ -64,11 +47,56 @@ const MainTasks = () => {
         listsArr.push({ ...doc.data(), id: doc.id, tasks: tasksData });
       })
     );
-
+    console.log(listsArr);
     setLists(listsArr);
   };
 
-  /* Actualizar Lista */
+  /* Añadir lista*/
+  const addList = async (values) => {
+    try {
+      const temporalID = uuidv4();
+
+      const newList = {
+        listName: values,
+        order: 0,
+        tasks: [],
+        id: temporalID /*Id temporal para el correcto renderizado */,
+      };
+
+      /*Funcion para ordenar los valores de Orden de las listas */
+      const newDataList = [newList, ...lists];
+
+      const listOrderFn = newDataList.forEach((list, i) => {
+        list.order = i;
+      });
+
+      setLists(newDataList);
+
+      const dofRef = await addDoc(collection(db, "lists"), {
+        listName: values,
+        order: 0,
+      });
+
+      /* Funcion Order and Save Real ID*/
+
+      const orderAndSaveID = newDataList.forEach((list, i) => {
+        if (list.id == temporalID) {
+          list.id = dofRef.id;
+        } else {
+          return;
+        }
+      });
+
+      setLists(newDataList);
+      pushOrderData(newDataList);
+      getData();
+      console.log("add or update success");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+
+  /* Actualizar Nombre de lista*/
   const updateList = useCallback(async (newNameList, idList) => {
     try {
       const docRef = doc(db, "lists", idList);
@@ -83,50 +111,37 @@ const MainTasks = () => {
   /*Función Borrar lista */
 
   const deletelist = useCallback(async (id) => {
-    const q = collection(db, "lists");
-    const docu = doc(q, id);
-    try {
-      setLists((prevLists) => prevLists.filter((list) => list.id !== id));
-      await deleteDoc(docu);
+    const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
+    
+    if (confirmation) {
+      const q = collection(db, "lists");
+      const dc = doc(q, id);
+      try {
+        setLists((prevLists) => prevLists.filter((list) => list.id !== id));
+        await deleteDoc(dc);
 
-      console.log("List deleted successfully");
-    } catch (err) {
-      console.log(err);
+        console.log("List deleted successfully");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      return;
     }
   });
-
-  /*Función Agregar nueva tarea. */
-  const addNewTask = async (idList, tasksName) => {
-    try {
-      const tasks = await getTasks(idList);
-      const orderValue = tasks.length + 1;
-      const newTask = {
-        taskName: tasksName,
-        done: false,
-        order: orderValue,
-      };
-      const docRef = doc(db, "lists", idList);
-      const tasksColl = collection(docRef, "tasks");
-      await addDoc(tasksColl, newTask);
-      console.log(`${newTask} se ha enviado con éxito`);
-      getData();
-    } catch (e) {
-      console.log("Algo salió mal", e);
-    }
-  };
 
   useEffect(() => {
     getData();
   }, []);
 
   /*Las tareas se obtienen aquí, el resto de funciones de las tareas se encuentran en el componente de listas.*/
-  /*Función Obtener Tareas */
+
+  /*Función Obtener Tareas: Esta función solo se llama desde la función principal getData */
   const getTasks = async (idList) => {
     try {
       const tasks = [];
       const q = query(
         collection(db, "lists", idList, "tasks"),
-        orderBy("order", "desc")
+        orderBy("order", "asc")
       );
       const querySnapshot = await getDocs(q);
       querySnapshot.docs.map((doc) => {
@@ -135,6 +150,19 @@ const MainTasks = () => {
       return tasks;
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  /*Funcion de orden dnd para las listas: */
+
+  const pushOrderData = async (newOrder) => {
+    if (newOrder) {
+      await newOrder.map(async (list, i) => {
+        const docRef = doc(db, "lists", list.id);
+        await updateDoc(docRef, {
+          order: i, //
+        });
+      });
     }
   };
 
@@ -157,15 +185,15 @@ const MainTasks = () => {
     ) {
       return;
     }
-    setLists((prevListArr) =>
-      reorder(prevListArr, source.index, destination.index)
-    );
-  };
+    let newOrder;
 
-  // const handleWheel = (event) => {
-  //   const container = event.currentTarget;
-  //   container.scrollLeft += event.deltaY;
-  // };
+    setLists(
+      (prevListArr) =>
+        (newOrder = reorder(prevListArr, source.index, destination.index))
+    );
+
+    pushOrderData(newOrder);
+  };
 
   return (
     <div className={styles.mainTasksContainer}>
@@ -201,8 +229,8 @@ const MainTasks = () => {
                           tasksDt={item.tasks}
                           updateList={updateList}
                           deleteLista={deletelist}
-                          addNewTaskProp={addNewTask}
                           data-id={item.id}
+                          getData={getData}
                         />
                       </div>
                     )}

@@ -18,7 +18,14 @@
   justify-content: space-between;
   margin-bottom: 2px;
 }
+.dotSettingButton {
+  border-radius: 2px;
+}
+.dotSettingButton:hover {
+  background-color: rgba(118, 118, 118, 0.71);
 
+  border-radius: 2px;
+}
 .inputTextList {
   max-width: 210px;
   font-size: 1rem;
@@ -27,7 +34,7 @@
 
 .taskListSectionForm {
   width: 100%;
-  max-height: 19vh;
+  max-height: 20vh;
   overflow: auto;
 }
 

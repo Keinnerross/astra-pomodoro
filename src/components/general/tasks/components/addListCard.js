@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "@/styles/componentes/general/tasks/components/addListCard.module.css";
 import { themes } from "../../userTemplates/mainUserTemplates";
 import { BsRocketTakeoff } from "react-icons/bs";
 const AddListCard = ({ addList }) => {
   const [values, setValues] = useState("");
-
+  const inputAddList = useRef(null);
   const themeSelect = themes[1];
 
   const configTheme = {
@@ -28,6 +28,7 @@ const AddListCard = ({ addList }) => {
         className={styles.addListContainerform}
         onSubmit={(e) => {
           addList(values);
+          inputAddList.current.value = "";
           e.preventDefault();
         }}
       >
@@ -35,6 +36,7 @@ const AddListCard = ({ addList }) => {
           style={{ color: configTheme.iconColor, width: "90%" }}
           placeholder="Add A new list..."
           onChange={handleInputChange}
+          ref={inputAddList}
         />
         <button type="submit">
           <BsRocketTakeoff fill={configTheme.iconColor} size={20} />

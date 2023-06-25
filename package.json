@@ -22,7 +22,8 @@
     "react-slick": "^0.29.0",
     "react-sortablejs": "^6.1.4",
     "slick-carousel": "^1.8.1",
-    "sortablejs": "^1.15.0"
+    "sortablejs": "^1.15.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/sortablejs": "^1.15.1"
