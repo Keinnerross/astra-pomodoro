@@ -2,10 +2,10 @@ import { useState, useRef } from "react";
 import styles from "@/styles/componentes/general/tasks/components/addListCard.module.css";
 import { themes } from "../../userTemplates/mainUserTemplates";
 import { BsRocketTakeoff } from "react-icons/bs";
-const AddListCard = ({ addList }) => {
+const AddListCard = ({ addList, numberTheme }) => {
   const [values, setValues] = useState("");
   const inputAddList = useRef(null);
-  const themeSelect = themes[1];
+  const themeSelect = themes[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,

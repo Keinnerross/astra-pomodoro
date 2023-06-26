@@ -25,7 +25,7 @@ import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 
-const MainTasks = () => {
+const MainTasks = ({ numberTheme }) => {
   const [lists, setLists] = useState([]);
 
   /* Functions Controllers List and Task */
@@ -112,7 +112,7 @@ const MainTasks = () => {
 
   const deletelist = useCallback(async (id) => {
     const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
-    
+
     if (confirmation) {
       const q = collection(db, "lists");
       const dc = doc(q, id);
@@ -197,7 +197,7 @@ const MainTasks = () => {
 
   return (
     <div className={styles.mainTasksContainer}>
-      <AddListCard addList={addList} />
+      <AddListCard addList={addList} numberTheme={numberTheme} />
       <div className={styles.listContainer}>
         <DragDropContext onDragEnd={dragEnd}>
           <Droppable droppableId="listArr" direction="horizontal">
@@ -231,6 +231,7 @@ const MainTasks = () => {
                           deleteLista={deletelist}
                           data-id={item.id}
                           getData={getData}
+                          numberTheme={numberTheme}
                         />
                       </div>
                     )}

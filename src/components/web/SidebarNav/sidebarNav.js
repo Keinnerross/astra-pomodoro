@@ -9,16 +9,19 @@ import { MdHelp, MdLogout, MdSettings } from "react-icons/md";
 
 // import { BiSolidHelpCircle, BiLogOut } from "react-icons/bi";
 
-const SidebarNav = ({ theme, ifActive }) => {
-  const themeSelect = theme[1];
+const SidebarNav = ({ theme, ifActive, numberTheme  }) => {
+  const themeSelect = theme[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,
-    iconSize: 25,
+    iconSize: 22,
     iconColor: themeSelect.iconColor,
   };
   return (
-    <div className={styles.sidebarMain}>
+    <div
+      className={styles.sidebarMain}
+      style={{ backgroundColor: configTheme.themeColor }}
+    >
       <div className={styles.sidebarSection}>
         <div className={styles.navSection}>
           <button className={styles.iconContainer}>

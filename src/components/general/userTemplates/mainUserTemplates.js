@@ -15,7 +15,7 @@ export const wallpapers = [
 
 export const themes = [
   {
-    themeColor: "rgba(999, 999, 999, 0.7)",
+    themeColor: "rgba(999, 999, 999, 0.5)",
     secundaryColor: "rgba(999, 999, 999, 0.4)",
     iconColor: "black",
   },
@@ -23,8 +23,5 @@ export const themes = [
     themeColor: "rgba(1, 1, 15, 0.6)",
     secundaryColor: "rgba(1, 1, 15, 0.4)",
     iconColor: "white ",
-    // themeColor: "rgba(999, 999, 999, 0.4)",
-    // secundaryColor: "rgba(999, 999, 999, 0.4)",
-    // iconColor: "black",
   },
 ];

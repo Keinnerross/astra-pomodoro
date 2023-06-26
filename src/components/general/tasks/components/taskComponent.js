@@ -6,8 +6,8 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
 
-const Task = ({ title, ifDone, idTask, idList, deleteTask }) => {
-  const themeSelect = themes[1];
+const Task = ({ title, ifDone, idTask, idList, deleteTask, numberTheme }) => {
+  const themeSelect = themes[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,
@@ -16,8 +16,6 @@ const Task = ({ title, ifDone, idTask, idList, deleteTask }) => {
   };
   /*Los temas estan puestos aqui para poder testear los estilos, sin embargo hay que ponerlos de forma atomatica relacionadose con la sidebar */
   /**Funcion para actualizar el Nombre de una tarea */
-
-  const [checkValue, setCheckValue] = useState(false);
 
   /*Funcion para acutalizar nombre de la tarea */
   const updateName = async (idList, idTarea, newTaskName) => {
@@ -37,26 +35,21 @@ const Task = ({ title, ifDone, idTask, idList, deleteTask }) => {
   };
 
   /**Funcion para actualizar el completado de la tarea */
+
+  const [check, setCheck] = useState(ifDone);
+
   const handleCheck = async (idLista, idTarea) => {
     try {
+      check ? setCheck(false) : setCheck(true);
+
       const task = doc(db, "lists", idLista, "tasks", idTarea);
-      const queryChecked = await getDoc(task);
-      const value = queryChecked.data().done ? false : true;
-      setCheckValue(value);
-    } catch (e) {
-      console.log(e);
-    }
+      await updateDoc(task, {
+        done: !check,
+      });
+    } catch (e) {}
   };
 
   /* Funcion para el chek de completado, ((((no implementado ))))*/
-
-  const updateCheck = async (idLista, idTarea, value) => {
-    const task = doc(db, "lists", idLista, "tasks", idTarea);
-    console.log("ejecutada");
-    await updateDoc(task, {
-      done: value,
-    });
-  };
 
   return (
     <div className={styles.taskContainer}>
@@ -71,7 +64,7 @@ const Task = ({ title, ifDone, idTask, idList, deleteTask }) => {
         <input
           type="checkbox"
           style={{ marginRight: 5, backgroundColor: "white" }}
-          value={checkValue}
+          checked={check}
           onChange={() => handleCheck(idList, idTask)}
         />
         <input
@@ -83,6 +76,7 @@ const Task = ({ title, ifDone, idTask, idList, deleteTask }) => {
       </div>
       <span
         className={styles.deleteTaskBtn}
+        style={{ color: configTheme.iconColor }}
         onClick={() => deleteTask(idList, idTask)}
       >
         x

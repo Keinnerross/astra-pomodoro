@@ -43,8 +43,8 @@
 
 .taskContainer:hover > .deleteTaskBtn {
   display: inline;
-  color: white;
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 500;
 }
+

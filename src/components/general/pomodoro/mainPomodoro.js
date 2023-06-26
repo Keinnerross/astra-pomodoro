@@ -8,10 +8,10 @@ import CyclePomo from "./components/cyclePomo";
 import ProgressBar from "./components/progressBar";
 import { themes } from "../userTemplates/mainUserTemplates";
 
-const MainPomodoro = ({ settingConfig, ifOpen }) => {
+const MainPomodoro = ({ settingConfig, ifOpen, numberTheme }) => {
   /*Configuración del Tema */
 
-  const themeSelect = themes[1];
+  const themeSelect = themes[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,

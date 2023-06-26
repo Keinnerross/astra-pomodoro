@@ -21,8 +21,9 @@ const DashboardTemplate = () => {
     short: 5,
     long: 15,
   });
+  const [themeSelected, setThemeSelected] = useState(1);
 
-  /*Functions */
+  /*Functions Setting Pomodoro*/
   const updateSetting = (inputValues) => {
     setSettingResult({
       ...settingResult,
@@ -43,11 +44,17 @@ const DashboardTemplate = () => {
     setActiveBrush(!activeBrush);
   };
 
+  //**Funciones para los Temas**/
+
+  const handlethemeSelected = (value) => {
+    setThemeSelected(value);
+  };
+
   return (
     <div>
       {/*Tengo pensado maejar todas las ventanas de configuracion desde el loyout de sea forma puedo pasar los parametros de setting de manera global y al componente pomodoro */}
 
-      <SelectTheme isActive={activeBrush} />
+      <SelectTheme isActive={activeBrush} handleTheme={handlethemeSelected} />
       <div
         style={{
           backgroundImage:
@@ -58,7 +65,11 @@ const DashboardTemplate = () => {
       >
         <div className={styles.bgSection}>
           <div className={styles.sidebarContainer}>
-            <SidebarNav theme={themes} ifActive={ifActiveBrush} />
+            <SidebarNav
+              theme={themes}
+              ifActive={ifActiveBrush}
+              numberTheme={themeSelected}
+            />
           </div>
           <div>
             <div className={styles.HeaderContainer}>
@@ -68,12 +79,13 @@ const DashboardTemplate = () => {
               <div className={styles.appGadgetsContainer}>
                 <div className={styles.pomodoroContainer}>
                   <MainPomodoro
+                    numberTheme={themeSelected}
                     ifOpen={ifOpenPomo}
                     settingConfig={settingResult}
                   />
                 </div>
                 <div className={styles.TasksViewContainer}>
-                  <MainTasks />
+                  <MainTasks numberTheme={themeSelected} />
                 </div>
               </div>
             </div>

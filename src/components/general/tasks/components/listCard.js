@@ -26,9 +26,10 @@ const ListCard = ({
   deleteLista,
   tasksDt,
   getData,
+  numberTheme,
 }) => {
   /*Configuracion Theme */
-  const themeSelect = themes[1];
+  const themeSelect = themes[numberTheme];
   const configTheme = {
     themeColor: themeSelect.themeColor,
     iconSize: 25,
@@ -230,6 +231,7 @@ const ListCard = ({
                             idList={idList}
                             key={task.taskId}
                             deleteTask={deleteTask}
+                            numberTheme={numberTheme}
                           />
                         </div>
                       )}
