@@ -19,6 +19,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  backdrop-filter: blur(2px);
 }
 .HeaderContainer {
   width: 100%;
@@ -32,13 +33,13 @@
 
 .appModuleContainer {
   width: 100vw;
-  height: 90%;
   max-width: 100%;
+  height: 80%;
+  min-height: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  max-height: 100%;
+  margin-top: 15px;
 }
 .appGadgetsContainer {
   width: 80vw;

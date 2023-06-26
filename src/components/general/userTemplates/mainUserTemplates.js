@@ -20,7 +20,7 @@ export const themes = [
     iconColor: "black",
   },
   {
-    themeColor: "rgba(1, 1, 15, 0.7)",
+    themeColor: "rgba(1, 1, 15, 0.6)",
     secundaryColor: "rgba(1, 1, 15, 0.4)",
     iconColor: "white ",
     // themeColor: "rgba(999, 999, 999, 0.4)",
