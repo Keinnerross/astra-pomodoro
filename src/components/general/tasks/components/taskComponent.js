@@ -7,7 +7,7 @@ import { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
 
 const Task = ({ title, ifDone, idTask, idList, deleteTask, numberTheme }) => {
-  const themeSelect = themes[numberTheme];
+  const themeSelect = themes(1)[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,

@@ -25,7 +25,7 @@ import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 
-const MainTasks = ({ numberTheme }) => {
+const MainTasks = ({ numberTheme, themeOpacity }) => {
   const [lists, setLists] = useState([]);
 
   /* Functions Controllers List and Task */
@@ -197,7 +197,11 @@ const MainTasks = ({ numberTheme }) => {
 
   return (
     <div className={styles.mainTasksContainer}>
-      <AddListCard addList={addList} numberTheme={numberTheme} />
+      <AddListCard
+        addList={addList}
+        numberTheme={numberTheme}
+        themeOpacity={themeOpacity}
+      />
       <div className={styles.listContainer}>
         <DragDropContext onDragEnd={dragEnd}>
           <Droppable droppableId="listArr" direction="horizontal">
@@ -232,6 +236,7 @@ const MainTasks = ({ numberTheme }) => {
                           data-id={item.id}
                           getData={getData}
                           numberTheme={numberTheme}
+                          themeOpacity={themeOpacity}
                         />
                       </div>
                     )}

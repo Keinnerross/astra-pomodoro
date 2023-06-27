@@ -9,8 +9,14 @@ import { MdHelp, MdLogout, MdSettings } from "react-icons/md";
 
 // import { BiSolidHelpCircle, BiLogOut } from "react-icons/bi";
 
-const SidebarNav = ({ theme, ifActive, numberTheme  }) => {
-  const themeSelect = theme[numberTheme];
+const SidebarNav = ({
+  theme,
+  ifActive,
+  activeHelp,
+  numberTheme,
+  themeOpacity,
+}) => {
+  const themeSelect = theme(themeOpacity)[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,
@@ -42,7 +48,7 @@ const SidebarNav = ({ theme, ifActive, numberTheme  }) => {
               fill={configTheme.iconColor}
             />
           </button>
-          <button className={styles.iconContainer}>
+          <button className={styles.iconContainer} onClick={() => activeHelp()}>
             <MdHelp size={configTheme.iconSize} fill={configTheme.iconColor} />
           </button>
         </div>

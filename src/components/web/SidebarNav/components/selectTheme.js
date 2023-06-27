@@ -2,7 +2,12 @@ import { useEffect } from "react";
 import styles from "@/styles/componentes/web/sidebar/components/selectTheme.module.css";
 import { wallpapers } from "../../../general/userTemplates/mainUserTemplates";
 
-const SelectTheme = ({ isActive, handleTheme }) => {
+const SelectTheme = ({
+  isActive,
+  handleTheme,
+  handleRangeOpacity,
+  handleWalpapper,
+}) => {
   // useEffect(() => {
   //   console.log(wallpapers[0].wallpaper);
   // }, []);
@@ -27,15 +32,23 @@ const SelectTheme = ({ isActive, handleTheme }) => {
         </div>
       </div>
       <div className={styles.selectThemeSection}>
+        <h3>Opacity </h3>
+        <input type="range" onChange={(e) => handleRangeOpacity(e)}></input>
+      </div>
+      <div className={styles.selectThemeSection}>
         <h3>Wallpapers</h3>
         <div className={styles.customItemsSection}>
           {wallpapers.map((wallpapers, i) => (
-            <button key={i}>
+            <div
+              className={styles.wallpaperBtn}
+              key={i}
+              onClick={() => handleWalpapper(i)}
+            >
               <img
+                className={styles.wallpaperImg}
                 src={`${wallpapers.wallpaper}`}
-                className={styles.wallpaperBtn}
               />
-            </button>
+            </div>
           ))}
         </div>
       </div>

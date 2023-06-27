@@ -4,7 +4,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 
 const Header = ({ theme }) => {
-  const themeSelect = theme[1];
+  const themeSelect = theme(1)[1];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,

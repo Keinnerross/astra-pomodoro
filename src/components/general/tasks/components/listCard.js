@@ -27,9 +27,10 @@ const ListCard = ({
   tasksDt,
   getData,
   numberTheme,
+  themeOpacity,
 }) => {
   /*Configuracion Theme */
-  const themeSelect = themes[numberTheme];
+  const themeSelect = themes(themeOpacity)[numberTheme];
   const configTheme = {
     themeColor: themeSelect.themeColor,
     iconSize: 25,

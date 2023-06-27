@@ -4,7 +4,7 @@ import styles from "@/styles/componentes/general/pomodoro/components/navPomodoro
 import { AiFillSetting } from "react-icons/ai";
 import { themes } from "../../userTemplates/mainUserTemplates";
 const NavPomodoro = ({ updatePomoSession, ifOpen }) => {
-  const themeSelect = themes[1];
+  const themeSelect = themes(1)[1];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,

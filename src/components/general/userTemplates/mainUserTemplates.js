@@ -1,26 +1,57 @@
 export const wallpapers = [
+  // {
+  //   wallpaper: "https://images6.alphacoders.com/115/1155966.png",
+  // },
+  // {
+  //   wallpaper: "https://images8.alphacoders.com/115/1156488.png",
+  // },
   {
-    wallpaper:
-      "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=975&q=80",
+    wallpaper: "https://images6.alphacoders.com/387/387000.jpg",
   },
   {
-    wallpaper:
-      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+    wallpaper: "https://images8.alphacoders.com/105/1054256.jpg",
+  },
+
+  {
+    wallpaper: "https://images.alphacoders.com/112/1125594.jpg",
+  },
+
+  {
+    wallpaper: "https://images6.alphacoders.com/129/1295574.png ",
+  },
+
+  {
+    wallpaper: "https://images6.alphacoders.com/121/1217194.png",
+  },
+
+  {
+    wallpaper: "https://images4.alphacoders.com/565/565989.jpg",
   },
   {
-    wallpaper:
-      "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    wallpaper: "https://images4.alphacoders.com/119/1194756.png",
+  },
+
+  {
+    wallpaper: "https://images6.alphacoders.com/984/984392.jpg",
+  },
+
+  {
+    wallpaper: "https://images4.alphacoders.com/904/90498.jpg",
+  },
+
+  {
+    wallpaper: "https://images2.alphacoders.com/708/708635.jpg",
   },
 ];
 
-export const themes = [
+export const themes = (opacity) => [
   {
-    themeColor: "rgba(999, 999, 999, 0.5)",
+    themeColor: `rgba(999, 999, 999, ${opacity})`,
     secundaryColor: "rgba(999, 999, 999, 0.4)",
     iconColor: "black",
   },
   {
-    themeColor: "rgba(1, 1, 15, 0.6)",
+    themeColor: `rgba(1, 1, 15, ${opacity})`,
     secundaryColor: "rgba(1, 1, 15, 0.4)",
     iconColor: "white ",
   },

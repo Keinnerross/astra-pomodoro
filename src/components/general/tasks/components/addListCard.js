@@ -2,10 +2,11 @@ import { useState, useRef } from "react";
 import styles from "@/styles/componentes/general/tasks/components/addListCard.module.css";
 import { themes } from "../../userTemplates/mainUserTemplates";
 import { BsRocketTakeoff } from "react-icons/bs";
-const AddListCard = ({ addList, numberTheme }) => {
+
+const AddListCard = ({ addList, numberTheme, themeOpacity }) => {
   const [values, setValues] = useState("");
   const inputAddList = useRef(null);
-  const themeSelect = themes[numberTheme];
+  const themeSelect = themes(themeOpacity)[numberTheme];
 
   const configTheme = {
     themeColor: themeSelect.themeColor,
@@ -33,7 +34,11 @@ const AddListCard = ({ addList, numberTheme }) => {
         }}
       >
         <input
-          style={{ color: configTheme.iconColor, width: "90%" }}
+          style={{
+            color: configTheme.iconColor,
+            width: "90%",
+            "::placeholder": { color: "red" },
+          }}
           placeholder="Add A new list..."
           onChange={handleInputChange}
           ref={inputAddList}
