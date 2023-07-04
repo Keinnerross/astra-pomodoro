@@ -20,77 +20,95 @@ import {
   serverTimestamp,
   orderBy,
   query,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
+import {
+  onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
+} from "firebase/auth";
+import { auth } from "../../../../firebase";
 
-const MainTasks = ({ numberTheme, themeOpacity }) => {
+const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
   const [lists, setLists] = useState([]);
 
   /* Functions Controllers List and Task */
   /*Listas: */
 
   /* Obtener Listas */
-  const getData = async () => {
-    const q = query(collection(db, "lists"), orderBy("order", "asc"));
-    const querySnapshot = await getDocs(q);
-    const listsArr = [];
 
-    /*Aqui hay una cuestion curiosa, modificando esta funcion de forma que obtenga los datos una sola vez y maneje la informacion desde el frente para que no se rerenderice, lo hice usando Primise.All de esta forma, cosa que se creara un array con todos los valores de las tareas vinculados a las listas y luego de obtener todo en un array (ver constante tasksPromise) poderlo actualizar en el estado y hacerlo llegar al componente de las listas gracias a los props.  */
+  const newGetData = async () => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const listsArr = [];
 
-    await Promise.all(
-      querySnapshot.docs.map(async (doc) => {
-        const tasks = await getTasks(doc.id);
-        const tasksPromise = Array.isArray(tasks) ? tasks : [tasks];
-        const tasksData = await Promise.all(tasksPromise);
-        listsArr.push({ ...doc.data(), id: doc.id, tasks: tasksData });
-      })
-    );
-    console.log(listsArr);
-    setLists(listsArr);
+        const docRef = doc(db, "users", user.uid);
+        const listColl = collection(docRef, "lists");
+        const querySnapshot = await getDocs(listColl);
+        console.log(querySnapshot);
+        await Promise.all(
+          querySnapshot.docs.map(async (doc) => {
+            const tasks = await getTasks(doc.id);
+
+            const tasksPromise = Array.isArray(tasks) ? tasks : [tasks];
+            const tasksData = await Promise.all(tasksPromise);
+            listsArr.push({ ...doc.data(), id: doc.id, tasks: tasksData });
+          })
+        );
+        setLists(listsArr);
+      }
+    });
   };
 
-  /* Añadir lista*/
+  /*Creación de Lista */
   const addList = async (values) => {
     try {
-      const temporalID = uuidv4();
+      const idList = uuidv4();
 
       const newList = {
         listName: values,
         order: 0,
         tasks: [],
-        id: temporalID /*Id temporal para el correcto renderizado */,
+        id: idList /*Id temporal para el correcto renderizado */,
       };
 
       /*Funcion para ordenar los valores de Orden de las listas */
       const newDataList = [newList, ...lists];
 
-      const listOrderFn = newDataList.forEach((list, i) => {
+      const newOrder = [];
+      /*ordenar Posiciones */
+      newDataList.forEach((list, i) => {
         list.order = i;
+        newOrder.push(list);
       });
 
-      setLists(newDataList);
+      /*Render Front */
+      setLists(newOrder);
 
-      const dofRef = await addDoc(collection(db, "lists"), {
-        listName: values,
-        order: 0,
-      });
+      /*Envío de Lista. */
 
-      /* Funcion Order and Save Real ID*/
+      /*Si Existe un Usuario */
 
-      const orderAndSaveID = newDataList.forEach((list, i) => {
-        if (list.id == temporalID) {
-          list.id = dofRef.id;
-        } else {
-          return;
-        }
-      });
+      /*Esto lo hacemos de esta forma ya que Firestore solo recibe dos parametros en Doc() Ver DocRef */
 
-      setLists(newDataList);
-      pushOrderData(newDataList);
-      getData();
-      console.log("add or update success");
+      if (ifUserLog) {
+        const docRef = doc(db, "users", userId);
+        const listColl = collection(docRef, "lists");
+        const listDocRef = doc(listColl, idList);
+
+        await setDoc(listDocRef, {
+          listName: values,
+          order: 0,
+          tasks: [],
+        });
+
+        // pushOrderData(newOrder);
+        /*Funcion a Ordenar igual agregando los usuarios*/
+        console.log("add or update success");
+      } else {
+        console.log("Necesitas estar loqueado para crear una tarea");
+      }
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -130,7 +148,7 @@ const MainTasks = ({ numberTheme, themeOpacity }) => {
   });
 
   useEffect(() => {
-    getData();
+    newGetData();
   }, []);
 
   /*Las tareas se obtienen aquí, el resto de funciones de las tareas se encuentran en el componente de listas.*/
@@ -234,7 +252,7 @@ const MainTasks = ({ numberTheme, themeOpacity }) => {
                           updateList={updateList}
                           deleteLista={deletelist}
                           data-id={item.id}
-                          getData={getData}
+                          getData={newGetData}
                           numberTheme={numberTheme}
                           themeOpacity={themeOpacity}
                         />

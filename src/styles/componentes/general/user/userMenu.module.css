@@ -1,0 +1,13 @@
+.userMenuContainer {
+  position: absolute;
+  background-color: white;
+  width: 200px;
+  height: 250px;
+  right: 30px;
+  top: 50px;
+  z-index: 999;
+  border-radius: 7px;
+}
+.hidden{
+    display: none;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "@/styles/componentes/web/dashboardTemplate.module.css";
 import SidebarNav from "@/components/web/SidebarNav/sidebarNav";
 import Header from "@/components/web/header/header";
@@ -8,8 +8,14 @@ import MainPomodoro from "../general/pomodoro/mainPomodoro";
 import SettingsPomodoro from "../general/pomodoro/settingsPomodoro";
 import WhatIsPomodoro from "@/components/web/SidebarNav/components/whatIsPomodoro";
 import MainTasks from "../general/tasks/mainTasks";
-
+import UserLogin from "@/components/general/user/login";
+import UserRegister from "../general/user/register";
+import UserMenu from "../general/user/userMenu";
 import SelectTheme from "./SidebarNav/components/selectTheme";
+import {
+  onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
+} from "firebase/auth";
+import { auth } from "../../../firebase";
 
 import { themes, wallpapers } from "../general/userTemplates/mainUserTemplates";
 
@@ -25,7 +31,11 @@ const DashboardTemplate = () => {
   const [wallpaperSelected, setWallpaperSelected] = useState(1);
   const [activeBrush, setActiveBrush] = useState(false);
   const [ifOpenHelp, setIfOpenHelp] = useState(false);
-
+  const [ifOpenLogin, setIfOpenLogin] = useState(false);
+  const [ifOpenRegister, setIfOpenRegister] = useState(false);
+  const [ifOpenUserMenu, setIfOpenUserMenu] = useState(false);
+  const [userLog, setUserLog] = useState(null);
+  const [idUserLog, setIdUserLog] = useState("");
   const wallpaper = wallpapers[wallpaperSelected].wallpaper;
 
   /*Functions Setting Pomodoro*/
@@ -70,6 +80,44 @@ const DashboardTemplate = () => {
     setWallpaperSelected(value);
   };
 
+  /*Login/Register Controles */
+
+  const ifActiveLogin = () => {
+    if (userLog) {
+      setIfOpenUserMenu(!ifOpenUserMenu);
+    } else {
+      setIfOpenLogin(!ifOpenLogin);
+    }
+  };
+  const ifActiveRegister = () => {
+    setIfOpenLogin(false);
+    setIfOpenRegister(true);
+  };
+
+  const toggleOff = () => {
+    setIfOpenLogin(false);
+    setIfOpenRegister(false);
+    setIfOpenUserMenu(false);
+  };
+
+  const ifHandleActive = () => {
+    setIfOpenLogin(true);
+    setIfOpenRegister(false);
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUserLog(true);
+        setIdUserLog(user.uid);
+        console.log("Usuario Logueado");
+      } else {
+        setUserLog(false);
+        console.log("Usuario sin inicial session");
+      }
+    });
+  }, []);
+
   return (
     <div>
       {/*Tengo pensado maejar todas las ventanas de configuracion desde el loyout de sea forma puedo pasar los parametros de setting de manera global y al componente pomodoro */}
@@ -82,7 +130,18 @@ const DashboardTemplate = () => {
       />
 
       <WhatIsPomodoro ifOpen={ifOpenHelp} />
-
+      <UserLogin
+        isActive={ifOpenLogin}
+        toggleLogin={toggleOff}
+        registerActive={ifActiveRegister}
+        modalRest={toggleOff}
+      />
+      <UserRegister
+        isActive={ifOpenRegister}
+        handleActive={ifHandleActive}
+        modalRest={toggleOff}
+      />
+      <UserMenu isActive={ifOpenUserMenu} modalRest={toggleOff} />
       <div
         style={{
           backgroundImage: `url(${wallpaper})`,
@@ -102,7 +161,7 @@ const DashboardTemplate = () => {
           </div>
           <div>
             <div className={styles.HeaderContainer}>
-              <Header theme={themes} />
+              <Header theme={themes} activeLogin={ifActiveLogin} />
             </div>
             <div className={styles.appModuleContainer}>
               <div className={styles.appGadgetsContainer}>
@@ -118,6 +177,8 @@ const DashboardTemplate = () => {
                   <MainTasks
                     numberTheme={themeSelected}
                     themeOpacity={opacityValue}
+                    ifUserLog={userLog}
+                    userId={idUserLog}
                   />
                 </div>
               </div>

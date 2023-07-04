@@ -3,7 +3,7 @@ import { BiSearch, BiRefresh } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 
-const Header = ({ theme }) => {
+const Header = ({ theme, activeLogin }) => {
   const themeSelect = theme(1)[1];
 
   const configTheme = {
@@ -50,7 +50,7 @@ const Header = ({ theme }) => {
               </button>
             </div>
             <div className={styles.iconContainer}>
-              <button>
+              <button onClick={() => activeLogin()}>
                 <FaUserCircle
                   size={configTheme.iconSize}
                   fill={configTheme.iconColor}

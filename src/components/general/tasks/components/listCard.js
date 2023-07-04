@@ -9,6 +9,7 @@ import {
   query,
   getDocs,
   orderBy,
+  setDoc,
   collection,
   addDoc,
   deleteDoc,
@@ -64,45 +65,37 @@ const ListCard = ({
   /*Función Agregar nueva tarea. */
   const addNewTask = async (idList, tasksName) => {
     try {
-      const temporalID = uuidv4();
+      const taskId = uuidv4();
 
       const newTask = {
         taskName: tasksName,
         done: false,
         order: 0,
-        taskId:
-          temporalID /*Este es un ID Temporar para poder renderizar correctamente */,
+        taskId: taskId,
       };
 
       const newDataTask = [newTask, ...taskDtArr];
+      const newOrder = [];
 
-      const listOrderFn = newDataTask.forEach((list, i) => {
+      newDataTask.forEach((list, i) => {
         list.order = i;
+        newOrder.push(list);
       });
 
-      setTaskDtArr(newDataTask);
+      /*Renderizado desde el Frente */
+      setTaskDtArr(newOrder);
 
       const docRef = doc(db, "lists", idList);
       const tasksColl = collection(docRef, "tasks");
-      const newTaskUpdate = await addDoc(tasksColl, {
+      const taskDocRef = doc(tasksColl, taskId);
+
+      await setDoc(taskDocRef, {
         taskName: tasksName,
         done: false,
         order: 0,
       });
-      console.log(newTaskUpdate.id);
 
-      newDataTask.forEach((task, i) => {
-        if (task.taskId == temporalID) {
-          task.taskId = newTaskUpdate.id;
-        } else {
-          return;
-        }
-      });
-
-      setTaskDtArr(newDataTask);
       pushOrderData(newDataTask);
-      getData();
-
       console.log("Tarea agregada con exito");
     } catch (e) {
       console.log("Algo salió mal", e);
