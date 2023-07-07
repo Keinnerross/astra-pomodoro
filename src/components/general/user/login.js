@@ -6,9 +6,9 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../../../firebase";
-import { getDoc, doc, getDocs, collection, setDoc } from "firebase/firestore";
+import { doc, getDocs, collection, setDoc } from "firebase/firestore";
 import { db } from "../../../../firebase";
-
+import { FcGoogle } from "react-icons/fc";
 const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   const [inputMail, setInputMail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -59,34 +59,54 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   };
 
   return (
-    <div className={isActive ? styles.loginContainer : styles.hidden}>
+    <div
+      className={isActive ? styles.loginContainer : styles.hidden}
+      onClick={() => modalRest()}
+    >
       <form
         className={styles.formContainer}
         onSubmit={(e) => handleLoginData(e)}
+        onClick={(e) => e.stopPropagation()}
       >
         <h4> Login</h4>
 
-        <div>
-          <label>Email</label>
-          <input
-            placeholder="email"
-            type="text"
-            onChange={(e) => setInputMail(e.target.value)}
-          />
-          <label>password</label>
-          <input
-            placeholder="******"
-            type="password"
-            onChange={(e) => setInputPassword(e.target.value)}
-          />
+        <div className={styles.formSection}>
+          <div>
+            <label>Email</label>
+            <input
+              placeholder="email"
+              type="text"
+              onChange={(e) => setInputMail(e.target.value)}
+            />
+            <label>password</label>
+            <input
+              placeholder="password"
+              type="password"
+              onChange={(e) => setInputPassword(e.target.value)}
+            />
+            <div className={styles.forgotBtnContainer}>
+              <button className={styles.forgotBtn}>Forgot Passwords?</button>
+            </div>
+          </div>
+          <button type="submit" className={styles.submitBtn}>
+            Login
+          </button>
         </div>
-        <button type="submit">Login</button>
-        <button type="button" onClick={() => googleLogin()}>
-          Google
-        </button>
         <label>Do not have at account?</label>
         <button type="button" onClick={() => registerActive()}>
           Create account
+        </button>
+        <div className={styles.orContainer}>
+          <span>|</span>
+          <span>Or</span>
+          <span>|</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => googleLogin()}
+          className={styles.googleBtn}
+        >
+          <FcGoogle /> Google
         </button>
 
         <button type="button" onClick={() => toggleLogin()}>

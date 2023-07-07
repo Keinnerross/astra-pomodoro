@@ -77,10 +77,14 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
   };
 
   return (
-    <div className={isActive ? styles.registerContainer : styles.hidden}>
+    <div
+      className={isActive ? styles.registerContainer : styles.hidden}
+      onClick={() => modalRest()}
+    >
       <form
         className={styles.formContainer}
         onSubmit={(e) => handleRegisterData(e)}
+        onClick={(e) => e.stopPropagation()}
       >
         <h4> Register</h4>
 
