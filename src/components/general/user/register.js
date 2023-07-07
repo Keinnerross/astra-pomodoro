@@ -1,9 +1,13 @@
 import styles from "@/styles/componentes/general/user/register.module.css";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../../../firebase";
-import { auth } from "../../../../firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { auth } from "../../../../firebase";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 const UserRegister = ({ isActive, handleActive, modalRest }) => {
   const [inputMail, setInputMail] = useState("");
@@ -39,6 +43,39 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
     }
   };
 
+  const googleRegister = async () => {
+    const provider = new GoogleAuthProvider();
+    const userCredentials = await signInWithPopup(auth, provider);
+
+    const userId = userCredentials.user.uid;
+    // const userId = "b1nNbozatae0lSd9Lu5sgnDby4P2";
+
+    const userRef = collection(db, "users");
+    const snapshot = await getDocs(userRef);
+
+    let users = [];
+    snapshot.docs.map((doc) => {
+      users.push(doc.id);
+    });
+    const userResult = users.find((user) => user == userId);
+
+    if (!userResult) {
+      const userData = {
+        id: userCredentials.user.uid,
+        email: userCredentials.user.email,
+      };
+
+      const collectionRef = collection(db, "users");
+      const docRef = doc(collectionRef, userData.id);
+
+      await setDoc(docRef, {
+        email: userData.email,
+      });
+    }
+
+    modalRest();
+  };
+
   return (
     <div className={isActive ? styles.registerContainer : styles.hidden}>
       <form
@@ -65,7 +102,9 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
         </div>
         <button type="submit">Register</button>
 
-        <button type="button">Google</button>
+        <button type="button" onClick={() => googleRegister()}>
+          Google
+        </button>
 
         <label>Do you have at account?</label>
         <button type="button" onClick={() => handleActive()}>

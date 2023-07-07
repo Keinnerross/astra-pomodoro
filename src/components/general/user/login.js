@@ -6,6 +6,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../../../firebase";
+import { getDoc, doc, getDocs, collection, setDoc } from "firebase/firestore";
+import { db } from "../../../../firebase";
 
 const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   const [inputMail, setInputMail] = useState("");
@@ -26,7 +28,32 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   const googleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const userCredentials = await signInWithPopup(auth, provider);
-    console.log(userCredentials.user);
+
+    const userId = userCredentials.user.uid;
+    // const userId = "b1nNbozatae0lSd9Lu5sgnDby4P2";
+
+    const userRef = collection(db, "users");
+    const snapshot = await getDocs(userRef);
+
+    let users = [];
+    snapshot.docs.map((doc) => {
+      users.push(doc.id);
+    });
+    const userResult = users.find((user) => user == userId);
+
+    if (!userResult) {
+      const userData = {
+        id: userCredentials.user.uid,
+        email: userCredentials.user.email,
+      };
+
+      const collectionRef = collection(db, "users");
+      const docRef = doc(collectionRef, userData.id);
+
+      await setDoc(docRef, {
+        email: userData.email,
+      });
+    }
 
     modalRest();
   };

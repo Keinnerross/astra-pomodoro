@@ -30,9 +30,14 @@ import {
 } from "firebase/auth";
 import { auth } from "../../../../firebase";
 
-const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
+const MainTasks = ({
+  numberTheme,
+  themeOpacity,
+  bgTheme,
+  ifUserLog,
+  userId,
+}) => {
   const [lists, setLists] = useState([]);
-
   /* Functions Controllers List and Task */
   /*Listas: */
 
@@ -46,10 +51,9 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
         const docRef = doc(db, "users", user.uid);
         const listColl = collection(docRef, "lists");
         const querySnapshot = await getDocs(listColl);
-        console.log(querySnapshot);
         await Promise.all(
           querySnapshot.docs.map(async (doc) => {
-            const tasks = await getTasks(doc.id);
+            const tasks = await getTasks(doc.id, user.uid);
 
             const tasksPromise = Array.isArray(tasks) ? tasks : [tasks];
             const tasksData = await Promise.all(tasksPromise);
@@ -64,35 +68,30 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
   /*Creación de Lista */
   const addList = async (values) => {
     try {
-      const idList = uuidv4();
-
-      const newList = {
-        listName: values,
-        order: 0,
-        tasks: [],
-        id: idList /*Id temporal para el correcto renderizado */,
-      };
-
-      /*Funcion para ordenar los valores de Orden de las listas */
-      const newDataList = [newList, ...lists];
-
-      const newOrder = [];
-      /*ordenar Posiciones */
-      newDataList.forEach((list, i) => {
-        list.order = i;
-        newOrder.push(list);
-      });
-
-      /*Render Front */
-      setLists(newOrder);
-
-      /*Envío de Lista. */
-
-      /*Si Existe un Usuario */
-
-      /*Esto lo hacemos de esta forma ya que Firestore solo recibe dos parametros en Doc() Ver DocRef */
-
+      /*Este condicional es temporal, lo ideal sería dividir en guardado un para la base de datos y el otro desde el frente con localStorage*/
       if (ifUserLog) {
+        const idList = uuidv4();
+
+        const newList = {
+          listName: values,
+          order: 0,
+          tasks: [],
+          id: idList /*Id temporal para el correcto renderizado */,
+        };
+
+        /*Funcion para ordenar los valores de Orden de las listas */
+        const newDataList = [newList, ...lists];
+
+        const newOrder = [];
+        /*ordenar Posiciones */
+        newDataList.forEach((list, i) => {
+          list.order = i;
+          newOrder.push(list);
+        });
+
+        /*Render Front */
+        setLists(newOrder);
+
         const docRef = doc(db, "users", userId);
         const listColl = collection(docRef, "lists");
         const listDocRef = doc(listColl, idList);
@@ -103,11 +102,17 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
           tasks: [],
         });
 
-        // pushOrderData(newOrder);
+        pushOrderData(newOrder);
         /*Funcion a Ordenar igual agregando los usuarios*/
         console.log("add or update success");
       } else {
-        console.log("Necesitas estar loqueado para crear una tarea");
+        alert("Necesitas estar logeado para crear una Lista");
+
+        /*Envío de Lista. */
+
+        /*Si Existe un Usuario */
+
+        /*Esto lo hacemos de esta forma ya que Firestore solo recibe dos parametros en Doc() Ver DocRef */
       }
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -117,7 +122,7 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
   /* Actualizar Nombre de lista*/
   const updateList = useCallback(async (newNameList, idList) => {
     try {
-      const docRef = doc(db, "lists", idList);
+      const docRef = doc(db, "users", userId, "lists", idList);
       await updateDoc(docRef, {
         listName: newNameList, // Agregamos la tarea a la lista
       });
@@ -132,8 +137,10 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
     const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
 
     if (confirmation) {
-      const q = collection(db, "lists");
-      const dc = doc(q, id);
+      const dc = doc(db, "users", userId, "lists", id);
+
+      // const q = collection(db, "lists");
+      // const dc = doc(q, id);
       try {
         setLists((prevLists) => prevLists.filter((list) => list.id !== id));
         await deleteDoc(dc);
@@ -154,14 +161,14 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
   /*Las tareas se obtienen aquí, el resto de funciones de las tareas se encuentran en el componente de listas.*/
 
   /*Función Obtener Tareas: Esta función solo se llama desde la función principal getData */
-  const getTasks = async (idList) => {
+  const getTasks = async (idList, idUser) => {
     try {
       const tasks = [];
-      const q = query(
-        collection(db, "lists", idList, "tasks"),
-        orderBy("order", "asc")
-      );
-      const querySnapshot = await getDocs(q);
+
+      const listDocRef = doc(db, "users", idUser, "lists", idList);
+      const taskCollectionRef = collection(listDocRef, "tasks");
+      const querySnapshot = await getDocs(taskCollectionRef);
+
       querySnapshot.docs.map((doc) => {
         tasks.push({ ...doc.data(), taskId: doc.id });
       });
@@ -176,7 +183,7 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
   const pushOrderData = async (newOrder) => {
     if (newOrder) {
       await newOrder.map(async (list, i) => {
-        const docRef = doc(db, "lists", list.id);
+        const docRef = doc(db, "users", userId, "lists", list.id);
         await updateDoc(docRef, {
           order: i, //
         });
@@ -242,8 +249,14 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
                         className={styles.listSectionItem}
                         {...provided.draggableProps}
                         ref={provided.innerRef}
-                        {...provided.dragHandleProps}
                       >
+                        <div
+                          style={{
+                            background: bgTheme,
+                          }}
+                          className={styles.dragControlContainer}
+                          {...provided.dragHandleProps}
+                        ></div>
                         <ListCard
                           key={item.id}
                           listName={item.listName}
@@ -255,6 +268,7 @@ const MainTasks = ({ numberTheme, themeOpacity, ifUserLog, userId }) => {
                           getData={newGetData}
                           numberTheme={numberTheme}
                           themeOpacity={themeOpacity}
+                          userId={userId}
                         />
                       </div>
                     )}

@@ -177,6 +177,7 @@ const DashboardTemplate = () => {
                   <MainTasks
                     numberTheme={themeSelected}
                     themeOpacity={opacityValue}
+                    bgTheme={themes(opacityValue)[themeSelected].themeColor}
                     ifUserLog={userLog}
                     userId={idUserLog}
                   />

@@ -26,9 +26,9 @@ const ListCard = ({
   updateList,
   deleteLista,
   tasksDt,
-  getData,
   numberTheme,
   themeOpacity,
+  userId,
 }) => {
   /*Configuracion Theme */
   const themeSelect = themes(themeOpacity)[numberTheme];
@@ -74,7 +74,7 @@ const ListCard = ({
         taskId: taskId,
       };
 
-      const newDataTask = [newTask, ...taskDtArr];
+      const newDataTask = [...taskDtArr, newTask];
       const newOrder = [];
 
       newDataTask.forEach((list, i) => {
@@ -85,9 +85,11 @@ const ListCard = ({
       /*Renderizado desde el Frente */
       setTaskDtArr(newOrder);
 
-      const docRef = doc(db, "lists", idList);
-      const tasksColl = collection(docRef, "tasks");
-      const taskDocRef = doc(tasksColl, taskId);
+      /*Guardar tareas en la db */
+
+      const listDoc = doc(db, "users", userId, "lists", idList);
+      const taskColl = collection(listDoc, "tasks");
+      const taskDocRef = doc(taskColl, taskId);
 
       await setDoc(taskDocRef, {
         taskName: tasksName,
@@ -108,7 +110,15 @@ const ListCard = ({
     const confirmation = confirm("Estas seguro de eliminar esta tarea?");
     if (confirmation) {
       try {
-        const docRef = doc(db, "lists", idList, "tasks", idTask);
+        const docRef = doc(
+          db,
+          "users",
+          userId,
+          "lists",
+          idList,
+          "tasks",
+          idTask
+        );
         const newlistTasks = taskDtArr.filter(
           (tasks) => tasks.taskId !== idTask
         );
@@ -132,7 +142,15 @@ const ListCard = ({
   const pushOrderData = async (newOrder) => {
     if (newOrder) {
       newOrder.map(async (task, i) => {
-        const docRef = doc(db, "lists", idList, "tasks", task.taskId);
+        const docRef = doc(
+          db,
+          "users",
+          userId,
+          "lists",
+          idList,
+          "tasks",
+          task.taskId
+        );
         await updateDoc(docRef, {
           order: i,
         });
@@ -168,6 +186,8 @@ const ListCard = ({
     pushOrderData(newTasksOrder);
   };
 
+  const hightValue = `${34 * taskDtArr.length}px`;
+
   return (
     <div
       className={styles.TaskCardContainer}
@@ -201,6 +221,7 @@ const ListCard = ({
           {(provided) => (
             <div
               className={styles.taskListSectionForm}
+              style={{ height: hightValue }}
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
@@ -226,6 +247,7 @@ const ListCard = ({
                             key={task.taskId}
                             deleteTask={deleteTask}
                             numberTheme={numberTheme}
+                            idUser={userId}
                           />
                         </div>
                       )}

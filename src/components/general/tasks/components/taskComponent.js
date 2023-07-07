@@ -6,7 +6,15 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
 
-const Task = ({ title, ifDone, idTask, idList, deleteTask, numberTheme }) => {
+const Task = ({
+  title,
+  ifDone,
+  idTask,
+  idList,
+  idUser,
+  deleteTask,
+  numberTheme,
+}) => {
   const themeSelect = themes(1)[numberTheme];
 
   const configTheme = {
@@ -20,7 +28,7 @@ const Task = ({ title, ifDone, idTask, idList, deleteTask, numberTheme }) => {
   /*Funcion para acutalizar nombre de la tarea */
   const updateName = async (idList, idTarea, newTaskName) => {
     try {
-      const task = doc(db, "lists", idList, "tasks", idTarea);
+      const task = doc(db, "users", idUser, "lists", idList, "tasks", idTarea);
       await updateDoc(task, {
         taskName: newTaskName,
       });

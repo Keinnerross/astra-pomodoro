@@ -5,7 +5,7 @@ import { auth } from "../../../../firebase";
 const UserMenu = ({ isActive, modalRest }) => {
   const logOut = async (tkn) => {
     await signOut(tkn);
-    modalRest();
+    location.reload();
   };
 
   return (

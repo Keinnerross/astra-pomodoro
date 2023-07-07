@@ -4,8 +4,17 @@
   flex-direction: column;
   align-items: center;
 }
+
+.dragControlContainer {
+  height: 12px;
+  width: 250px;
+  border-radius: 7px 7px 0 0;
+}
+
 .listSectionItem {
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 19vh;
   cursor: context-menu !important;
 }
