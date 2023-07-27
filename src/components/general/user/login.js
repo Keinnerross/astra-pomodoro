@@ -1,5 +1,5 @@
 import styles from "@/styles/componentes/general/user/login.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -12,26 +12,27 @@ import { FcGoogle } from "react-icons/fc";
 const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   const [inputMail, setInputMail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const [textErrorLog, setTextErrorLog] = useState("");
 
   const handleLoginData = async (e) => {
     e.preventDefault();
-    const credentials = await signInWithEmailAndPassword(
-      auth,
-      inputMail,
-      inputPassword
-    );
-    console.log(credentials.user);
 
-    modalRest();
+    try {
+      const credentials = await signInWithEmailAndPassword(
+        auth,
+        inputMail,
+        inputPassword
+      );
+      modalRest();
+    } catch (e) {
+      setTextErrorLog("Hubo un error al iniciar sessión");
+    }
   };
 
   const googleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const userCredentials = await signInWithPopup(auth, provider);
-
     const userId = userCredentials.user.uid;
-    // const userId = "b1nNbozatae0lSd9Lu5sgnDby4P2";
-
     const userRef = collection(db, "users");
     const snapshot = await getDocs(userRef);
 
@@ -61,7 +62,10 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   return (
     <div
       className={isActive ? styles.loginContainer : styles.hidden}
-      onClick={() => modalRest()}
+      onClick={() => {
+        modalRest();
+        setTextErrorLog("");
+      }}
     >
       <form
         className={styles.formContainer}
@@ -85,15 +89,61 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
               onChange={(e) => setInputPassword(e.target.value)}
             />
             <div className={styles.forgotBtnContainer}>
-              <button className={styles.forgotBtn}>Forgot Passwords?</button>
+              <button className={styles.forgotBtn}>Forgot Password?</button>
             </div>
+            <span
+              style={{
+                textAlign: "center",
+                fontSize: "15px",
+                color: "red",
+                fontStyle: "italic",
+              }}
+            >
+              {textErrorLog}
+            </span>
           </div>
           <button type="submit" className={styles.submitBtn}>
             Login
           </button>
         </div>
         <label>Do not have at account?</label>
-        <button type="button" onClick={() => registerActive()}>
+        <button
+          type="button"
+          onClick={() => {
+            registerActive();
+            setTextErrorLog("");
+          }}
+        >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
           Create account
         </button>
         <div className={styles.orContainer}>

@@ -12,6 +12,28 @@ import {
 const UserRegister = ({ isActive, handleActive, modalRest }) => {
   const [inputMail, setInputMail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const [validEmail, setValidEmail] = useState(null);
+  const [registerError, setRegisterError] = useState(null);
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const handleEmailChange = (e) => {
+    const { value } = e.target;
+    setInputMail(value);
+    setValidEmail(validateEmail(value));
+  };
+
+  const renderValidateEmail = () => {
+    if (validEmail) {
+      return null;
+    } else if (validEmail == null) {
+      return null;
+    } else {
+      return "Introduce un email con formato ejemplo@ejemplo.com";
+    }
+  };
 
   const handleRegisterData = async (e) => {
     e.preventDefault();
@@ -37,7 +59,7 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
 
       modalRest();
     } catch (e) {
-      console.log(e + "Contraseña o Email Inválido.");
+      setRegisterError("Email or password no valid");
 
       /*En este apartado se deben manejar los errores Correctamente. */
     }
@@ -79,7 +101,10 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
   return (
     <div
       className={isActive ? styles.registerContainer : styles.hidden}
-      onClick={() => modalRest()}
+      onClick={() => {
+        modalRest();
+        setValidEmail(null);
+      }}
     >
       <form
         className={styles.formContainer}
@@ -94,8 +119,9 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
           <input
             placeholder="email"
             type="text"
-            onChange={(e) => setInputMail(e.target.value)}
+            onChange={(e) => handleEmailChange(e)}
           />
+          <p>{renderValidateEmail()}</p>
           <label>password</label>
 
           <input
@@ -103,6 +129,8 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
             type="password"
             onChange={(e) => setInputPassword(e.target.value)}
           />
+
+          {registerError}
         </div>
         <button type="submit">Register</button>
 
@@ -111,7 +139,13 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
         </button>
 
         <label>Do you have at account?</label>
-        <button type="button" onClick={() => handleActive()}>
+        <button
+          type="button"
+          onClick={() => {
+            setValidEmail(null);
+            handleActive();
+          }}
+        >
           LogIn
         </button>
       </form>
