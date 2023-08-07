@@ -253,7 +253,7 @@ const MainTasks = ({
         className={styles.mainTasksSection}
         style={
           numberTheme == 1
-            ? { background: "rgba(56, 51, 51, 0.30)" }
+            ? { background: "rgba(56, 51, 51, 0.40)" }
             : { background: "rgba(153, 153, 154, 0.30)" }
         }
       >
