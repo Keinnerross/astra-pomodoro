@@ -45,7 +45,7 @@ const DashboardTemplate = () => {
   });
   const [themeSelected, setThemeSelected] = useState(1);
   const [opacityValue, setOpacityValue] = useState(0.5);
-  const [wallpaperSelected, setWallpaperSelected] = useState(1);
+  const [wallpaperSelected, setWallpaperSelected] = useState(4);
   const [activeBrush, setActiveBrush] = useState(false);
   const [ifOpenHelp, setIfOpenHelp] = useState(false);
   const [ifOpenLogin, setIfOpenLogin] = useState(false);
