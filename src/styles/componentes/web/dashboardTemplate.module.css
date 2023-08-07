@@ -3,17 +3,16 @@
   max-width: 100%;
   background-color: #181818;
   height: 100vh;
-  max-height: 100%;
   align-items: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   backdrop-filter: blur(2px);
+
 }
 .bgSection {
   width: 100%;
   display: flex;
-  max-height: 100%;
   justify-content: center;
   flex-direction: row;
 }
@@ -21,12 +20,14 @@
 .HeaderContainer {
   width: 100%;
 }
-/* 
+
 .sidebarContainer {
-  width: 5%;
-  justify-content: space-between;
-  display: flex;
-} */
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+}
 
 .appModuleContainer {
   width: 100%;
@@ -34,10 +35,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 10px;
 }
 .appGadgetsContainer {
-  max-width: 1300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,5 +50,9 @@
 }
 
 .TasksViewContainer {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-top: 20px;
 }

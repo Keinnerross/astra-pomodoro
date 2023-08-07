@@ -212,16 +212,16 @@ const DashboardTemplate = () => {
             userLog={userLog}
           />
         </div>
+        <div className={styles.sidebarContainer}>
+          <SidebarNav
+            theme={themes}
+            ifActive={ifActiveBrush}
+            numberTheme={themeSelected}
+            themeOpacity={opacityValue}
+            activeHelp={ifActiveHelp}
+          />
+        </div>
         <div className={styles.bgSection}>
-          <div className={styles.sidebarContainer}>
-            <SidebarNav
-              theme={themes}
-              ifActive={ifActiveBrush}
-              numberTheme={themeSelected}
-              themeOpacity={opacityValue}
-              activeHelp={ifActiveHelp}
-            />
-          </div>
           <div>
             <div className={styles.appModuleContainer}>
               <div className={styles.appGadgetsContainer}>

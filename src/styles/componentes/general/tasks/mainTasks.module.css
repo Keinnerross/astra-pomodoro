@@ -1,8 +1,10 @@
 .mainTasksContainer {
-  height: 360px;
+  width: 100%;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .dragControlContainer {
@@ -12,24 +14,29 @@
 }
 
 .mainTasksSection {
-  height: 350px;
-  padding: 40px 30px;
+  width: 90%;
   border-radius: 9px;
-  margin-top: 20px;
+  padding: 20px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .listSectionItem {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 20px 20px 0;
   cursor: context-menu !important;
 }
 
 .listContainer {
   overflow-x: auto;
-  width: 1300px;
+  width: 100%;
+  max-width: 1300px;
   display: flex;
-  height: 360px;
 }
 
 .listContainer::-webkit-scrollbar {
@@ -37,7 +44,7 @@
 }
 
 .listContainer::-webkit-scrollbar:vertical {
-  width: 10px;
+  width: 8px;
 }
 
 .listContainer::-webkit-scrollbar-button:increment,
@@ -46,7 +53,7 @@
 }
 
 .listContainer::-webkit-scrollbar-thumb {
-  background-color: #0d021f8c;
+  background-color: rgba(106, 106, 112, 0.533);
   border-radius: 20px;
   cursor: pointer;
 }

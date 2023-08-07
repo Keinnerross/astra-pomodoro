@@ -1,18 +1,16 @@
 .sidebarMain {
-  width: 4vw;
-  height: 100vh;
+  width: 45px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  backdrop-filter: blur(0.7px);
 }
 
 .sidebarSection {
   width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -21,7 +19,6 @@
 
 .navSection {
   width: 100%;
-
   height: 70%;
   display: flex;
   flex-direction: column;
