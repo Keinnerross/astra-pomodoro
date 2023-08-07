@@ -14,6 +14,7 @@ import {
   doc,
   addDoc,
   updateDoc,
+  update,
   onSnapshot,
   getDocs,
   deleteDoc,
@@ -54,12 +55,21 @@ const MainTasks = ({
         await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const tasks = await getTasks(doc.id, user.uid);
-
             const tasksPromise = Array.isArray(tasks) ? tasks : [tasks];
             const tasksData = await Promise.all(tasksPromise);
+            tasksData.sort((a, b) => (a.order > b.order ? 1 : -1));
             listsArr.push({ ...doc.data(), id: doc.id, tasks: tasksData });
+            listsArr.sort((a, b) => (a.order > b.order ? 1 : -1));
           })
         );
+        setLists(listsArr);
+      } else {
+        const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
+        let listsArr = [];
+        storedArray.map((doc) => {
+          listsArr.push({ ...doc, id: doc.id, tasks: doc.tasks });
+        });
+
         setLists(listsArr);
       }
     });
@@ -69,29 +79,30 @@ const MainTasks = ({
   const addList = async (values) => {
     try {
       /*Este condicional es temporal, lo ideal sería dividir en guardado un para la base de datos y el otro desde el frente con localStorage*/
+
+      const idList = uuidv4();
+
+      const newList = {
+        listName: values,
+        order: 0,
+        tasks: [],
+        id: idList /*Id*/,
+      };
+
+      /*Funcion para ordenar los valores de Orden de las listas */
+      const newDataList = [newList, ...lists];
+
+      const newOrder = [];
+      /*ordenar Posiciones */
+      newDataList.forEach((list, i) => {
+        list.order = i;
+        newOrder.push(list);
+      });
+
+      /*Render Front */
+      setLists(newOrder);
+      /*Guardado en la DB */
       if (ifUserLog) {
-        const idList = uuidv4();
-
-        const newList = {
-          listName: values,
-          order: 0,
-          tasks: [],
-          id: idList /*Id temporal para el correcto renderizado */,
-        };
-
-        /*Funcion para ordenar los valores de Orden de las listas */
-        const newDataList = [newList, ...lists];
-
-        const newOrder = [];
-        /*ordenar Posiciones */
-        newDataList.forEach((list, i) => {
-          list.order = i;
-          newOrder.push(list);
-        });
-
-        /*Render Front */
-        setLists(newOrder);
-
         const docRef = doc(db, "users", userId);
         const listColl = collection(docRef, "lists");
         const listDocRef = doc(listColl, idList);
@@ -101,18 +112,14 @@ const MainTasks = ({
           order: 0,
           tasks: [],
         });
-
         pushOrderData(newOrder);
-        /*Funcion a Ordenar igual agregando los usuarios*/
-        console.log("add or update success");
       } else {
-        alert("Necesitas estar logeado para crear una Lista");
+        /*LocalStorage */
+        const existingArray = JSON.parse(localStorage.getItem("lists")) || [];
+        existingArray.push(newList);
 
-        /*Envío de Lista. */
-
-        /*Si Existe un Usuario */
-
-        /*Esto lo hacemos de esta forma ya que Firestore solo recibe dos parametros en Doc() Ver DocRef */
+        localStorage.setItem("lists", JSON.stringify(existingArray));
+        pushOrderData(newOrder);
       }
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -137,15 +144,18 @@ const MainTasks = ({
     const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
 
     if (confirmation) {
-      const dc = doc(db, "users", userId, "lists", id);
-
-      // const q = collection(db, "lists");
-      // const dc = doc(q, id);
       try {
-        setLists((prevLists) => prevLists.filter((list) => list.id !== id));
-        await deleteDoc(dc);
+        if (ifUserLog) {
+          const dc = doc(db, "users", userId, "lists", id);
+          setLists((prevLists) => prevLists.filter((list) => list.id !== id));
+          await deleteDoc(dc);
+        } else {
+          const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
+          const updateArray = storedArray.filter((lists) => lists.id !== id);
 
-        console.log("List deleted successfully");
+          localStorage.setItem("lists", JSON.stringify(updateArray));
+          newGetData();
+        }
       } catch (err) {
         console.log(err);
       }
@@ -181,13 +191,24 @@ const MainTasks = ({
   /*Funcion de orden dnd para las listas: */
 
   const pushOrderData = async (newOrder) => {
-    if (newOrder) {
-      await newOrder.map(async (list, i) => {
-        const docRef = doc(db, "users", userId, "lists", list.id);
-        await updateDoc(docRef, {
-          order: i, //
-        });
-      });
+    try {
+      if (newOrder) {
+        if (ifUserLog) {
+          await newOrder.map(async (list, i) => {
+            const docRef = doc(db, "users", userId, "lists", list.id);
+            await updateDoc(docRef, {
+              order: i, //
+            });
+          });
+        } else {
+          const updatedArray = newOrder.map((list, i) => {
+            return { ...list, order: i };
+          });
+          localStorage.setItem("lists", JSON.stringify(updatedArray));
+        }
+      }
+    } catch (e) {
+      console.log(e + "FAIL");
     }
   };
 
@@ -269,6 +290,7 @@ const MainTasks = ({
                           numberTheme={numberTheme}
                           themeOpacity={themeOpacity}
                           userId={userId}
+                          newGetData={newGetData}
                         />
                       </div>
                     )}

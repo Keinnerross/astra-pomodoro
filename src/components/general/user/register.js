@@ -85,6 +85,7 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
       const userData = {
         id: userCredentials.user.uid,
         email: userCredentials.user.email,
+        bg: 1,
       };
 
       const collectionRef = collection(db, "users");

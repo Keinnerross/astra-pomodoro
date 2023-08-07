@@ -29,6 +29,7 @@ const ListCard = ({
   numberTheme,
   themeOpacity,
   userId,
+  newGetData,
 }) => {
   /*Configuracion Theme */
   const themeSelect = themes(themeOpacity)[numberTheme];
@@ -58,7 +59,6 @@ const ListCard = ({
   /*Funcion de input del titulo de la Tarea */
   const handleInputTask = (e) => {
     const { value } = e.target;
-    console.log(value);
     setValues(value);
   };
 
@@ -84,21 +84,31 @@ const ListCard = ({
 
       /*Renderizado desde el Frente */
       setTaskDtArr(newOrder);
-
       /*Guardar tareas en la db */
+      if (userId) {
+        const listDoc = doc(db, "users", userId, "lists", idList);
+        const taskColl = collection(listDoc, "tasks");
+        const taskDocRef = doc(taskColl, taskId);
 
-      const listDoc = doc(db, "users", userId, "lists", idList);
-      const taskColl = collection(listDoc, "tasks");
-      const taskDocRef = doc(taskColl, taskId);
+        await setDoc(taskDocRef, {
+          taskName: tasksName,
+          done: false,
+          order: 0,
+        });
 
-      await setDoc(taskDocRef, {
-        taskName: tasksName,
-        done: false,
-        order: 0,
-      });
-
-      pushOrderData(newDataTask);
-      console.log("Tarea agregada con exito");
+        pushOrderData(newDataTask);
+      } else {
+        const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
+        const updatedArray = storedArray.map((list) => {
+          if (list.id === idList) {
+            return { ...list, tasks: newOrder };
+          } else {
+            return list;
+          }
+        });
+        localStorage.setItem("lists", JSON.stringify(updatedArray));
+        newGetData();
+      }
     } catch (e) {
       console.log("Algo salió mal", e);
     }
@@ -110,23 +120,44 @@ const ListCard = ({
     const confirmation = confirm("Estas seguro de eliminar esta tarea?");
     if (confirmation) {
       try {
-        const docRef = doc(
-          db,
-          "users",
-          userId,
-          "lists",
-          idList,
-          "tasks",
-          idTask
-        );
-        const newlistTasks = taskDtArr.filter(
-          (tasks) => tasks.taskId !== idTask
-        );
-        setTaskDtArr(newlistTasks);
-        await deleteDoc(docRef);
-        console.log("Eliminado Sadisfactoriamente");
+        if (userId) {
+          const docRef = doc(
+            db,
+            "users",
+            userId,
+            "lists",
+            idList,
+            "tasks",
+            idTask
+          );
+          const newlistTasks = taskDtArr.filter(
+            (tasks) => tasks.taskId !== idTask
+          );
+          setTaskDtArr(newlistTasks);
+          await deleteDoc(docRef);
+        } else {
+          const storedArray = JSON.parse(localStorage.getItem("lists"));
+          let tasksArr;
+          storedArray.forEach((list) => {
+            if (list.id === idList) {
+              tasksArr = list.tasks;
+            }
+          });
+          const updateTasks = tasksArr.filter((task) => task.taskId !== idTask);
+
+          const updateLists = storedArray.map((list, i) => {
+            if (list.id === idList) {
+              return { ...list, tasks: updateTasks };
+            } else {
+              return list;
+            }
+          });
+
+          localStorage.setItem("lists", JSON.stringify(updateLists));
+          newGetData();
+        }
       } catch (e) {
-        alert("Hubo un problema en eliminar");
+        alert("Hubo un problema en eliminar" + e);
       }
     } else {
       return;

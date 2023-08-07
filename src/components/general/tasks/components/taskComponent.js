@@ -5,7 +5,7 @@ import { db } from "../../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
-
+import { BsThreeDotsVertical } from "react-icons";
 const Task = ({
   title,
   ifDone,
@@ -46,15 +46,16 @@ const Task = ({
 
   const [check, setCheck] = useState(ifDone);
 
-  const handleCheck = async (idLista, idTarea) => {
+  const handleCheck = async (idUser, idList, idTarea) => {
     try {
       check ? setCheck(false) : setCheck(true);
-
-      const task = doc(db, "lists", idLista, "tasks", idTarea);
+      const task = doc(db, "users", idUser, "lists", idList, "tasks", idTarea);
       await updateDoc(task, {
         done: !check,
       });
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   /* Funcion para el chek de completado, ((((no implementado ))))*/
@@ -69,12 +70,23 @@ const Task = ({
             size={15}
           />
         </div>
-        <input
+
+        <div className={styles.checkTaskContainer}>
+          <input
+            defaultChecked={check}
+            type="checkbox"
+            id={idTask}
+            onChange={() => handleCheck(idUser, idList, idTask)}
+          />
+          <label htmlFor={idTask}></label>
+          <div className={styles.settingTaskCard}></div>
+        </div>
+        {/* <input
           type="checkbox"
           style={{ marginRight: 5, backgroundColor: "white" }}
           checked={check}
           onChange={() => handleCheck(idList, idTask)}
-        />
+        /> */}
         <input
           className={styles.inputTitleTask}
           style={{ color: configTheme.iconColor }}

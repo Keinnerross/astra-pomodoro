@@ -32,7 +32,9 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
   const googleLogin = async () => {
     const provider = new GoogleAuthProvider();
     const userCredentials = await signInWithPopup(auth, provider);
+
     const userId = userCredentials.user.uid;
+
     const userRef = collection(db, "users");
     const snapshot = await getDocs(userRef);
 
@@ -114,36 +116,6 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
             setTextErrorLog("");
           }}
         >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
           Create account
         </button>
         <div className={styles.orContainer}>

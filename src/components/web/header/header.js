@@ -2,8 +2,7 @@ import styles from "@/styles/componentes/web/header/header.module.css";
 import { BiSearch, BiRefresh } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
-
-const Header = ({ theme, activeLogin }) => {
+const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
   const themeSelect = theme(1)[1];
 
   const configTheme = {
@@ -51,10 +50,21 @@ const Header = ({ theme, activeLogin }) => {
             </div>
             <div className={styles.iconContainer}>
               <button onClick={() => activeLogin()}>
-                <FaUserCircle
-                  size={configTheme.iconSize}
-                  fill={configTheme.iconColor}
-                />
+                {userLog ? (
+                  <div
+                    className={styles.imgProfileContainer}
+                    style={{
+                      backgroundImage: `url(
+                        ${imgProfile}
+                      )`,
+                    }}
+                  ></div>
+                ) : (
+                  <FaUserCircle
+                    size={configTheme.iconSize}
+                    fill={configTheme.iconColor}
+                  />
+                )}
               </button>
             </div>
           </div>

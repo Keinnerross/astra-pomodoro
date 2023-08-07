@@ -13,6 +13,23 @@ import UserRegister from "../general/user/register";
 import UserMenu from "../general/user/userMenu";
 import SelectTheme from "./SidebarNav/components/selectTheme";
 import {
+  collection,
+  doc,
+  addDoc,
+  updateDoc,
+  update,
+  onSnapshot,
+  getDocs,
+  getDoc,
+  deleteDoc,
+  serverTimestamp,
+  orderBy,
+  query,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../../../firebase";
+
+import {
   onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
 } from "firebase/auth";
 import { auth } from "../../../firebase";
@@ -36,6 +53,7 @@ const DashboardTemplate = () => {
   const [ifOpenUserMenu, setIfOpenUserMenu] = useState(false);
   const [userLog, setUserLog] = useState(null);
   const [idUserLog, setIdUserLog] = useState("");
+  const [imgProfile, setImgProfile] = useState(null);
   const wallpaper = wallpapers[wallpaperSelected].wallpaper;
 
   /*Functions Setting Pomodoro*/
@@ -76,8 +94,38 @@ const DashboardTemplate = () => {
   };
 
   /*Función para cambiar el Wallpaper*/
-  const handleWalpapper = (value) => {
-    setWallpaperSelected(value);
+  const handleWalpapper = async (value) => {
+    try {
+      const bgData = value;
+      setWallpaperSelected(bgData);
+
+      if (userLog) {
+        const docRef = doc(db, "users", idUserLog);
+        await updateDoc(docRef, {
+          bg: bgData,
+        });
+      } else {
+        localStorage.setItem("bg", bgData);
+      }
+    } catch (e) {}
+  };
+
+  /*Función para Obtener preferencias de tema del usuario (Wallpapers, Opacity, etc...) */
+  const getUserTheme = async () => {
+    try {
+      if (userLog) {
+        const docRef = doc(db, "users", idUserLog);
+        const querySnapshot = await getDoc(docRef);
+        const data = querySnapshot.data().bg;
+        setWallpaperSelected(data ? data : localStorage.getItem("bg") || 1);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleDataUser = (img) => {
+    setImgProfile(img);
   };
 
   /*Login/Register Controles */
@@ -106,10 +154,12 @@ const DashboardTemplate = () => {
   };
 
   useEffect(() => {
+    /*Validando usuario y actualizando estados para las credenciales*/
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUserLog(true);
         setIdUserLog(user.uid);
+        setImgProfile(user.photoURL);
         console.log("Usuario Logueado");
       } else {
         setUserLog(false);
@@ -117,6 +167,11 @@ const DashboardTemplate = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    /*Obtener las preferencias del tema del usuario desde firebase */
+    getUserTheme();
+  }, [userLog]);
 
   return (
     <div>
@@ -135,6 +190,7 @@ const DashboardTemplate = () => {
         toggleLogin={toggleOff}
         registerActive={ifActiveRegister}
         modalRest={toggleOff}
+        handleDataUser={handleDataUser}
       />
       <UserRegister
         isActive={ifOpenRegister}
@@ -161,7 +217,12 @@ const DashboardTemplate = () => {
           </div>
           <div>
             <div className={styles.HeaderContainer}>
-              <Header theme={themes} activeLogin={ifActiveLogin} />
+              <Header
+                theme={themes}
+                activeLogin={ifActiveLogin}
+                imgProfile={imgProfile}
+                userLog={userLog}
+              />
             </div>
             <div className={styles.appModuleContainer}>
               <div className={styles.appGadgetsContainer}>

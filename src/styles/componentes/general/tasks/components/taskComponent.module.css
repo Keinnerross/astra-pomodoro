@@ -48,3 +48,45 @@
   font-weight: 500;
 }
 
+.checkTaskContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  gap: 3px;
+  position: relative;
+}
+
+.checkTaskContainer input[type="checkbox"] + label::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  float: left;
+  border: 2px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.checkTaskContainer input[type="checkbox"]:checked + label:before {
+  border-color: var(--bodyBlue);
+}
+
+.checkTaskContainer input[type="checkbox"]:checked + label:after {
+  content: "";
+  width: 6px;
+  height: 3px;
+  border: 3px solid green;
+  position: absolute;
+  left: 4.5px;
+  top: 5.9px;
+
+  border-right: 0;
+  border-top: 0;
+  transform: rotate(-55deg);
+  cursor: pointer;
+}
+
+.checkTaskContainer input[type="checkbox"] {
+  display: none;
+}
