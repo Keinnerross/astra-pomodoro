@@ -117,7 +117,7 @@ const DashboardTemplate = () => {
         const docRef = doc(db, "users", idUserLog);
         const querySnapshot = await getDoc(docRef);
         const data = querySnapshot.data().bg;
-        setWallpaperSelected(data ? data : localStorage.getItem("bg") || 1);
+        setWallpaperSelected(data ? data : localStorage.getItem("bg") || 4);
       }
     } catch (e) {
       console.log(e);
