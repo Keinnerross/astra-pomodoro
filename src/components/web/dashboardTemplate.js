@@ -201,10 +201,17 @@ const DashboardTemplate = () => {
       <div
         style={{
           backgroundImage: `url(${wallpaper})`,
-          // background: " #80CBC4",
         }}
         className={styles.bgDashboard}
       >
+        <div className={styles.HeaderContainer}>
+          <Header
+            theme={themes}
+            activeLogin={ifActiveLogin}
+            imgProfile={imgProfile}
+            userLog={userLog}
+          />
+        </div>
         <div className={styles.bgSection}>
           <div className={styles.sidebarContainer}>
             <SidebarNav
@@ -216,14 +223,6 @@ const DashboardTemplate = () => {
             />
           </div>
           <div>
-            <div className={styles.HeaderContainer}>
-              <Header
-                theme={themes}
-                activeLogin={ifActiveLogin}
-                imgProfile={imgProfile}
-                userLog={userLog}
-              />
-            </div>
             <div className={styles.appModuleContainer}>
               <div className={styles.appGadgetsContainer}>
                 <div className={styles.pomodoroContainer}>

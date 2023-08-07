@@ -1,13 +1,12 @@
 .TaskCardContainer {
   width: 250px;
-  min-width: 180px;
   padding: 3px 12px 12px 12px;
   display: flex;
-  position: relative;
   flex-wrap: wrap;
   margin: 0 10px 10px 10px;
   border-radius: 0 0 7px 7px;
   cursor: grab;
+  position: relative;
 }
 
 .titleListSection {
@@ -33,7 +32,7 @@
 
 .taskListSectionForm {
   width: 100%;
-  max-height: 130px;
+  max-height: 140px;
   overflow: auto;
 }
 
@@ -63,6 +62,10 @@
 .addTaskInput {
   width: 100%;
   font-size: 0.9rem;
+}
+
+.addTaskInput::placeholder {
+  color: white;
 }
 
 .addTaskSection {

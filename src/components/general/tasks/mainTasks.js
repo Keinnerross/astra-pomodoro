@@ -248,58 +248,68 @@ const MainTasks = ({
         numberTheme={numberTheme}
         themeOpacity={themeOpacity}
       />
-      <div className={styles.listContainer}>
-        <DragDropContext onDragEnd={dragEnd}>
-          <Droppable droppableId="listArr" direction="horizontal">
-            {(provided) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className={styles.listContainer}
-                // onWheel={handleWheel} Por corregir
-              >
-                {lists.map((item, i) => (
-                  <Draggable
-                    className={styles.dragableItem}
-                    key={item.id}
-                    draggableId={item.id.toString()}
-                    index={i}
-                  >
-                    {(provided) => (
-                      <div
-                        className={styles.listSectionItem}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                      >
+
+      <div
+        className={styles.mainTasksSection}
+        style={
+          numberTheme == 1
+            ? { background: "rgba(56, 51, 51, 0.508)" }
+            : { background: "rgba(225, 225, 225, 0.3)" }
+        }
+      >
+        <div className={styles.listContainer}>
+          <DragDropContext onDragEnd={dragEnd}>
+            <Droppable droppableId="listArr" direction="horizontal">
+              {(provided) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className={styles.listContainer}
+                  // onWheel={handleWheel} Por corregir
+                >
+                  {lists.map((item, i) => (
+                    <Draggable
+                      className={styles.dragableItem}
+                      key={item.id}
+                      draggableId={item.id.toString()}
+                      index={i}
+                    >
+                      {(provided) => (
                         <div
-                          style={{
-                            background: bgTheme,
-                          }}
-                          className={styles.dragControlContainer}
-                          {...provided.dragHandleProps}
-                        ></div>
-                        <ListCard
-                          key={item.id}
-                          listName={item.listName}
-                          idList={item.id}
-                          tasksDt={item.tasks}
-                          updateList={updateList}
-                          deleteLista={deletelist}
-                          data-id={item.id}
-                          getData={newGetData}
-                          numberTheme={numberTheme}
-                          themeOpacity={themeOpacity}
-                          userId={userId}
-                          newGetData={newGetData}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+                          className={styles.listSectionItem}
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
+                        >
+                          <div
+                            style={{
+                              background: bgTheme,
+                            }}
+                            className={styles.dragControlContainer}
+                            {...provided.dragHandleProps}
+                          ></div>
+                          <ListCard
+                            key={item.id}
+                            listName={item.listName}
+                            idList={item.id}
+                            tasksDt={item.tasks}
+                            updateList={updateList}
+                            deleteLista={deletelist}
+                            data-id={item.id}
+                            getData={newGetData}
+                            numberTheme={numberTheme}
+                            themeOpacity={themeOpacity}
+                            userId={userId}
+                            newGetData={newGetData}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       </div>
     </div>
   );

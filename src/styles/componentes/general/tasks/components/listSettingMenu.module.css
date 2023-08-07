@@ -4,9 +4,10 @@
   position: absolute;
   right: -100px;
   top: 22px;
-  z-index: 9000;
+  z-index: 9999;
   border-radius: 4px;
   padding: 10px 0;
+  backdrop-filter: blur(7px);
 }
 
 .listSettingContainer button {

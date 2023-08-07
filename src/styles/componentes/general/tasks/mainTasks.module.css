@@ -1,31 +1,36 @@
 .mainTasksContainer {
-  max-width: 100%;
+  height: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .dragControlContainer {
-  height: 12px;
+  height: 18px;
   width: 250px;
   border-radius: 7px 7px 0 0;
+}
+
+.mainTasksSection {
+  height: 350px;
+  padding: 30px 20px;
+  border-radius: 9px;
+  margin-top: 10px;
+  backdrop-filter: blur(3px);
 }
 
 .listSectionItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 19vh;
   cursor: context-menu !important;
 }
 
 .listContainer {
   overflow-x: auto;
-  width: 100%;
-  max-width: 80vw;
-  min-width: 80vw;
+  width: 1300px;
   display: flex;
-  margin-top: 5px;
+  height: 360px;
 }
 
 .listContainer::-webkit-scrollbar {

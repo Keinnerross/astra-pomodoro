@@ -48,11 +48,11 @@ export const themes = (opacity) => [
   {
     themeColor: `rgba(999, 999, 999, ${opacity})`,
     secundaryColor: "rgba(999, 999, 999, 0.4)",
-    iconColor: "black",
+    iconColor: "white",
   },
   {
     themeColor: `rgba(1, 1, 15, ${opacity})`,
     secundaryColor: "rgba(1, 1, 15, 0.4)",
-    iconColor: "white ",
+    iconColor: "white",
   },
 ];

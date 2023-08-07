@@ -8,7 +8,7 @@
 
 .headerSection {
   width: 90%;
-  max-width: 90%;
+  max-width: 1600px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
