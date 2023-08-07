@@ -13,10 +13,9 @@
 
 .mainTasksSection {
   height: 350px;
-  padding: 30px 20px;
+  padding: 40px 30px;
   border-radius: 9px;
-  margin-top: 10px;
-  backdrop-filter: blur(3px);
+  margin-top: 20px;
 }
 
 .listSectionItem {
