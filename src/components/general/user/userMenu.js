@@ -6,7 +6,7 @@ import { RiAccountCircleFill, RiLogoutBoxFill } from "react-icons/ri";
 
 import { FaPaypal } from "react-icons/fa";
 
-const UserMenu = ({ isActive, userData }) => {
+const UserMenu = ({ isActive, userData, toggleMenu }) => {
   const logOut = async (tkn) => {
     await signOut(tkn);
     location.reload();
@@ -17,42 +17,51 @@ const UserMenu = ({ isActive, userData }) => {
   };
 
   return (
-    <div className={isActive ? styles.userMenuContainer : styles.hidden}>
-      <div className={styles.userMenuSection}>
-        <div className={styles.userProfileSection}>
-          <div className={styles.imgUserContainer}>
-            <div
-              className={styles.userImg}
-              style={{
-                backgroundImage: `url(${userData ? userData.photoURL : ""})`,
-              }}
-            ></div>
+    <>
+      <div
+        className={isActive ? styles.userMenuMain : styles.hidden}
+        onClick={() => toggleMenu()}
+      ></div>
+
+      <div className={isActive ? styles.userMenuContainer : styles.hidden}>
+        <div className={styles.userMenuSection}>
+          <div className={styles.userProfileSection}>
+            <div className={styles.imgUserContainer}>
+              <div
+                className={styles.userImg}
+                style={{
+                  backgroundImage: `url(${userData ? userData.photoURL : ""})`,
+                }}
+              ></div>
+            </div>
+            <div className={styles.infoUserContainer}>
+              <h4>{userData ? userData.displayName : "Invitado"}</h4>
+              <span>{userData ? userData.email : ""}</span>
+            </div>
           </div>
-          <div className={styles.infoUserContainer}>
-            <h4>{userData ? userData.displayName : "Invitado"}</h4>
-            <span>{userData ? userData.email : ""}</span>
+
+          <div className={styles.buttonSettingContainer}>
+            <RiAccountCircleFill size={iconSetting.size} />
+
+            <span>Account</span>
           </div>
-        </div>
+          <div className={styles.buttonSettingContainer}>
+            <FaPaypal size={iconSetting.size} />
+            <a href="https://www.paypal.me/keinnerr" target="_blank">
+              <span>Donate</span>
+            </a>
+          </div>
+          <div
+            className={styles.buttonSettingContainer}
+            onClick={() => logOut(auth)}
+          >
+            <RiLogoutBoxFill size={iconSetting.size} />
 
-        <div className={styles.buttonSettingContainer}>
-          <RiAccountCircleFill size={iconSetting.size} />
-
-          <span>Account</span>
-        </div>
-        <div className={styles.buttonSettingContainer}>
-          <FaPaypal size={iconSetting.size} />
-          <span>Donate</span>
-        </div>
-        <div
-          className={styles.buttonSettingContainer}
-          onClick={() => logOut(auth)}
-        >
-          <RiLogoutBoxFill size={iconSetting.size} />
-
-          <span>Logout</span>
+            <span>Logout</span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

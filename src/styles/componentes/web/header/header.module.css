@@ -46,14 +46,34 @@
   flex-direction: row;
 }
 
-.iconContainer {
-  padding: 10px;
+.iconContainerImg {
+  width: 40px;
+  height: 40px;
   margin: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconContainer {
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.iconContainer:hover {
+  background-color: rgba(255, 255, 255, 0.158);
 }
 
 .imgProfileContainer {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 100px;
   background-position: center;
   background-size: cover;

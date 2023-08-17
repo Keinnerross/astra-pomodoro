@@ -200,6 +200,7 @@ const DashboardTemplate = () => {
         isActive={ifOpenUserMenu}
         modalRest={toggleOff}
         userData={userData}
+        toggleMenu={toggleOff}
       />
       <div
         style={{

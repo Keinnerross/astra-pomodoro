@@ -11,7 +11,9 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
     iconColor: themeSelect.iconColor,
   };
 
-  console.log(imgProfile);
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   return (
     <div className={styles.headerContainer}>
@@ -35,7 +37,7 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
           </div>
           <div className={styles.userHeaderSection}>
             <div className={styles.iconContainer}>
-              <button>
+              <button onClick={() => refreshPage()}>
                 <BiRefresh
                   size={configTheme.iconSize}
                   fill={configTheme.iconColor}
@@ -50,7 +52,7 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
                 />
               </button>
             </div>
-            <div className={styles.iconContainer}>
+            <div className={styles.iconContainerImg}>
               <button onClick={() => activeLogin()}>
                 {userLog ? (
                   <div
