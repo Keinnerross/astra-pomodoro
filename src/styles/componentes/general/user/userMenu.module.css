@@ -1,13 +1,53 @@
 .userMenuContainer {
   position: absolute;
   background-color: white;
-  width: 200px;
-  height: 250px;
-  right: 30px;
-  top: 50px;
+  width: 230px;
+  right: 90px;
+  top: 65px;
   z-index: 999;
-  border-radius: 7px;
+  border-radius: 9px;
 }
-.hidden{
-    display: none;
+
+.userMenuSection {
+  padding: 20px 15px;
+}
+
+.userProfileSection {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.userImg {
+  width: 35px;
+  height: 35px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 60px;
+}
+
+.infoUserContainer h4 {
+  font-size: 16px;
+}
+
+.infoUserContainer span {
+  font-size: 14px;
+}
+.buttonSettingContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.buttonSettingContainer:hover {
+  background: rgb(219, 219, 219);
+}rgba(219, 219, 219, 0.768)
+
+.hidden {
+  display: none;
 }

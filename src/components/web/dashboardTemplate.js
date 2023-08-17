@@ -52,6 +52,8 @@ const DashboardTemplate = () => {
   const [ifOpenRegister, setIfOpenRegister] = useState(false);
   const [ifOpenUserMenu, setIfOpenUserMenu] = useState(false);
   const [userLog, setUserLog] = useState(null);
+  const [userData, setUserData] = useState(null);
+
   const [idUserLog, setIdUserLog] = useState("");
   const [imgProfile, setImgProfile] = useState(null);
   const wallpaper = wallpapers[wallpaperSelected].wallpaper;
@@ -124,10 +126,6 @@ const DashboardTemplate = () => {
     }
   };
 
-  const handleDataUser = (img) => {
-    setImgProfile(img);
-  };
-
   /*Login/Register Controles */
 
   const ifActiveLogin = () => {
@@ -160,9 +158,11 @@ const DashboardTemplate = () => {
         setUserLog(true);
         setIdUserLog(user.uid);
         setImgProfile(user.photoURL);
+        setUserData(user);
         console.log("Usuario Logueado");
       } else {
         setUserLog(false);
+
         console.log("Usuario sin inicial session");
       }
     });
@@ -190,14 +190,17 @@ const DashboardTemplate = () => {
         toggleLogin={toggleOff}
         registerActive={ifActiveRegister}
         modalRest={toggleOff}
-        handleDataUser={handleDataUser}
       />
       <UserRegister
         isActive={ifOpenRegister}
         handleActive={ifHandleActive}
         modalRest={toggleOff}
       />
-      <UserMenu isActive={ifOpenUserMenu} modalRest={toggleOff} />
+      <UserMenu
+        isActive={ifOpenUserMenu}
+        modalRest={toggleOff}
+        userData={userData}
+      />
       <div
         style={{
           backgroundImage: `url(${wallpaper})`,

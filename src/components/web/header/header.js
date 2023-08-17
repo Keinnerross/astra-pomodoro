@@ -11,6 +11,8 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
     iconColor: themeSelect.iconColor,
   };
 
+  console.log(imgProfile);
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerSection}>

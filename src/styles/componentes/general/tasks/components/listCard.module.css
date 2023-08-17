@@ -17,6 +17,7 @@
 }
 .dotSettingButton {
   border-radius: 2px;
+  z-index: 999;
 }
 .dotSettingButton:hover {
   background-color: rgba(118, 118, 118, 0.71);

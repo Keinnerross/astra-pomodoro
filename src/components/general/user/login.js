@@ -6,6 +6,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../../../firebase";
+
 import { doc, getDocs, collection, setDoc } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { FcGoogle } from "react-icons/fc";

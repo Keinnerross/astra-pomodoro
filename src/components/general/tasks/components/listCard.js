@@ -171,21 +171,23 @@ const ListCard = ({
   /*Funcion de orden dnd para las listas: */
 
   const pushOrderData = async (newOrder) => {
-    if (newOrder) {
-      newOrder.map(async (task, i) => {
-        const docRef = doc(
-          db,
-          "users",
-          userId,
-          "lists",
-          idList,
-          "tasks",
-          task.taskId
-        );
-        await updateDoc(docRef, {
-          order: i,
+    if (userId) {
+      if (newOrder) {
+        newOrder.map(async (task, i) => {
+          const docRef = doc(
+            db,
+            "users",
+            userId,
+            "lists",
+            idList,
+            "tasks",
+            task.taskId
+          );
+          await updateDoc(docRef, {
+            order: i,
+          });
         });
-      });
+      }
     }
   };
 
@@ -217,6 +219,10 @@ const ListCard = ({
     pushOrderData(newTasksOrder);
   };
 
+  const toggleSettingList = () => {
+    setSettingActive(!settingActive);
+  };
+
   const hightValue = `${34 * taskDtArr.length}px`;
 
   return (
@@ -230,6 +236,7 @@ const ListCard = ({
         active={settingActive}
         deleteList={deleteLista}
         idList={idList}
+        handleModal={toggleSettingList}
       />
 
       <div className={styles.titleListSection}>
@@ -242,7 +249,7 @@ const ListCard = ({
 
         <button
           className={styles.dotSettingButton}
-          onClick={() => setSettingActive(!settingActive)}
+          onClick={() => toggleSettingList()}
         >
           <BsThreeDotsVertical fill={themeSelect.iconColor} />
         </button>
