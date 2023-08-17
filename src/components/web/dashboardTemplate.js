@@ -184,7 +184,7 @@ const DashboardTemplate = () => {
         handleWalpapper={handleWalpapper}
       />
 
-      <WhatIsPomodoro ifOpen={ifOpenHelp} />
+      <WhatIsPomodoro ifOpen={ifOpenHelp} toggleInfoPomo={ifActiveHelp} />
       <UserLogin
         isActive={ifOpenLogin}
         toggleLogin={toggleOff}
