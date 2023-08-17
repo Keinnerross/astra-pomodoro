@@ -268,44 +268,50 @@ const MainTasks = ({
                   className={styles.listContainer}
                   // onWheel={handleWheel} Por corregir
                 >
-                  {lists.map((item, i) => (
-                    <Draggable
-                      className={styles.dragableItem}
-                      key={item.id}
-                      draggableId={item.id.toString()}
-                      index={i}
-                    >
-                      {(provided) => (
-                        <div
-                          className={styles.listSectionItem}
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                        >
+                  {lists.length == 1 ? (
+                    lists.map((item, i) => (
+                      <Draggable
+                        className={styles.dragableItem}
+                        key={item.id}
+                        draggableId={item.id.toString()}
+                        index={i}
+                      >
+                        {(provided) => (
                           <div
-                            style={{
-                              background: bgTheme,
-                            }}
-                            className={styles.dragControlContainer}
-                            {...provided.dragHandleProps}
-                          ></div>
-                          <ListCard
-                            key={item.id}
-                            listName={item.listName}
-                            idList={item.id}
-                            tasksDt={item.tasks}
-                            updateList={updateList}
-                            deleteLista={deletelist}
-                            data-id={item.id}
-                            getData={newGetData}
-                            numberTheme={numberTheme}
-                            themeOpacity={themeOpacity}
-                            userId={userId}
-                            newGetData={newGetData}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
+                            className={styles.listSectionItem}
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                          >
+                            <div
+                              style={{
+                                background: bgTheme,
+                              }}
+                              className={styles.dragControlContainer}
+                              {...provided.dragHandleProps}
+                            ></div>
+                            <ListCard
+                              key={item.id}
+                              listName={item.listName}
+                              idList={item.id}
+                              tasksDt={item.tasks}
+                              updateList={updateList}
+                              deleteLista={deletelist}
+                              data-id={item.id}
+                              getData={newGetData}
+                              numberTheme={numberTheme}
+                              themeOpacity={themeOpacity}
+                              userId={userId}
+                              newGetData={newGetData}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))
+                  ) : (
+                    <h4 className={styles.textListIfEmply}>
+                      Your lists will appear here...
+                    </h4>
+                  )}
                 </div>
               )}
             </Droppable>

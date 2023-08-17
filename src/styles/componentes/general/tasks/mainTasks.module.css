@@ -62,3 +62,12 @@
 .listContainer::-webkit-scrollbar-track {
   border-radius: 10px;
 }
+
+.textListIfEmply {
+  color: rgba(255, 255, 255, 0.502);
+  text-align: center;
+  font-weight: 200;
+  width: 100%;
+  font-size: 18px;
+  user-select: none;
+}
