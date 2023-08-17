@@ -5,6 +5,7 @@ import { auth } from "../../../../firebase";
 import { RiAccountCircleFill, RiLogoutBoxFill } from "react-icons/ri";
 
 import { FaPaypal } from "react-icons/fa";
+import { useEffect } from "react";
 
 const UserMenu = ({ isActive, userData, toggleMenu }) => {
   const logOut = async (tkn) => {
@@ -15,6 +16,20 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
   const iconSetting = {
     size: 20,
   };
+
+  const user = {
+    email: "",
+    name: "",
+    picture: "",
+  };
+
+  useEffect(() => {
+    if (userData) {
+      user.name = userData.displayName;
+      user.email = userData.email;
+      user.picture = userData.photoURL;
+    }
+  }, [userData]);
 
   return (
     <>
@@ -30,12 +45,16 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
               <div
                 className={styles.userImg}
                 style={{
-                  backgroundImage: `url(${userData ? userData.photoURL : ""})`,
+                  backgroundImage: `url(${
+                    userData
+                      ? userData.photoURL
+                      : "https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg"
+                  })`,
                 }}
               ></div>
             </div>
             <div className={styles.infoUserContainer}>
-              <h4>{userData ? userData.displayName : "Invitado"}</h4>
+              <h4>{userData ? userData.displayName : `User009`}</h4>
               <span>{userData ? userData.email : ""}</span>
             </div>
           </div>

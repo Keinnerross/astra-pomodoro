@@ -268,7 +268,7 @@ const MainTasks = ({
                   className={styles.listContainer}
                   // onWheel={handleWheel} Por corregir
                 >
-                  {lists.length == 1 ? (
+                  {lists.length > 0 ? (
                     lists.map((item, i) => (
                       <Draggable
                         className={styles.dragableItem}

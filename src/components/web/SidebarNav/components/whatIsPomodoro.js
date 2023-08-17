@@ -5,12 +5,12 @@ const WhatIsPomodoro = ({ ifOpen, toggleInfoPomo }) => {
     <>
       <div
         className={ifOpen ? styles.helpPomodoroContainer : styles.hidden}
-        onClick={(e) => {
-          toggleInfoPomo();
-          e.stopPropagation();
-        }}
+        onClick={() => toggleInfoPomo()}
       >
-        <div className={styles.helpPomodoroSection}>
+        <div
+          className={styles.helpPomodoroSection}
+          onClick={(e) => e.stopPropagation()}
+        >
           <h2>What Is Pomodoro?🍅</h2>
           <p>
             La técnica Pomodoro es un método de gestión del tiempo desarrollado

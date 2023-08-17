@@ -12,8 +12,14 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting }) => {
   }, []);
 
   return (
-    <div className={ifOpen ? styles.settingMain : styles.hidden}>
-      <div className={styles.settingContainer}>
+    <div
+      className={ifOpen ? styles.settingMain : styles.hidden}
+      onClick={() => closeSetting()}
+    >
+      <div
+        className={styles.settingContainer}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.settingSection}>
           <div className={styles.titleCloseSetting}>
             <p>Settings</p>

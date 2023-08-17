@@ -157,7 +157,11 @@ const DashboardTemplate = () => {
       if (user) {
         setUserLog(true);
         setIdUserLog(user.uid);
-        setImgProfile(user.photoURL);
+        setImgProfile(
+          user.photoURL
+            ? user.photoURL
+            : "https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg"
+        );
         setUserData(user);
         console.log("Usuario Logueado");
       } else {
