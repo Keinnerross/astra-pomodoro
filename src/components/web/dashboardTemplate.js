@@ -186,6 +186,7 @@ const DashboardTemplate = () => {
         handleTheme={handlethemeSelected}
         handleRangeOpacity={handleRangeOpacity}
         handleWalpapper={handleWalpapper}
+        handleClose={ifActiveBrush}
       />
 
       <WhatIsPomodoro ifOpen={ifOpenHelp} toggleInfoPomo={ifActiveHelp} />

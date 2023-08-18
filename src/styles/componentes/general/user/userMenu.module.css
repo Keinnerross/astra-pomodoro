@@ -10,7 +10,7 @@
 .userMenuContainer {
   position: absolute;
   background-color: white;
-  width: 230px;
+  min-width: 230px;
   right: 90px;
   top: 65px;
   z-index: 999;
