@@ -2,10 +2,19 @@
   width: 250px;
   padding: 3px 12px 12px 12px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   border-radius: 0 0 7px 7px;
   cursor: grab;
   position: relative;
+  max-height: 100%;
+  /*Importante estas propiedades para su correct*/
+}
+
+.taskCardSection {
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .titleListSection {
@@ -13,50 +22,32 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 2px;
+  /* background-color: aquamarine; */
 }
+
 .dotSettingButton {
   border-radius: 2px;
   z-index: 999;
 }
-.dotSettingButton:hover {
-  background-color: rgba(118, 118, 118, 0.71);
 
-  border-radius: 2px;
-}
+/*Titulo de la Lista*/
 .inputTextList {
   max-width: 210px;
   font-size: 1rem;
   font-weight: 500;
 }
 
-.taskListSectionForm {
+.taskRenderContainer {
   width: 100%;
-  max-height: 130px;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
+  height: 100%;
+  max-height: 100% !important;
 }
 
-.taskListSectionForm::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
-
-.taskListSectionForm::-webkit-scrollbar:vertical {
-  width: 10px;
-}
-
-.taskListSectionForm::-webkit-scrollbar-button:increment,
-.taskListSectionForm::-webkit-scrollbar-button {
-  display: none;
-}
-
-.taskListSectionForm::-webkit-scrollbar-thumb {
-  background-color: rgba(139, 145, 147, 0.45);
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.taskListSectionForm::-webkit-scrollbar-track {
-  border-radius: 10px;
+.taskRenderSection {
+  /* background-color: hotpink; */
 }
 
 .addTaskInput {
@@ -71,4 +62,31 @@
 .addTaskSection {
   width: 100%;
   padding-top: 10px;
+}
+
+/*************************************************************/
+/*******Estilos de la barra de desplazamiento*********/
+/************************************************************/
+
+.taskRenderContainer::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.taskRenderContainer::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.taskRenderContainer::-webkit-scrollbar-button:increment,
+.taskRenderContainer::-webkit-scrollbar-button {
+  display: none;
+}
+
+.taskRenderContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 145, 147, 0.45);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.taskRenderContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
 }

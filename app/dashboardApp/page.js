@@ -1,10 +1,8 @@
 import DashboardTemplate from "@/components/web/dashboardTemplate";
+import DashboardTemplate2 from "@/components/web/dashboardTemplate2";
+
 const DashboardApp = () => {
-  return (
-    <div>
-      <DashboardTemplate />
-    </div>
-  );
+  return <DashboardTemplate2 />;
 };
 
 export default DashboardApp;

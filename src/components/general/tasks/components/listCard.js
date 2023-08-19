@@ -232,6 +232,9 @@ const ListCard = ({
         backgroundColor: configTheme.themeColor,
       }}
     >
+      {/********************************************
+       *** *** Menu Flotante
+       *******************************************/}
       <ListSettingMenu
         active={settingActive}
         deleteList={deleteLista}
@@ -239,81 +242,103 @@ const ListCard = ({
         handleModal={toggleSettingList}
       />
 
-      <div className={styles.titleListSection}>
-        <input
-          className={styles.inputTextList}
-          style={{ color: configTheme.iconColor }}
-          defaultValue={listName} /*Por corregir */
-          onChange={handleInputChange}
-        />
+      {/********************************************
+       *** *** Contenido de la lista
+       *******************************************/}
 
-        <button
-          className={styles.dotSettingButton}
-          onClick={() => toggleSettingList()}
-        >
-          <BsThreeDotsVertical fill={themeSelect.iconColor} />
-        </button>
+      {/******************
+       **Titulo
+       *****************/}
+
+      <div className={styles.taskCardSection}>
+        <div className={styles.titleListSection}>
+          <input
+            className={styles.inputTextList}
+            style={{ color: configTheme.iconColor }}
+            defaultValue={listName} /*Por corregir */
+            onChange={handleInputChange}
+          />
+
+          <button
+            className={styles.dotSettingButton}
+            onClick={() => toggleSettingList()}
+          >
+            <BsThreeDotsVertical fill={themeSelect.iconColor} />
+          </button>
+        </div>
+
+        {/******************
+         **Tareas
+         *****************/}
+
+        <DragDropContext onDragEnd={dragEnd}>
+          <Droppable droppableId="tasksArr">
+            {(provided) => (
+              <div
+                className={styles.taskRenderContainer}
+                style={{ height: hightValue }}
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {taskDtArr
+                  ? taskDtArr.map((task, i) => (
+                      <Draggable
+                        key={task.taskId}
+                        draggableId={task.taskId}
+                        index={i}
+                      >
+                        {(provided) => (
+                          <div
+                            className={styles.taskRenderSection}
+                            /*DIV SIN STYLOS*/
+                            {...provided.draggableProps}
+                            ref={provided.innerRef}
+                            {...provided.dragHandleProps}
+                          >
+                            <Task
+                              style={{ color: configTheme.iconColor }}
+                              idTask={task.taskId}
+                              title={task.taskName}
+                              ifDone={task.done}
+                              idList={idList}
+                              key={task.taskId}
+                              deleteTask={deleteTask}
+                              numberTheme={numberTheme}
+                              idUser={userId}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))
+                  : console.log("noapasaonaa")}
+
+                {/* Por Corregir el condicional*/}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
+        {/******************
+         **Seccion para añadir nueva Tarea
+         *****************/}
+        <div className={styles.addTaskSection}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addNewTask(idList, values);
+              inputAddTaskRef.current.value = "";
+            }}
+          >
+            <input
+              className={styles.addTaskInput}
+              style={{ color: configTheme.iconColor }}
+              placeholder="+ Add new task"
+              onChange={handleInputTask}
+              ref={inputAddTaskRef}
+            />
+          </form>
+        </div>
       </div>
-      <DragDropContext onDragEnd={dragEnd}>
-        <Droppable droppableId="tasksArr">
-          {(provided) => (
-            <div
-              className={styles.taskListSectionForm}
-              style={{ height: hightValue }}
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {taskDtArr
-                ? taskDtArr.map((task, i) => (
-                    <Draggable
-                      key={task.taskId}
-                      draggableId={task.taskId}
-                      index={i}
-                    >
-                      {(provided) => (
-                        <div
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                          {...provided.dragHandleProps}
-                        >
-                          <Task
-                            style={{ color: configTheme.iconColor }}
-                            idTask={task.taskId}
-                            title={task.taskName}
-                            ifDone={task.done}
-                            idList={idList}
-                            key={task.taskId}
-                            deleteTask={deleteTask}
-                            numberTheme={numberTheme}
-                            idUser={userId}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))
-                : console.log("noapasaonaa")}
-
-              {/* Por Corregir el condicional*/}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <form
-        className={styles.addTaskSection}
-        onSubmit={(e) => {
-          e.preventDefault();
-          addNewTask(idList, values);
-          inputAddTaskRef.current.value = "";
-        }}
-      >
-        <input
-          className={styles.addTaskInput}
-          style={{ color: configTheme.iconColor }}
-          placeholder="+ Add new task"
-          onChange={handleInputTask}
-          ref={inputAddTaskRef}
-        />
-      </form>
     </div>
   );
 };

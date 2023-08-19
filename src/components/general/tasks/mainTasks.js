@@ -242,14 +242,17 @@ const MainTasks = ({
     pushOrderData(newOrder);
   };
 
+  /*Configuracion para el tamaño del contenedor de las */
+
   return (
     <div className={styles.mainTasksContainer}>
-      <AddListCard
-        addList={addList}
-        numberTheme={numberTheme}
-        themeOpacity={themeOpacity}
-      />
-
+      <div style={{ padding: "20px 0" }}>
+        <AddListCard
+          addList={addList}
+          numberTheme={numberTheme}
+          themeOpacity={themeOpacity}
+        />
+      </div>
       <div
         className={styles.mainTasksSection}
         style={
@@ -259,13 +262,15 @@ const MainTasks = ({
         }
       >
         <div className={styles.listContainer}>
+          {" "}
+          {/*Contenedor que tiene el over y tamaño de las tareas */}
           <DragDropContext onDragEnd={dragEnd}>
             <Droppable droppableId="listArr" direction="horizontal">
               {(provided) => (
                 <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  className={styles.listContainer}
+                  className={styles.listSection}
                   // onWheel={handleWheel} Por corregir
                 >
                   {lists.length > 0 ? (

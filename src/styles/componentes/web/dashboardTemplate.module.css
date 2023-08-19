@@ -8,7 +8,6 @@
   background-repeat: no-repeat;
   background-position: center;
   backdrop-filter: blur(2px);
-
 }
 .bgSection {
   width: 100%;
@@ -21,13 +20,7 @@
   width: 100%;
 }
 
-.sidebarContainer {
-  height: 100%;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-}
+
 
 .appModuleContainer {
   width: 100%;

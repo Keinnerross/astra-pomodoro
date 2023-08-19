@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "@/styles/componentes/web/dashboardTemplate.module.css";
+import styles from "@/styles/componentes/web/dashboardTemplate2.module.css";
 import SidebarNav from "@/components/web/SidebarNav/sidebarNav";
 import Header from "@/components/web/header/header";
 import MainPomodoro from "../general/pomodoro/mainPomodoro";
@@ -36,7 +36,7 @@ import { auth } from "../../../firebase";
 
 import { themes, wallpapers } from "../general/userTemplates/mainUserTemplates";
 
-const DashboardTemplate = () => {
+const DashboardTemplate2 = () => {
   const [settingPomoOpen, setSettingPomoOpen] = useState(false);
   const [settingResult, setSettingResult] = useState({
     pomodoro: 25,
@@ -178,8 +178,10 @@ const DashboardTemplate = () => {
   }, [userLog]);
 
   return (
-    <div>
-      {/*Tengo pensado maejar todas las ventanas de configuracion desde el loyout de sea forma puedo pasar los parametros de setting de manera global y al componente pomodoro */}
+    <>
+      {/*//////////////////////////////////////////////
+// Modales, menús y ventanas.
+//////////////////////////////////////////////*/}
 
       <SelectTheme
         isActive={activeBrush}
@@ -190,6 +192,7 @@ const DashboardTemplate = () => {
       />
 
       <WhatIsPomodoro ifOpen={ifOpenHelp} toggleInfoPomo={ifActiveHelp} />
+
       <UserLogin
         isActive={ifOpenLogin}
         toggleLogin={toggleOff}
@@ -207,54 +210,66 @@ const DashboardTemplate = () => {
         userData={userData}
         toggleMenu={toggleOff}
       />
+
+      <SettingsPomodoro
+        closeSetting={ifOpenPomo}
+        ifOpen={settingPomoOpen}
+        updateSetting={updateSetting}
+      />
+
+      <div className={styles.sidebarContainer}>
+        <SidebarNav
+          theme={themes}
+          ifActive={ifActiveBrush}
+          numberTheme={themeSelected}
+          themeOpacity={opacityValue}
+          activeHelp={ifActiveHelp}
+        />
+      </div>
+
+      {/*//////////////////////////////////////////////
+//App Dashboard.
+//////////////////////////////////////////////*/}
+
       <div
         style={{
           backgroundImage: `url(${wallpaper})`,
         }}
         className={styles.bgDashboard}
       >
-        <div className={styles.sidebarContainer}>
-          <SidebarNav
+        <div className={styles.HeaderContainer}>
+          <Header
             theme={themes}
-            ifActive={ifActiveBrush}
-            numberTheme={themeSelected}
-            themeOpacity={opacityValue}
-            activeHelp={ifActiveHelp}
+            activeLogin={ifActiveLogin}
+            imgProfile={imgProfile}
+            userLog={userLog}
           />
         </div>
-        <div className={styles.bgSection}>
-          <div>
-            <div className={styles.appModuleContainer}>
-              <div className={styles.appGadgetsContainer}>
-                <div className={styles.pomodoroContainer}>
-                  <MainPomodoro
-                    numberTheme={themeSelected}
-                    ifOpen={ifOpenPomo}
-                    settingConfig={settingResult}
-                    themeOpacity={opacityValue}
-                  />
-                </div>
-                <div className={styles.TasksViewContainer}>
-                  <MainTasks
-                    numberTheme={themeSelected}
-                    themeOpacity={opacityValue}
-                    bgTheme={themes(opacityValue)[themeSelected].themeColor}
-                    ifUserLog={userLog}
-                    userId={idUserLog}
-                  />
-                </div>
-              </div>
+
+        <div className={styles.dashboardContainer}>
+          <div className={styles.dashboardSection}>
+            <div className={styles.pomodoroContainer}>
+              <MainPomodoro
+                numberTheme={themeSelected}
+                ifOpen={ifOpenPomo}
+                settingConfig={settingResult}
+                themeOpacity={opacityValue}
+              />
+            </div>
+            <div className={styles.listsViewContainer}>
+              <MainTasks
+                numberTheme={themeSelected}
+                themeOpacity={opacityValue}
+                bgTheme={themes(opacityValue)[themeSelected].themeColor}
+                ifUserLog={userLog}
+                userId={idUserLog}
+              />
             </div>
           </div>
         </div>
       </div>
-      <SettingsPomodoro
-        closeSetting={ifOpenPomo}
-        ifOpen={settingPomoOpen}
-        updateSetting={updateSetting}
-      />
-    </div>
+    </>
   );
 };
 
-export default DashboardTemplate;
+export default DashboardTemplate2;
