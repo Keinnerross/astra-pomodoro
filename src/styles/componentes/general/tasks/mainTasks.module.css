@@ -1,7 +1,6 @@
 .mainTasksContainer {
-  width: 100%;
-  width: 80%;
-  max-width: 1300px;
+  width: 85%;
+  max-width: 1700px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,12 +9,13 @@
 }
 
 .mainTasksSection {
-  width: 90%;
+  width: 100%;
   border-radius: 9px;
   padding: 20px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  min-height: 150px;
   height: 90%; /*Importante!!!*/
   /*Nota: Un contenedor al ser Flex toma su ancho y alto completo de su padre*/
   /*Este es el contenedor transparentoso, su bgColor se le asigna en el archivo Js de este modulo*/
@@ -32,7 +32,6 @@
 .listSection {
   overflow-x: auto;
   width: 100%;
-  max-width: 1300px;
   display: flex;
   /* background-color: rgb(240, 131, 13); */
   height: 100%;
@@ -85,9 +84,11 @@
 
 .textListIfEmply {
   color: rgba(255, 255, 255, 0.502);
-  text-align: center;
   font-weight: 200;
-  width: 100%;
   font-size: 18px;
   user-select: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

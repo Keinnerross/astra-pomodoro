@@ -312,7 +312,7 @@ const MainTasks = ({
                     ))
                   ) : (
                     <h4 className={styles.textListIfEmply}>
-                      Your lists will appear here...
+                      Your lists will appear here
                     </h4>
                   )}
                 </div>
