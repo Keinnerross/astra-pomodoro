@@ -4,10 +4,16 @@
 }
 
 .pomoTimeContainer {
-  font-size: 3.1rem;
+  font-size: 4.1rem;
   font-weight: 800;
 }
 
 .focusWarrior {
   font-size: 0.9rem;
+}
+
+@media (max-height: 700px) {
+  .pomoTimeContainer {
+    font-size: 3.1rem;
+  }
 }

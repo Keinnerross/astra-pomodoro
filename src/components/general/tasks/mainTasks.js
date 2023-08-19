@@ -242,8 +242,6 @@ const MainTasks = ({
     pushOrderData(newOrder);
   };
 
-  /*Configuracion para el tamaño del contenedor de las */
-
   return (
     <div className={styles.mainTasksContainer}>
       <div style={{ padding: "20px 0" }}>

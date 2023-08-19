@@ -199,6 +199,8 @@ const ListCard = ({
     return result;
   };
 
+  const hightValue = `${34 * taskDtArr.length}px`;
+
   const dragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) {
@@ -216,14 +218,13 @@ const ListCard = ({
       (prevTask) =>
         (newTasksOrder = reorder(prevTask, source.index, destination.index))
     );
+
     pushOrderData(newTasksOrder);
   };
 
   const toggleSettingList = () => {
     setSettingActive(!settingActive);
   };
-
-  const hightValue = `${34 * taskDtArr.length}px`;
 
   return (
     <div
