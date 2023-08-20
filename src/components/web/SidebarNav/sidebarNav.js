@@ -6,6 +6,10 @@ import { FaPaintBrush } from "react-icons/fa";
 import { TbMessageLanguage } from "react-icons/tb";
 import { MdHelp, MdLogout, MdSettings } from "react-icons/md";
 import { BsFillRocketFill } from "react-icons/bs";
+import Language from "./components/language";
+import { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../../firebase";
 
 // import { BiSolidHelpCircle, BiLogOut } from "react-icons/bi";
 
@@ -16,7 +20,6 @@ const SidebarNav = ({
   numberTheme,
   themeOpacity,
 }) => {
-
   const themeSelect = theme(themeOpacity)[numberTheme];
 
   const configTheme = {
@@ -25,13 +28,27 @@ const SidebarNav = ({
     iconColor: themeSelect.iconColor,
   };
 
-  const handleSidebarFull = () => {};
+  const [languageActive, setLanguageActive] = useState(false);
+
+  const ifLanguageActive = () => {
+    setLanguageActive(!languageActive);
+  };
+
+  const logOut = async (tkn) => {
+    const userConfirmed = confirm("Do yo want log out session?");
+    if (userConfirmed) {
+      await signOut(tkn);
+      location.reload();
+    }
+  };
 
   return (
     <div
       className={styles.sidebarMain}
       style={{ backgroundColor: configTheme.themeColor }}
     >
+      <Language isActive={languageActive} handleActive={ifLanguageActive} />
+
       <div className={styles.sidebarSection}>
         <div className={styles.navSection}>
           <div className={styles.iconTopContainer}>
@@ -39,7 +56,6 @@ const SidebarNav = ({
               <BsFillRocketFill
                 size={configTheme.iconSize}
                 fill={configTheme.iconColor}
-                onClick={() => handleSidebarFull()}
               />
             </button>
           </div>
@@ -47,14 +63,16 @@ const SidebarNav = ({
             <button className={styles.iconContainer} onClick={() => ifActive()}>
               {/***Modal */}
 
-             
-
               <FaPaintBrush
                 size={configTheme.iconSize}
                 fill={configTheme.iconColor}
               />
             </button>
-            <button className={styles.iconContainer}>
+
+            <button
+              className={styles.iconContainer}
+              onClick={() => ifLanguageActive()}
+            >
               <TbMessageLanguage
                 size={configTheme.iconSize}
                 fill={configTheme.iconColor}
@@ -79,7 +97,7 @@ const SidebarNav = ({
               fill={configTheme.iconColor}
             />
           </button> */}
-          <button className={styles.iconContainer}>
+          <button className={styles.iconContainer} onClick={() => logOut(auth)}>
             <MdLogout
               size={configTheme.iconSize}
               fill={configTheme.iconColor}
