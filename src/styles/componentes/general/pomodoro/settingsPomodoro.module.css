@@ -1,7 +1,6 @@
 .settingMain {
   width: 100vw;
   height: 100vh;
-  background-color: #3d3d3d6e;
   min-height: 100%;
   display: flex;
   align-items: center;
@@ -9,6 +8,7 @@
   position: fixed;
   top: 0;
   z-index: 99;
+  backdrop-filter: blur(2px);
 }
 
 .settingContainer {

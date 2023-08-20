@@ -1,7 +1,9 @@
 import styles from "@/styles/componentes/web/header/header.module.css";
+import Notifications from "../../general/notifications/notifications.js";
 import { BiSearch, BiRefresh } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
+import { useState } from "react";
 const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
   const themeSelect = theme(1)[1];
 
@@ -15,9 +17,17 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
     window.location.reload();
   };
 
+  const [notiActive, setNotiActive] = useState(false);
+
+  const handleNotiActive = () => {
+    setNotiActive(!notiActive);
+  };
+
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerSection}>
+        <Notifications isActive={notiActive} handleActive={handleNotiActive} />
+
         <div className={styles.logoSection}>
           <h2 style={{ color: "white" }}>AstraPomodoro</h2>
         </div>
@@ -45,7 +55,7 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
               </button>
             </div>
             <div className={styles.iconContainer}>
-              <button>
+              <button onClick={() => handleNotiActive()}>
                 <IoMdNotifications
                   size={configTheme.iconSize}
                   fill={configTheme.iconColor}

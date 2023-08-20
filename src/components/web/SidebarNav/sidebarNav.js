@@ -3,7 +3,6 @@ import styles from "@/styles/componentes/web/sidebar/sidebar.module.css";
 /*Import Icons */
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaPaintBrush } from "react-icons/fa";
-
 import { TbMessageLanguage } from "react-icons/tb";
 import { MdHelp, MdLogout, MdSettings } from "react-icons/md";
 
@@ -23,6 +22,13 @@ const SidebarNav = ({
     iconSize: 22,
     iconColor: themeSelect.iconColor,
   };
+
+  const handleSidebarFull = () => {
+
+
+    
+  };
+
   return (
     <div
       className={styles.sidebarMain}
@@ -34,6 +40,7 @@ const SidebarNav = ({
             <AiOutlineMenu
               size={configTheme.iconSize}
               fill={configTheme.iconColor}
+              onClick={() => handleSidebarFull()}
             />
           </button>
           <button className={styles.iconContainer} onClick={() => ifActive()}>

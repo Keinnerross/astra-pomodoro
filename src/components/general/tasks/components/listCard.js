@@ -281,37 +281,51 @@ const ListCard = ({
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                {taskDtArr
-                  ? taskDtArr.map((task, i) => (
-                      <Draggable
-                        key={task.taskId}
-                        draggableId={task.taskId}
-                        index={i}
-                      >
-                        {(provided) => (
-                          <div
-                            className={styles.taskRenderSection}
-                            /*DIV SIN STYLOS*/
-                            {...provided.draggableProps}
-                            ref={provided.innerRef}
-                            {...provided.dragHandleProps}
-                          >
-                            <Task
-                              style={{ color: configTheme.iconColor }}
-                              idTask={task.taskId}
-                              title={task.taskName}
-                              ifDone={task.done}
-                              idList={idList}
-                              key={task.taskId}
-                              deleteTask={deleteTask}
-                              numberTheme={numberTheme}
-                              idUser={userId}
-                            />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))
-                  : console.log("noapasaonaa")}
+                {taskDtArr.length > 0 ? (
+                  taskDtArr.map((task, i) => (
+                    <Draggable
+                      key={task.taskId}
+                      draggableId={task.taskId}
+                      index={i}
+                    >
+                      {(provided) => (
+                        <div
+                          className={styles.taskRenderSection}
+                          /*DIV SIN STYLOS*/
+                          {...provided.draggableProps}
+                          ref={provided.innerRef}
+                          {...provided.dragHandleProps}
+                        >
+                          <Task
+                            style={{ color: configTheme.iconColor }}
+                            idTask={task.taskId}
+                            title={task.taskName}
+                            ifDone={task.done}
+                            idList={idList}
+                            key={task.taskId}
+                            deleteTask={deleteTask}
+                            numberTheme={numberTheme}
+                            idUser={userId}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))
+                ) : (
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: "14px",
+                      opacity: ".4",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      paddingLeft: "3px",
+                    }}
+                  >
+                    Your tasks will appear here{" "}
+                  </span>
+                )}
 
                 {/* Por Corregir el condicional*/}
               </div>

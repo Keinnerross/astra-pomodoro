@@ -1,0 +1,117 @@
+.notificationMain {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+}
+
+.notificationContainer {
+  width: 380px;
+  height: 440px;
+
+  position: absolute;
+  top: 50px;
+  right: 55px;
+  background-color: white;
+  min-width: 230px;
+  z-index: 999;
+  border-radius: 9px;
+}
+
+.notificationSection {
+  height: 90%;
+}
+
+.headerNotifications {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.notiRenderContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.notiMessageIfEmply {
+  width: 65%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.notiMessageIfEmply h5 {
+  color: gray;
+  font-size: 14px;
+}
+
+.notiMessageIfEmply span {
+  padding: 10px 0;
+  color: gray;
+  font-size: 12px;
+}
+
+/*Card Styles Notification*/
+
+.cardNotiContainer {
+  width: 100%;
+  padding: 25px 20px;
+}
+
+.cardNotiContainer:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.cardNotiSection {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.iconNoti {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoNotiContainer h4 {
+  font-size: 16px;
+}
+.infoNotiContainer p {
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+.notiRenderContainer::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.notiRenderContainer::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.notiRenderContainer::-webkit-scrollbar-button:increment,
+.notiRenderContainer::-webkit-scrollbar-button {
+  display: none;
+}
+
+.notiRenderContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 145, 147, 0.45);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.notiRenderContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
