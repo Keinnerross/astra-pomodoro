@@ -49,6 +49,7 @@ const ListCard = ({
 
   const [settingActive, setSettingActive] = useState(false);
   const inputAddTaskRef = useRef(null);
+  const inputTitleList = useRef(null);
 
   /*Funcion de input del titulo actualizacion del nombre de la lista */
   const handleInputChange = (e) => {
@@ -253,13 +254,20 @@ const ListCard = ({
 
       <div className={styles.taskCardSection}>
         <div className={styles.titleListSection}>
-          <input
-            className={styles.inputTextList}
-            style={{ color: configTheme.iconColor }}
-            defaultValue={listName} /*Por corregir */
-            onChange={handleInputChange}
-          />
-
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              inputTitleList.current.blur();
+            }}
+          >
+            <input
+              className={styles.inputTextList}
+              style={{ color: configTheme.iconColor }}
+              defaultValue={listName} /*Por corregir */
+              ref={inputTitleList}
+              onChange={handleInputChange}
+            />
+          </form>
           <button
             className={styles.dotSettingButton}
             onClick={() => toggleSettingList()}

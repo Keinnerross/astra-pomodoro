@@ -253,11 +253,11 @@ const MainTasks = ({
       </div>
       <div
         className={styles.mainTasksSection}
-        style={
-          numberTheme == 1
-            ? { background: "rgba(1, 1, 15, 0.4)" }
-            : { background: "rgba(153, 153, 154, 0.30)" }
-        }
+        // style={
+        //   numberTheme == 1
+        //     ? { background: "rgba(1, 1, 15, 0.2)" }
+        //     : { background: "rgba(153, 153, 154, 0.30)" }
+        // }
       >
         <div className={styles.listContainer}>
           {" "}
@@ -269,6 +269,11 @@ const MainTasks = ({
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   className={styles.listSection}
+                  style={
+                    lists.length > 0
+                      ? { overflowX: "scroll" }
+                      : { overflow: "none" }
+                  }
                   // onWheel={handleWheel} Por corregir
                 >
                   {lists.length > 0 ? (

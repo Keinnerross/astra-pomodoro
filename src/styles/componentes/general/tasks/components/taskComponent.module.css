@@ -1,6 +1,6 @@
 .taskContainer {
   display: flex;
-  padding: 5px 0;
+  padding: 3px 0;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   cursor: default !important;
@@ -53,7 +53,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  gap: 3px;
+  gap: 10px;
   position: relative;
 }
 

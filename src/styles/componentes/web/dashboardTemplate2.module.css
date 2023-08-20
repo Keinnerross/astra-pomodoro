@@ -36,32 +36,32 @@
 .listsViewContainer {
   width: 100%;
   min-height: 10%;
-  height: fit-content; /* Este nos da la altura del contenido de la caja de Listas*/
+  height: 100%; /* Este nos da la altura del contenido de la caja de Listas*/
   display: flex;
   justify-content: center;
 }
 
 @media (max-height: 768px) {
   .listsViewContainer {
-    max-height: 45%;
+    max-height: 52%;
   }
 }
 
 @media (max-height: 690px) {
   .listsViewContainer {
-    max-height: 40%;
+    max-height: 52%;
   }
 }
 
 @media (max-height: 540px) {
   .listsViewContainer {
-    max-height: 35%;
+    max-height: 38%;
   }
 }
 
 @media (min-height: 768px) and (max-height: 1900px) {
   .listsViewContainer {
-    max-height: 55%;
+    max-height: 58%;
   }
 }
 

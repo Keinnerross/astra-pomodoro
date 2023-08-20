@@ -16,7 +16,7 @@
   justify-content: center;
   flex-wrap: wrap;
   min-height: 150px;
-  height: 90%; /*Importante!!!*/
+  height: 100%; /*Importante!!!*/
   /*Nota: Un contenedor al ser Flex toma su ancho y alto completo de su padre*/
   /*Este es el contenedor transparentoso, su bgColor se le asigna en el archivo Js de este modulo*/
   box-sizing: border-box;
@@ -30,12 +30,11 @@
 }
 
 .listSection {
-  overflow-x: auto;
+  overflow-x: scroll;
   width: 100%;
   display: flex;
   /* background-color: rgb(240, 131, 13); */
   height: 100%;
-  padding-bottom: 10px;
 }
 
 .listSectionItem {
@@ -44,7 +43,7 @@
   margin: 0 20px 0 0;
   cursor: context-menu !important;
   /* background-color: aliceblue; */
-  height: 90%;
+  height: 95%;
 }
 
 /******************/
@@ -52,7 +51,9 @@
 /*****************/
 
 .listSection::-webkit-scrollbar {
-  -webkit-appearance: none;
+  background-color: rgba(106, 106, 112, 0.433);
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .listSection::-webkit-scrollbar:vertical {
@@ -65,7 +66,7 @@
 }
 
 .listSection::-webkit-scrollbar-thumb {
-  background-color: rgba(106, 106, 112, 0.533);
+  background-color: rgba(106, 106, 112, 0.433); /* rgba(1, 1, 15, 0.4); */
   border-radius: 20px;
   cursor: pointer;
 }
@@ -78,7 +79,7 @@
   display: flex;
   min-height: 18px;
   height: 18px;
-  width: 250px;
+  width: 300px;
   border-radius: 7px 7px 0 0;
 }
 
@@ -91,4 +92,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.7s;
+}
+.textListIfEmply:hover {
+  color: rgba(255, 255, 255, 0.802);
+  font-size: 19px;
 }
