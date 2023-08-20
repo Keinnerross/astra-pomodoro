@@ -217,16 +217,6 @@ const DashboardTemplate2 = () => {
         updateSetting={updateSetting}
       />
 
-      <div className={styles.sidebarContainer}>
-        <SidebarNav
-          theme={themes}
-          ifActive={ifActiveBrush}
-          numberTheme={themeSelected}
-          themeOpacity={opacityValue}
-          activeHelp={ifActiveHelp}
-        />
-      </div>
-
       {/*//////////////////////////////////////////////
 //App Dashboard.
 //////////////////////////////////////////////*/}
@@ -245,7 +235,15 @@ const DashboardTemplate2 = () => {
             userLog={userLog}
           />
         </div>
-
+        <div className={styles.sidebarContainer}>
+          <SidebarNav
+            theme={themes}
+            ifActive={ifActiveBrush}
+            numberTheme={themeSelected}
+            themeOpacity={opacityValue}
+            activeHelp={ifActiveHelp}
+          />
+        </div>
         <div className={styles.dashboardContainer}>
           <div className={styles.dashboardSection}>
             <div className={styles.pomodoroContainer}>

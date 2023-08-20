@@ -5,6 +5,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { FaPaintBrush } from "react-icons/fa";
 import { TbMessageLanguage } from "react-icons/tb";
 import { MdHelp, MdLogout, MdSettings } from "react-icons/md";
+import { BsFillRocketFill } from "react-icons/bs";
 
 // import { BiSolidHelpCircle, BiLogOut } from "react-icons/bi";
 
@@ -15,6 +16,7 @@ const SidebarNav = ({
   numberTheme,
   themeOpacity,
 }) => {
+
   const themeSelect = theme(themeOpacity)[numberTheme];
 
   const configTheme = {
@@ -23,11 +25,7 @@ const SidebarNav = ({
     iconColor: themeSelect.iconColor,
   };
 
-  const handleSidebarFull = () => {
-
-
-    
-  };
+  const handleSidebarFull = () => {};
 
   return (
     <div
@@ -36,36 +34,51 @@ const SidebarNav = ({
     >
       <div className={styles.sidebarSection}>
         <div className={styles.navSection}>
-          <button className={styles.iconContainer}>
-            <AiOutlineMenu
-              size={configTheme.iconSize}
-              fill={configTheme.iconColor}
-              onClick={() => handleSidebarFull()}
-            />
-          </button>
-          <button className={styles.iconContainer} onClick={() => ifActive()}>
-            <FaPaintBrush
-              size={configTheme.iconSize}
-              fill={configTheme.iconColor}
-            />
-          </button>
-          <button className={styles.iconContainer}>
-            <TbMessageLanguage
-              size={configTheme.iconSize}
-              fill={configTheme.iconColor}
-            />
-          </button>
-          <button className={styles.iconContainer} onClick={() => activeHelp()}>
-            <MdHelp size={configTheme.iconSize} fill={configTheme.iconColor} />
-          </button>
+          <div className={styles.iconTopContainer}>
+            <button className={styles.iconContainerTop}>
+              <BsFillRocketFill
+                size={configTheme.iconSize}
+                fill={configTheme.iconColor}
+                onClick={() => handleSidebarFull()}
+              />
+            </button>
+          </div>
+          <div className={styles.navTopSection}>
+            <button className={styles.iconContainer} onClick={() => ifActive()}>
+              {/***Modal */}
+
+             
+
+              <FaPaintBrush
+                size={configTheme.iconSize}
+                fill={configTheme.iconColor}
+              />
+            </button>
+            <button className={styles.iconContainer}>
+              <TbMessageLanguage
+                size={configTheme.iconSize}
+                fill={configTheme.iconColor}
+              />
+            </button>
+            <button
+              className={styles.iconContainer}
+              onClick={() => activeHelp()}
+            >
+              <MdHelp
+                size={configTheme.iconSize}
+                fill={configTheme.iconColor}
+              />
+            </button>
+          </div>
         </div>
+
         <div className={styles.settingSection}>
-          <button className={styles.iconContainer}>
+          {/* <button className={styles.iconContainer}>
             <MdSettings
               size={configTheme.iconSize}
               fill={configTheme.iconColor}
             />
-          </button>
+          </button> */}
           <button className={styles.iconContainer}>
             <MdLogout
               size={configTheme.iconSize}

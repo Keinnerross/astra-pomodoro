@@ -32,7 +32,11 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
           <h2 style={{ color: "white" }}>AstraPomodoro</h2>
         </div>
         <div className={styles.elementsHeaderSection}>
-          <div className={styles.searchBar}>
+
+
+{/*Barra de Busqueda Deshabilitada */}
+
+          {/* <div className={styles.searchBar}>
             <button>
               <BiSearch
                 size={configTheme.iconSize}
@@ -44,7 +48,7 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
               className={styles.textInput}
               placeholder="Search a task group"
             ></input>
-          </div>
+          </div> */}
           <div className={styles.userHeaderSection}>
             <div className={styles.iconContainer}>
               <button onClick={() => refreshPage()}>

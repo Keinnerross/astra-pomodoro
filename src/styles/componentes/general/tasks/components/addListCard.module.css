@@ -1,8 +1,8 @@
 .addListContainer {
-  width: 550px;
-  height: 40px;
+  width: 850px;
+  height: 45px;
   min-height: 35px;
-  border-radius: 7px;
+  border-radius: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
