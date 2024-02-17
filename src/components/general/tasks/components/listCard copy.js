@@ -164,12 +164,8 @@ const ListCard = ({
     }
   };
 
-  const [viewThreeTask, setViewThreeTask] = useState([])
-
-
   useEffect(() => {
     setTaskDtArr(tasksDt);
-    setViewThreeTask(tasksDt.slice(0, 3))
   }, [tasksDt]);
 
   /*Funcion de orden dnd para las listas: */
@@ -252,10 +248,20 @@ const ListCard = ({
 
       <div className={styles.taskCardSection}>
         <div className={styles.titleListSection}>
-
-          <h3
-            className={styles.inputTextList}
-          >{listName}</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              inputTitleList.current.blur();
+            }}
+          >
+            <input
+              className={styles.inputTextList}
+              style={{ color: configTheme.iconColor }}
+              defaultValue={listName} /*Por corregir */
+              ref={inputTitleList}
+              onChange={handleInputChange}
+            />
+          </form>
           <button
             className={styles.dotSettingButton}
             onClick={() => toggleSettingList()}
@@ -273,12 +279,12 @@ const ListCard = ({
             {(provided) => (
               <div
                 className={styles.taskRenderContainer}
-                // style={{ height: hightValue }}
+                style={{ height: hightValue }}
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
                 {taskDtArr.length > 0 ? (
-                  viewThreeTask.map((task, i) => (
+                  taskDtArr.map((task, i) => (
                     <Draggable
                       key={task.taskId}
                       draggableId={task.taskId}
@@ -350,7 +356,7 @@ const ListCard = ({
           </form>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

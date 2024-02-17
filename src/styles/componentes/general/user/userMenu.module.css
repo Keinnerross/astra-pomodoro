@@ -39,11 +39,15 @@
 
 .infoUserContainer h4 {
   font-size: 16px;
+  color: var(--blackNoir);
 }
 
 .infoUserContainer span {
   font-size: 14px;
+  color: var(--blackNoir);
+
 }
+
 .buttonSettingContainer {
   display: flex;
   align-items: center;

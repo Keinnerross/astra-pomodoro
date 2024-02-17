@@ -30,6 +30,7 @@
 }
 .listSettingContainer button > span {
   margin-left: 5px;
+  color: var(--blackNoir);
 }
 .listSettingContainer button:hover {
   background-color: rgb(237, 236, 236);

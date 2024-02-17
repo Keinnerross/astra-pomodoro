@@ -13,7 +13,7 @@
   user-select: none;
   /*Importante estas propiedades para su correct*/
   background-color: var(--blackSecundary);
-  height: 180px
+
 }
 
 .taskCardSection {

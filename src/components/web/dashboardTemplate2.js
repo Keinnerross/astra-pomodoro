@@ -206,10 +206,10 @@ const DashboardTemplate2 = () => {
               />
             </div>
             <div className={styles.listsViewContainer}>
-              {/* <MainTasks
+              <MainTasks
                 ifUserLog={userLog}
                 userId={idUserLog}
-              /> */}
+              />
             </div>
           </div>
         </div>
