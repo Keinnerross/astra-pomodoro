@@ -1,0 +1,33 @@
+.ModalAddTaskBackdrop {
+    width: 100vw;
+    height: 100vh;
+    min-height: 400px;
+    position: absolute;
+    backdrop-filter: blur(2px);
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ModalAddTaskContainer {
+    width: 410px;
+    height: 500px;
+    padding: 25px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.hidden {
+    display: none;
+}

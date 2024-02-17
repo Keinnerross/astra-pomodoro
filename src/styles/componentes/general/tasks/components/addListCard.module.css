@@ -1,5 +1,4 @@
 .addListContainer {
-  width: 850px;
   height: 45px;
   min-height: 35px;
   border-radius: 80px;
@@ -7,6 +6,8 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(0.7px);
+  z-index: 999;
+  color: black;
 }
 
 .addListContainerform {
@@ -18,12 +19,12 @@
 }
 
 .addListContainerform input::placeholder {
-  color: white;
+  color: var(--blackBackground);
   font-weight: 200;
 }
 
 .addListContainerform input {
-  color: white;
+  color: var(--blackBackground);
   font-weight: 400;
   font-size: 16px;
 }

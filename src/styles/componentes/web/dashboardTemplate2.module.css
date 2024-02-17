@@ -15,10 +15,10 @@
 
 .dashboardSection {
   width: 100%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 .headerContainer {
@@ -31,6 +31,7 @@
 } */
 
 .listsViewContainer {
+  padding-top: 30px;
   width: 100%;
   display: flex;
   justify-content: center;

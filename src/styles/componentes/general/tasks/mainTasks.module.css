@@ -1,21 +1,36 @@
 .mainTasksContainer {
   width: 85%;
-  max-width: 1700px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-bottom: 20px;
+}
+
+.mainTaskTitleSection {
+  width: 100%;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--greyFocus);
+
+}
+
+.addListBtnContainer {
+  cursor: pointer;
 }
 
 .mainTasksSection {
   width: 100%;
   border-radius: 9px;
-  padding: 20px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  min-height: 150px;
-  height: 100%;
+  height: 30vh;
+  /*de esta forma se mantiene el alto del contenedor al arrastrar tareas.*/
+  padding-top: 20px;
+
+
   /*Importante!!!*/
   /*Nota: Un contenedor al ser Flex toma su ancho y alto completo de su padre*/
   /*Este es el contenedor transparentoso, su bgColor se le asigna en el archivo Js de este modulo*/

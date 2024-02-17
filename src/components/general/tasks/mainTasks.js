@@ -5,6 +5,7 @@ import React, {
   useRef,
   FC,
   forwardRef,
+  Fragment,
 } from "react";
 import styles from "@/styles/componentes/general/tasks/mainTasks.module.css";
 import ListCard from "./components/listCard";
@@ -31,6 +32,9 @@ import {
 } from "firebase/auth";
 import { auth } from "../../../../firebase";
 import UserLogin from "../user/login";
+import { IoIosAddCircle } from "react-icons/io";
+import ModalAddTask from "./components/ModalAddTask";
+import * as ControllersUi from "@/components/functions/ControllersUi";
 
 const MainTasks = ({
   numberTheme,
@@ -242,84 +246,100 @@ const MainTasks = ({
     pushOrderData(newOrder);
   };
 
-  return (
-    <div className={styles.mainTasksContainer}>
-      <div style={{ padding: "20px 0" }}>
-        {/* <AddListCard
-          addList={addList}
-          numberTheme={numberTheme}
-          themeOpacity={themeOpacity}
-        /> */}
 
-        <h3 >My lists</h3>
-      </div>
-      <div
-        className={styles.mainTasksSection}
-      >
-        <div className={styles.listContainer}>
-          {" "}
-          {/*Contenedor que tiene el over y tamaño de las tareas */}
-          <DragDropContext onDragEnd={dragEnd}>
-            <Droppable droppableId="listArr" direction="horizontal">
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className={styles.listSection}
-                  style={
-                    lists.length > 0
-                      ? { overflowX: "scroll" }
-                      : { overflow: "none" }
-                  }
-                // onWheel={handleWheel} Por corregir
-                >
-                  {lists.length > 0 ? (
-                    lists.map((item, i) => (
-                      <Draggable
-                        className={styles.dragableItem}
-                        key={item.id}
-                        draggableId={item.id.toString()}
-                        index={i}
-                      >
-                        {(provided) => (
-                          <div
-                            className={styles.listSectionItem}
-                            {...provided.draggableProps}
-                            ref={provided.innerRef}
-                          >
-                            <div className={styles.dragControlContainer}
-                              {...provided.dragHandleProps}
-                            ></div>
-                            <ListCard
-                              key={item.id}
-                              listName={item.listName}
-                              idList={item.id}
-                              tasksDt={item.tasks}
-                              updateList={updateList}
-                              deleteLista={deletelist}
-                              data-id={item.id}
-                              getData={newGetData}
-                              numberTheme={numberTheme}
-                              themeOpacity={themeOpacity}
-                              userId={userId}
-                              newGetData={newGetData}
-                            />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))
-                  ) : (
-                    <h4 className={styles.textListIfEmply}>
-                      Your lists will appear here
-                    </h4>
-                  )}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+  const [ifModalAddTask, setIfModalAddtask] = useState(false)
+
+  const handleModal = () => {
+    setIfModalAddtask(!ifModalAddTask)
+  }
+
+  return (
+    <Fragment>
+
+      <ModalAddTask isActive={ifModalAddTask} handleModal={() => handleModal()} />
+
+      <div className={styles.mainTasksContainer}>
+
+        <div className={styles.mainTaskTitleSection}>
+
+          <div className={styles.MainTaskGroupColumn}>
+            <h3>My lists</h3>
+            <span>Difine what you want to achive</span>
+          </div>
+          <div className={styles.addListBtnContainer} onClick={() => handleModal()}>
+            <IoIosAddCircle size={38} fill="#fff" />
+          </div>
+
+
+        </div>
+        <div
+          className={styles.mainTasksSection}
+        >
+          <div className={styles.listContainer}>
+            {" "}
+            {/*Contenedor que tiene el over y tamaño de las tareas */}
+            <DragDropContext onDragEnd={dragEnd}>
+              <Droppable droppableId="listArr" direction="horizontal">
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className={styles.listSection}
+                    style={
+                      lists.length > 0
+                        ? { overflowX: "scroll" }
+                        : { overflow: "none" }
+                    }
+                  // onWheel={handleWheel} Por corregir
+                  >
+                    {lists.length > 0 ? (
+                      lists.map((item, i) => (
+                        <Draggable
+                          className={styles.dragableItem}
+                          key={item.id}
+                          draggableId={item.id.toString()}
+                          index={i}
+                        >
+                          {(provided) => (
+                            <div
+                              className={styles.listSectionItem}
+                              {...provided.draggableProps}
+                              ref={provided.innerRef}
+                            >
+                              <div className={styles.dragControlContainer}
+                                {...provided.dragHandleProps}
+                              ></div>
+                              <ListCard
+                                key={item.id}
+                                listName={item.listName}
+                                idList={item.id}
+                                tasksDt={item.tasks}
+                                updateList={updateList}
+                                deleteLista={deletelist}
+                                data-id={item.id}
+                                getData={newGetData}
+                                numberTheme={numberTheme}
+                                themeOpacity={themeOpacity}
+                                userId={userId}
+                                newGetData={newGetData}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))
+                    ) : (
+                      <h4 className={styles.textListIfEmply}>
+                        Your lists will appear here
+                      </h4>
+                    )}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
         </div>
       </div>
-    </div>
+    </Fragment >
   );
 };
 
