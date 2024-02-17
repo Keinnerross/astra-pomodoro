@@ -1,4 +1,4 @@
-import styles from "@/styles/componentes/web/sidebar/sidebar.module.css";
+// import styles from "@/styles/componentes/web/sidebar/sidebar.module.css";
 
 /*Import Icons */
 import { AiOutlineMenu } from "react-icons/ai";
@@ -20,12 +20,9 @@ const SidebarNav = ({
   numberTheme,
   themeOpacity,
 }) => {
-  const themeSelect = theme(themeOpacity)[numberTheme];
 
   const configTheme = {
-    themeColor: themeSelect.themeColor,
     iconSize: 22,
-    iconColor: themeSelect.iconColor,
   };
 
   const [languageActive, setLanguageActive] = useState(false);
@@ -55,7 +52,7 @@ const SidebarNav = ({
             <button className={styles.iconContainerTop}>
               <BsFillRocketFill
                 size={configTheme.iconSize}
-                fill={configTheme.iconColor}
+                fill={"fff"}
               />
             </button>
           </div>
@@ -65,7 +62,7 @@ const SidebarNav = ({
 
               <FaPaintBrush
                 size={configTheme.iconSize}
-                fill={configTheme.iconColor}
+                fill={"fff"}
               />
             </button>
 
@@ -75,7 +72,7 @@ const SidebarNav = ({
             >
               <TbMessageLanguage
                 size={configTheme.iconSize}
-                fill={configTheme.iconColor}
+                fill={"fff"}
               />
             </button>
             <button
@@ -84,7 +81,7 @@ const SidebarNav = ({
             >
               <MdHelp
                 size={configTheme.iconSize}
-                fill={configTheme.iconColor}
+                fill={"fff"}
               />
             </button>
           </div>
@@ -94,13 +91,13 @@ const SidebarNav = ({
           {/* <button className={styles.iconContainer}>
             <MdSettings
               size={configTheme.iconSize}
-              fill={configTheme.iconColor}
+              fill={"fff"}
             />
           </button> */}
           <button className={styles.iconContainer} onClick={() => logOut(auth)}>
             <MdLogout
               size={configTheme.iconSize}
-              fill={configTheme.iconColor}
+              fill={"fff"}
             />
           </button>
         </div>

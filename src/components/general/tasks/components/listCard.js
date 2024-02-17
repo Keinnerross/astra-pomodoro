@@ -32,11 +32,10 @@ const ListCard = ({
   newGetData,
 }) => {
   /*Configuracion Theme */
-  const themeSelect = themes(themeOpacity)[numberTheme];
   const configTheme = {
-    themeColor: themeSelect.themeColor,
+    themeColor: "#0A2841",
     iconSize: 25,
-    iconColor: themeSelect.iconColor,
+    iconColor: "white",
   };
   /*Los temas estan puestos aqui para poder testear los estilos, sin embargo hay que ponerlos de forma atomatica relacionadose con la sidebar */
 
@@ -228,12 +227,7 @@ const ListCard = ({
   };
 
   return (
-    <div
-      className={styles.TaskCardContainer}
-      style={{
-        backgroundColor: configTheme.themeColor,
-      }}
-    >
+    <div className={styles.TaskCardContainer}>
       {/********************************************
        *** *** Menu Flotante
        *******************************************/}
@@ -272,7 +266,7 @@ const ListCard = ({
             className={styles.dotSettingButton}
             onClick={() => toggleSettingList()}
           >
-            <BsThreeDotsVertical fill={themeSelect.iconColor} />
+            <BsThreeDotsVertical fill={configTheme.iconColor} />
           </button>
         </div>
 

@@ -4,7 +4,7 @@ import styles from "@/styles/componentes/general/pomodoro/mainPomodoro.module.cs
 import NavPomodoro from "./components/navPomodoro";
 import ButtonsPomo from "./components/buttonsPomodoro";
 import PomoTimer from "./components/pomodoroTimer";
-import CyclePomo from "./components/cyclePomo";
+import PhrasesGenerator from "./components/phrasesGenerator";
 import ProgressBar from "./components/progressBar";
 import { themes } from "../userTemplates/mainUserTemplates";
 
@@ -13,9 +13,9 @@ const MainPomodoro = ({ settingConfig, ifOpen, numberTheme, themeOpacity }) => {
   const themeSelect = themes(themeOpacity)[numberTheme];
 
   const configTheme = {
-    themeColor: themeSelect.themeColor,
+    themeColor: "transparent",
     iconSize: 25,
-    iconColor: themeSelect.iconColor,
+    iconColor: "white",
   };
 
   /*Pomodoro Variables*/
@@ -135,29 +135,18 @@ const MainPomodoro = ({ settingConfig, ifOpen, numberTheme, themeOpacity }) => {
       className={styles.pomodoroMainContainer}
       style={{ backgroundColor: configTheme.themeColor }}
     >
-      <NavPomodoro updatePomoSession={updatePomoSession} ifOpen={ifOpen} />
+      <NavPomodoro updatePomoSession={updatePomoSession} sessionSelect={pomoSession} />
       <PomoTimer time={time} theme={configTheme} />
+      <PhrasesGenerator />
       <ButtonsPomo
         playPomo={playPomo}
         restPomo={restPomo}
         stopPomo={stopPomo}
         ifActive={isActive}
+        ifOpen={ifOpen}
       />
-      <h5 style={{ color: configTheme.iconColor, display: "flex" }}>
-        <CyclePomo cyclePomo={cyclePomo} /> /4
-      </h5>
-      <p
-        className={styles.focusWarrio}
-        style={{
-          color: configTheme.iconColor,
-          fontSize: "14px",
-          marginBottom: "5px",
-        }}
-      >
-        Focus Warrior{" "}
-      </p>
-      <ProgressBar time={time} barValue={barValue} />
-    </div>
+
+    </div >
   );
 };
 

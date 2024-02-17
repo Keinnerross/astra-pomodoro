@@ -1,11 +1,12 @@
 .pomodoroContainer {
-  align-items: center;
   justify-content: center;
 }
 
 .pomoTimeContainer {
-  font-size: 5.1rem;
-  font-weight: 800;
+  font-size: 7.1rem;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+
 }
 
 .focusWarrior {
@@ -14,6 +15,6 @@
 
 @media (max-height: 700px) {
   .pomoTimeContainer {
-    font-size: 3.1rem;
+    font-size: 7.1rem;
   }
 }

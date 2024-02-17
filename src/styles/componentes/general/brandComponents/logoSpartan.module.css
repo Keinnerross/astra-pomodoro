@@ -1,0 +1,8 @@
+.logoSpartan {
+    width: 250px;
+    height: 45px;
+    background-image: url("../../../../../assets/brand/Logos/Logo1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

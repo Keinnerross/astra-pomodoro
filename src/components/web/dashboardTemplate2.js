@@ -1,8 +1,7 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import styles from "@/styles/componentes/web/dashboardTemplate2.module.css";
-import SidebarNav from "@/components/web/SidebarNav/sidebarNav";
+import SidebarMain from "./Sidebar/sidebarMain";
 import Header from "@/components/web/header/header";
 import MainPomodoro from "../general/pomodoro/mainPomodoro";
 import SettingsPomodoro from "../general/pomodoro/settingsPomodoro";
@@ -12,6 +11,7 @@ import UserLogin from "@/components/general/user/login";
 import UserRegister from "../general/user/register";
 import UserMenu from "../general/user/userMenu";
 import SelectTheme from "./SidebarNav/components/selectTheme";
+
 import {
   collection,
   doc,
@@ -32,9 +32,8 @@ import { db } from "../../../firebase";
 import {
   onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
 } from "firebase/auth";
-import { auth } from "../../../firebase";
 
-import { themes, wallpapers } from "../general/userTemplates/mainUserTemplates";
+import { auth } from "../../../firebase";
 
 const DashboardTemplate2 = () => {
   const [settingPomoOpen, setSettingPomoOpen] = useState(false);
@@ -51,12 +50,12 @@ const DashboardTemplate2 = () => {
   const [ifOpenLogin, setIfOpenLogin] = useState(false);
   const [ifOpenRegister, setIfOpenRegister] = useState(false);
   const [ifOpenUserMenu, setIfOpenUserMenu] = useState(false);
+  const [ifOpenSidebar, setIfOpenSidebar] = useState(false);
   const [userLog, setUserLog] = useState(null);
   const [userData, setUserData] = useState(null);
 
   const [idUserLog, setIdUserLog] = useState("");
   const [imgProfile, setImgProfile] = useState(null);
-  const wallpaper = wallpapers[wallpaperSelected].wallpaper;
 
   /*Functions Setting Pomodoro*/
   const updateSetting = (inputValues) => {
@@ -74,57 +73,20 @@ const DashboardTemplate2 = () => {
   };
 
   // /*Functions Sidebar */
+  const toggleSidebar = () => {
+    setIfOpenSidebar(!ifOpenSidebar)
+  }
+
+
   // /*Brush */
-  const ifActiveBrush = () => {
-    setActiveBrush(!activeBrush);
-  };
+  // const ifActiveBrush = () => {
+  //   setActiveBrush(!activeBrush);
+  // };
 
-  const ifActiveHelp = () => {
-    setIfOpenHelp(!ifOpenHelp);
-  };
+  // const ifActiveHelp = () => {
+  //   setIfOpenHelp(!ifOpenHelp);
+  // };
 
-  //**Funciones para los Temas**/
-  /*Función para cambiar entre tema y tema (Colores Blanco y negro) */
-  const handlethemeSelected = (value) => {
-    setThemeSelected(value);
-  };
-
-  /*Función para cambiar la opacidad del color de los modulos del tema */
-  const handleRangeOpacity = (e) => {
-    const valueRange = e.target.value / 100;
-    setOpacityValue(valueRange);
-  };
-
-  /*Función para cambiar el Wallpaper*/
-  const handleWalpapper = async (value) => {
-    try {
-      const bgData = value;
-      setWallpaperSelected(bgData);
-
-      if (userLog) {
-        const docRef = doc(db, "users", idUserLog);
-        await updateDoc(docRef, {
-          bg: bgData,
-        });
-      } else {
-        localStorage.setItem("bg", bgData);
-      }
-    } catch (e) {}
-  };
-
-  /*Función para Obtener preferencias de tema del usuario (Wallpapers, Opacity, etc...) */
-  const getUserTheme = async () => {
-    try {
-      if (userLog) {
-        const docRef = doc(db, "users", idUserLog);
-        const querySnapshot = await getDoc(docRef);
-        const data = querySnapshot.data().bg;
-        setWallpaperSelected(data ? data : localStorage.getItem("bg") || 4);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   /*Login/Register Controles */
 
@@ -172,10 +134,7 @@ const DashboardTemplate2 = () => {
     });
   }, []);
 
-  useEffect(() => {
-    /*Obtener las preferencias del tema del usuario desde firebase */
-    getUserTheme();
-  }, [userLog]);
+
 
   return (
     <>
@@ -183,15 +142,13 @@ const DashboardTemplate2 = () => {
 // Modales, menús y ventanas.
 //////////////////////////////////////////////*/}
 
-      <SelectTheme
+      {/* <SelectTheme
         isActive={activeBrush}
-        handleTheme={handlethemeSelected}
-        handleRangeOpacity={handleRangeOpacity}
-        handleWalpapper={handleWalpapper}
+
         handleClose={ifActiveBrush}
       />
 
-      <WhatIsPomodoro ifOpen={ifOpenHelp} toggleInfoPomo={ifActiveHelp} />
+      <WhatIsPomodoro ifOpen={ifOpenHelp} toggleInfoPomo={ifActiveHelp} /> */}
 
       <UserLogin
         isActive={ifOpenLogin}
@@ -217,33 +174,27 @@ const DashboardTemplate2 = () => {
         updateSetting={updateSetting}
       />
 
+      <SidebarMain ifOpen={ifOpenSidebar} toggleSidebar={toggleSidebar} />
+
+
       {/*//////////////////////////////////////////////
 //App Dashboard.
 //////////////////////////////////////////////*/}
 
       <div
-        style={{
-          backgroundImage: `url(${wallpaper})`,
-        }}
         className={styles.bgDashboard}
       >
+
+
         <div className={styles.HeaderContainer}>
           <Header
-            theme={themes}
             activeLogin={ifActiveLogin}
             imgProfile={imgProfile}
             userLog={userLog}
+            toggleSidebar={toggleSidebar}
           />
         </div>
-        <div className={styles.sidebarContainer}>
-          <SidebarNav
-            theme={themes}
-            ifActive={ifActiveBrush}
-            numberTheme={themeSelected}
-            themeOpacity={opacityValue}
-            activeHelp={ifActiveHelp}
-          />
-        </div>
+
         <div className={styles.dashboardContainer}>
           <div className={styles.dashboardSection}>
             <div className={styles.pomodoroContainer}>
@@ -255,13 +206,10 @@ const DashboardTemplate2 = () => {
               />
             </div>
             <div className={styles.listsViewContainer}>
-              <MainTasks
-                numberTheme={themeSelected}
-                themeOpacity={opacityValue}
-                bgTheme={themes(opacityValue)[themeSelected].themeColor}
+              {/* <MainTasks
                 ifUserLog={userLog}
                 userId={idUserLog}
-              />
+              /> */}
             </div>
           </div>
         </div>

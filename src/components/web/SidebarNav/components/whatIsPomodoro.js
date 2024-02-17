@@ -1,4 +1,4 @@
-import styles from "@/styles/componentes/web/sidebar/components/whatIsPomodoro.module.css";
+// import styles from "@/styles/componentes/web/sidebar/components/whatIsPomodoro.module.css";
 
 const WhatIsPomodoro = ({ ifOpen, toggleInfoPomo }) => {
   return (

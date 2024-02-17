@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import styles from "@/styles/componentes/web/sidebar/components/selectTheme.module.css";
-import { wallpapers } from "../../../general/userTemplates/mainUserTemplates";
+// import styles from "@/styles/componentes/web/sidebar/components/selectTheme.module.css";
+// import { wallpapers } from "../../../general/userTemplates/mainUserTemplates";
 
 const SelectTheme = ({
   isActive,

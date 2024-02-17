@@ -13,15 +13,15 @@ const PomoTimer = ({ time, theme }) => {
     document.title = `${showTime(time)} - Focus Warrior! `;
   })();
   /**/
-  
+
   return (
     <div className={styles.pomodoroContainer}>
-      <p
+      <span
         className={styles.pomoTimeContainer}
         style={{ color: theme.iconColor }}
       >
         {showTime(time)}
-      </p>
+      </span>
     </div>
   );
 };

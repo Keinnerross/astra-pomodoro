@@ -1,56 +1,30 @@
-import React from "react";
 
 import styles from "@/styles/componentes/general/pomodoro/components/navPomodoro.module.css";
-import { AiFillSetting } from "react-icons/ai";
-import { themes } from "../../userTemplates/mainUserTemplates";
-const NavPomodoro = ({ updatePomoSession, ifOpen }) => {
-  const themeSelect = themes(1)[1];
 
-  const configTheme = {
-    themeColor: themeSelect.themeColor,
-    secundary: themeSelect.secundaryColor,
-    iconColor: themeSelect.iconColor,
-    iconSize: 25,
-  };
-
+const NavPomodoro = ({ updatePomoSession, sessionSelect }) => {
   return (
     <div className={styles.navPomodoroContainer}>
       <div className={styles.navPomoSection}>
         <button
-          className={styles.navItem}
-          style={{
-            color: configTheme.iconColor,
-            background: configTheme.secundary,
-          }}
+          className={sessionSelect == "Pomodoro" ? styles.navItemActive : styles.navItem}
           onClick={() => updatePomoSession("Pomodoro")}
         >
-          <p className={styles.navText}>Pomo</p>
+          <span className={styles.navText}>pomodoro</span>
         </button>
         <button
-          className={styles.navItem}
+          className={sessionSelect == "Short" ? styles.navItemActive : styles.navItem}
           onClick={() => updatePomoSession("Short")}
-          style={{
-            color: configTheme.iconColor,
-            background: configTheme.secundary,
-          }}
         >
-          <p className={styles.navText}>Short</p>
+          <span className={styles.navText}>short break</span>
         </button>
         <button
-          className={styles.navItem}
+          className={sessionSelect == "Long" ? styles.navItemActive : styles.navItem}
           onClick={() => updatePomoSession("Long")}
-          style={{
-            color: configTheme.iconColor,
-            background: configTheme.secundary,
-          }}
         >
-          <p className={styles.navText}>Long</p>
+          <span className={styles.navText}>long break</span>
         </button>
       </div>
 
-      <button className={styles.settingPomoButton} onClick={() => ifOpen(true)}>
-        <AiFillSetting size={20} fill={"white"} />
-      </button>
     </div>
   );
 };

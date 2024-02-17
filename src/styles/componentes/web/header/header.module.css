@@ -7,15 +7,14 @@
 }
 
 .headerSection {
-  width: 90%;
+  width: 95%;
   max-width: 1700px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  padding-top: 5px;
-
+  padding: 5px 0;
+  border-bottom: solid .5px var(--greyFocus);
 }
 
 .elementsHeaderSection {
@@ -71,7 +70,7 @@
 }
 
 .iconContainer:hover {
-  background-color: rgba(255, 255, 255, 0.158);
+  background-color: var(--greyFocus)
 }
 
 .imgProfileContainer {
@@ -81,4 +80,8 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.hidden {
+  display: none;
 }

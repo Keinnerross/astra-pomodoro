@@ -1,17 +1,27 @@
 import styles from "@/styles/componentes/web/header/header.module.css";
 import Notifications from "../../general/notifications/notifications.js";
+import LogoSpartan from "@/components/general/brandComponents/logoComponent.js";
+
 import { BiSearch, BiRefresh } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
+import { AiOutlineMenu } from "react-icons/ai";
+
+
+
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
-const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
-  const themeSelect = theme(1)[1];
 
-  const configTheme = {
-    themeColor: themeSelect.themeColor,
-    iconSize: 25,
-    iconColor: themeSelect.iconColor,
-  };
+
+const settingIcons = {
+  size: 28,
+  color: "#fff",
+}
+
+
+
+
+const Header = ({ theme, activeLogin, imgProfile, userLog, toggleSidebar }) => {
+
 
   const refreshPage = () => {
     window.location.reload();
@@ -27,42 +37,39 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
     <div className={styles.headerContainer}>
       <div className={styles.headerSection}>
         <Notifications isActive={notiActive} handleActive={handleNotiActive} />
-
-        <div className={styles.logoSection}>
-          <h2 style={{ color: "white" }}>AstraPomodoro</h2>
-        </div>
         <div className={styles.elementsHeaderSection}>
-
-
-{/*Barra de Busqueda Deshabilitada */}
-
-          {/* <div className={styles.searchBar}>
-            <button>
-              <BiSearch
-                size={configTheme.iconSize}
-                fill={configTheme.iconColor}
+          <div className={styles.iconContainer}>
+            <button
+              onClick={() => toggleSidebar()}
+            >
+              <AiOutlineMenu
+                size={settingIcons.size}
+                fill={settingIcons.color}
               />
             </button>
-            <input
-              type="text"
-              className={styles.textInput}
-              placeholder="Search a task group"
-            ></input>
-          </div> */}
+          </div>
+          <div className={styles.logoSection}>
+            <LogoSpartan />
+          </div>
+        </div>
+
+
+
+        <div className={styles.elementsHeaderSection}>
           <div className={styles.userHeaderSection}>
             <div className={styles.iconContainer}>
               <button onClick={() => refreshPage()}>
                 <BiRefresh
-                  size={configTheme.iconSize}
-                  fill={configTheme.iconColor}
+                  size={settingIcons.size}
+                  fill={settingIcons.color}
                 />
               </button>
             </div>
             <div className={styles.iconContainer}>
               <button onClick={() => handleNotiActive()}>
                 <IoMdNotifications
-                  size={configTheme.iconSize}
-                  fill={configTheme.iconColor}
+                  size={settingIcons.size}
+                  fill={settingIcons.color}
                 />
               </button>
             </div>
@@ -79,8 +86,8 @@ const Header = ({ theme, activeLogin, imgProfile, userLog }) => {
                   ></div>
                 ) : (
                   <FaUserCircle
-                    size={configTheme.iconSize}
-                    fill={configTheme.iconColor}
+                    size={settingIcons.size}
+                    fill={settingIcons.color}
                   />
                 )}
               </button>

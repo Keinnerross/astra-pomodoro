@@ -245,19 +245,16 @@ const MainTasks = ({
   return (
     <div className={styles.mainTasksContainer}>
       <div style={{ padding: "20px 0" }}>
-        <AddListCard
+        {/* <AddListCard
           addList={addList}
           numberTheme={numberTheme}
           themeOpacity={themeOpacity}
-        />
+        /> */}
+
+        <h3 >My lists</h3>
       </div>
       <div
         className={styles.mainTasksSection}
-        // style={
-        //   numberTheme == 1
-        //     ? { background: "rgba(1, 1, 15, 0.2)" }
-        //     : { background: "rgba(153, 153, 154, 0.30)" }
-        // }
       >
         <div className={styles.listContainer}>
           {" "}
@@ -274,7 +271,7 @@ const MainTasks = ({
                       ? { overflowX: "scroll" }
                       : { overflow: "none" }
                   }
-                  // onWheel={handleWheel} Por corregir
+                // onWheel={handleWheel} Por corregir
                 >
                   {lists.length > 0 ? (
                     lists.map((item, i) => (
@@ -290,11 +287,7 @@ const MainTasks = ({
                             {...provided.draggableProps}
                             ref={provided.innerRef}
                           >
-                            <div
-                              style={{
-                                background: bgTheme,
-                              }}
-                              className={styles.dragControlContainer}
+                            <div className={styles.dragControlContainer}
                               {...provided.dragHandleProps}
                             ></div>
                             <ListCard

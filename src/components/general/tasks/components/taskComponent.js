@@ -18,9 +18,9 @@ const Task = ({
   const themeSelect = themes(1)[numberTheme];
 
   const configTheme = {
-    themeColor: themeSelect.themeColor,
+    themeColor: "fff",
     iconSize: 25,
-    iconColor: themeSelect.iconColor,
+    iconColor: "fff",
   };
   /*Los temas estan puestos aqui para poder testear los estilos, sin embargo hay que ponerlos de forma atomatica relacionadose con la sidebar */
   /**Funcion para actualizar el Nombre de una tarea */

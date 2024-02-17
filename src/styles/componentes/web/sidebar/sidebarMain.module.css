@@ -1,0 +1,87 @@
+.sidebarBackdrop {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.212);
+}
+
+.sidebarContainer {
+    background-color: var(--blackNoir);
+    width: 20vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 999;
+
+}
+
+.sidebarSection {
+    padding: 20px;
+}
+
+.sidebarGroupRow {
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.sidebarGroupColumn {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+}
+
+.sidebarItem {
+    width: fit-content;
+    padding: 5px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebarItem:hover {
+    background-color: var(--greyFocus);
+    cursor: pointer;
+}
+
+.iconContainer {
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.iconContainer:hover {
+    background-color: var(--greyFocus)
+}
+
+
+.searchBar {
+    width: 80%;
+    background-color: white;
+    border-radius: 12px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+
+}
+
+.searchBar input {
+    width: 100%;
+}
+
+.searchBar input::placeholder {
+    color: grey;
+}
+
+.hidden {
+    display: none;
+}

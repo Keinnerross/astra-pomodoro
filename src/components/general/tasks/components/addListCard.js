@@ -9,9 +9,9 @@ const AddListCard = ({ addList, numberTheme, themeOpacity }) => {
   const themeSelect = themes(themeOpacity)[numberTheme];
 
   const configTheme = {
-    themeColor: themeSelect.themeColor,
+    themeColor: "fff",
     iconSize: 25,
-    iconColor: themeSelect.iconColor,
+    iconColor: "fff",
   };
 
   const handleInputChange = (e) => {
