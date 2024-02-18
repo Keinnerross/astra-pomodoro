@@ -6,7 +6,9 @@ import React, {
   FC,
   forwardRef,
   Fragment,
+  useContext,
 } from "react";
+import { AppContext } from "@/Context/store";
 import styles from "@/styles/componentes/general/tasks/mainTasks.module.css";
 import ListCard from "./components/listCard";
 import AddListCard from "./components/addListCard";
@@ -27,14 +29,11 @@ import {
 import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
-import {
-  onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
-} from "firebase/auth";
-import { auth } from "../../../../firebase";
+
 import UserLogin from "../user/login";
 import { IoIosAddCircle } from "react-icons/io";
-import ModalAddTask from "./components/ModalAddTask";
-import * as ControllersUi from "@/components/functions/ControllersUi";
+import ModalList from "./components/listsComponents/modalList";
+import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
 
 const MainTasks = ({
   numberTheme,
@@ -42,43 +41,13 @@ const MainTasks = ({
   bgTheme,
   ifUserLog,
   userId,
+
 }) => {
-  const [lists, setLists] = useState([]);
-  /* Functions Controllers List and Task */
-  /*Listas: */
 
-  /* Obtener Listas */
+  const { lists, setLists } = useContext(AppContext);
+  const { userLog, idUserLog } = useContext(AppContext);
 
-  const newGetData = async () => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const listsArr = [];
 
-        const docRef = doc(db, "users", user.uid);
-        const listColl = collection(docRef, "lists");
-        const querySnapshot = await getDocs(listColl);
-        await Promise.all(
-          querySnapshot.docs.map(async (doc) => {
-            const tasks = await getTasks(doc.id, user.uid);
-            const tasksPromise = Array.isArray(tasks) ? tasks : [tasks];
-            const tasksData = await Promise.all(tasksPromise);
-            tasksData.sort((a, b) => (a.order > b.order ? 1 : -1));
-            listsArr.push({ ...doc.data(), id: doc.id, tasks: tasksData });
-            listsArr.sort((a, b) => (a.order > b.order ? 1 : -1));
-          })
-        );
-        setLists(listsArr);
-      } else {
-        const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
-        let listsArr = [];
-        storedArray.map((doc) => {
-          listsArr.push({ ...doc, id: doc.id, tasks: doc.tasks });
-        });
-
-        setLists(listsArr);
-      }
-    });
-  };
 
   /*Creación de Lista */
   const addList = async (values) => {
@@ -143,55 +112,29 @@ const MainTasks = ({
     }
   });
 
-  /*Función Borrar lista */
 
-  const deletelist = useCallback(async (id) => {
-    const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
 
-    if (confirmation) {
-      try {
-        if (ifUserLog) {
-          const dc = doc(db, "users", userId, "lists", id);
-          setLists((prevLists) => prevLists.filter((list) => list.id !== id));
-          await deleteDoc(dc);
-        } else {
-          const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
-          const updateArray = storedArray.filter((lists) => lists.id !== id);
 
-          localStorage.setItem("lists", JSON.stringify(updateArray));
-          newGetData();
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      return;
-    }
-  });
 
   useEffect(() => {
-    newGetData();
+    const fetchData = async () => {
+      try {
+        const lists = await ListsServices.newGetData();
+        setLists(lists)
+      } catch (error) {
+        console.log(e)
+      }
+    };
+
+    fetchData();
   }, []);
 
-  /*Las tareas se obtienen aquí, el resto de funciones de las tareas se encuentran en el componente de listas.*/
 
-  /*Función Obtener Tareas: Esta función solo se llama desde la función principal getData */
-  const getTasks = async (idList, idUser) => {
-    try {
-      const tasks = [];
 
-      const listDocRef = doc(db, "users", idUser, "lists", idList);
-      const taskCollectionRef = collection(listDocRef, "tasks");
-      const querySnapshot = await getDocs(taskCollectionRef);
 
-      querySnapshot.docs.map((doc) => {
-        tasks.push({ ...doc.data(), taskId: doc.id });
-      });
-      return tasks;
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
+
+
 
   /*Funcion de orden dnd para las listas: */
 
@@ -248,15 +191,32 @@ const MainTasks = ({
 
 
   const [ifModalAddTask, setIfModalAddtask] = useState(false)
+  const [listSelect, setListSelect] = useState("")
 
-  const handleModal = () => {
+
+
+  const handleModalList = (listData) => {
     setIfModalAddtask(!ifModalAddTask)
+    setListSelect(listData ? listData : false)
+  }
+
+  const deleteRender = (idList) => {
+    ListsServices.deleteList(idList, userLog, idUserLog)
+    setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
   }
 
   return (
-    <Fragment>
 
-      <ModalAddTask isActive={ifModalAddTask} handleModal={() => handleModal()} />
+
+
+
+    <Fragment>
+      <ModalList
+        isActive={ifModalAddTask}
+        handleModal={() => handleModalList(false)}
+        listSelect={listSelect}
+      />
+
 
       <div className={styles.mainTasksContainer}>
 
@@ -266,9 +226,11 @@ const MainTasks = ({
             <h3>My lists</h3>
             <span>Difine what you want to achive</span>
           </div>
-          <div className={styles.addListBtnContainer} onClick={() => handleModal()}>
+
+          <div className={styles.addListBtnContainer} onClick={() => handleModalList(false)}>
             <IoIosAddCircle size={38} fill="#fff" />
           </div>
+
 
 
         </div>
@@ -277,7 +239,7 @@ const MainTasks = ({
         >
           <div className={styles.listContainer}>
             {" "}
-            {/*Contenedor que tiene el over y tamaño de las tareas */}
+            {/*Contenedor que tiene el over y tamaño de la lista */}
             <DragDropContext onDragEnd={dragEnd}>
               <Droppable droppableId="listArr" direction="horizontal">
                 {(provided) => (
@@ -285,11 +247,13 @@ const MainTasks = ({
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     className={styles.listSection}
-                    style={
-                      lists.length > 0
-                        ? { overflowX: "scroll" }
-                        : { overflow: "none" }
-                    }
+
+                  //Esto debería ser un carousel.
+                  // style={
+                  //   lists.length > 0
+                  //     ? { overflowX: "scroll" }
+                  //     : { overflow: "none" }
+                  // }
                   // onWheel={handleWheel} Por corregir
                   >
                     {lists.length > 0 ? (
@@ -301,29 +265,36 @@ const MainTasks = ({
                           index={i}
                         >
                           {(provided) => (
-                            <div
-                              className={styles.listSectionItem}
-                              {...provided.draggableProps}
-                              ref={provided.innerRef}
-                            >
-                              <div className={styles.dragControlContainer}
-                                {...provided.dragHandleProps}
-                              ></div>
-                              <ListCard
-                                key={item.id}
-                                listName={item.listName}
-                                idList={item.id}
-                                tasksDt={item.tasks}
-                                updateList={updateList}
-                                deleteLista={deletelist}
-                                data-id={item.id}
-                                getData={newGetData}
-                                numberTheme={numberTheme}
-                                themeOpacity={themeOpacity}
-                                userId={userId}
-                                newGetData={newGetData}
-                              />
-                            </div>
+
+                            <Fragment>
+
+
+                              <div
+                                className={styles.listSectionItem}
+                                onClick={() => handleModalList(item)}
+                                {...provided.draggableProps}
+                                ref={provided.innerRef}
+                              >
+                                <div className={styles.dragControlContainer}
+                                  {...provided.dragHandleProps}
+                                ></div>
+                                <ListCard
+                                  key={item.id}
+                                  listName={item.listName}
+                                  idList={item.id}
+                                  tasksDt={item.tasks}
+                                  updateList={updateList}
+                                  deleteLista={deleteRender}
+                                  data-id={item.id}
+                                  getData={ListsServices.newGetData}
+                                  numberTheme={numberTheme}
+                                  themeOpacity={themeOpacity}
+                                  userId={userId}
+                                // newGetData={newGetData}
+                                />
+                              </div>
+                            </Fragment>
+
                           )}
                         </Draggable>
                       ))

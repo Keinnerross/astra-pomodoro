@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   border-radius: 0 0 7px 7px;
-  cursor: grab;
   position: relative;
   max-height: 92%;
   -webkit-user-select: none;

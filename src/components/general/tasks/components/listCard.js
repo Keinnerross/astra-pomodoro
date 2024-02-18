@@ -1,7 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import styles from "@/styles/componentes/general/tasks/components/listCard.module.css";
-import { themes } from "../../userTemplates/mainUserTemplates";
-
 import Task from "./taskComponent";
 import { db } from "../../../../../firebase";
 import {
@@ -41,7 +39,6 @@ const ListCard = ({
 
   /*Controles de lista y tareas */
 
-  const [values, setValues] = useState("");
 
   /*Estado dónde se guardan las tareas */
   const [taskDtArr, setTaskDtArr] = useState([]);
@@ -57,62 +54,10 @@ const ListCard = ({
   };
 
   /*Funcion de input del titulo de la Tarea */
-  const handleInputTask = (e) => {
-    const { value } = e.target;
-    setValues(value);
-  };
+
 
   /*Función Agregar nueva tarea. */
-  const addNewTask = async (idList, tasksName) => {
-    try {
-      const taskId = uuidv4();
 
-      const newTask = {
-        taskName: tasksName,
-        done: false,
-        order: 0,
-        taskId: taskId,
-      };
-
-      const newDataTask = [...taskDtArr, newTask];
-      const newOrder = [];
-
-      newDataTask.forEach((list, i) => {
-        list.order = i;
-        newOrder.push(list);
-      });
-
-      /*Renderizado desde el Frente */
-      setTaskDtArr(newOrder);
-      /*Guardar tareas en la db */
-      if (userId) {
-        const listDoc = doc(db, "users", userId, "lists", idList);
-        const taskColl = collection(listDoc, "tasks");
-        const taskDocRef = doc(taskColl, taskId);
-
-        await setDoc(taskDocRef, {
-          taskName: tasksName,
-          done: false,
-          order: 0,
-        });
-
-        pushOrderData(newDataTask);
-      } else {
-        const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
-        const updatedArray = storedArray.map((list) => {
-          if (list.id === idList) {
-            return { ...list, tasks: newOrder };
-          } else {
-            return list;
-          }
-        });
-        localStorage.setItem("lists", JSON.stringify(updatedArray));
-        newGetData();
-      }
-    } catch (e) {
-      console.log("Algo salió mal", e);
-    }
-  };
 
   /*Funcion para eliminar una tarea */
 
@@ -256,100 +201,72 @@ const ListCard = ({
           <h3
             className={styles.inputTextList}
           >{listName}</h3>
-          <button
-            className={styles.dotSettingButton}
-            onClick={() => toggleSettingList()}
+          <div
+            onClick={(e) => e.stopPropagation()}
           >
-            <BsThreeDotsVertical fill={configTheme.iconColor} />
-          </button>
+            <button
+              className={styles.dotSettingButton}
+              onClick={() => toggleSettingList()}
+            >
+              <BsThreeDotsVertical fill={configTheme.iconColor} />
+            </button>
+          </div>
         </div>
 
         {/******************
          **Tareas
          *****************/}
 
-        <DragDropContext onDragEnd={dragEnd}>
-          <Droppable droppableId="tasksArr">
-            {(provided) => (
-              <div
-                className={styles.taskRenderContainer}
-                // style={{ height: hightValue }}
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {taskDtArr.length > 0 ? (
-                  viewThreeTask.map((task, i) => (
-                    <Draggable
-                      key={task.taskId}
-                      draggableId={task.taskId}
-                      index={i}
-                    >
-                      {(provided) => (
-                        <div
-                          className={styles.taskRenderSection}
-                          /*DIV SIN STYLOS*/
-                          {...provided.draggableProps}
-                          ref={provided.innerRef}
-                          {...provided.dragHandleProps}
-                        >
-                          <Task
-                            style={{ color: configTheme.iconColor }}
-                            idTask={task.taskId}
-                            title={task.taskName}
-                            ifDone={task.done}
-                            idList={idList}
-                            key={task.taskId}
-                            deleteTask={deleteTask}
-                            numberTheme={numberTheme}
-                            idUser={userId}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))
-                ) : (
-                  <span
-                    style={{
-                      color: "white",
-                      fontSize: "14px",
-                      opacity: ".4",
-                      height: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      paddingLeft: "3px",
-                    }}
-                  >
-                    Your tasks will appear here{" "}
-                  </span>
-                )}
 
-                {/* Por Corregir el condicional*/}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <div
+          className={styles.taskRenderContainer}
 
-        {/******************
-         **Seccion para añadir nueva Tarea
-         *****************/}
-        <div className={styles.addTaskSection}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              addNewTask(idList, values);
-              inputAddTaskRef.current.value = "";
-            }}
-          >
-            <input
-              className={styles.addTaskInput}
-              style={{ color: configTheme.iconColor }}
-              placeholder="+ Add new task"
-              onChange={handleInputTask}
-              ref={inputAddTaskRef}
-            />
-          </form>
+        >
+          {taskDtArr.length > 0 ? (
+            viewThreeTask.map((task, i) => (
+
+              <Task
+                idTask={task.taskId}
+                title={task.taskName}
+                ifDone={task.done}
+                idList={idList}
+                key={task.taskId}
+                deleteTask={deleteTask}
+                numberTheme={numberTheme}
+                idUser={userId}
+                showDragDots={false}
+                elementsColor={"white"}
+              />
+              // </div>
+              // )}
+              // </Draggable>
+            ))
+          ) : (
+            <span
+              style={{
+                color: "white",
+                fontSize: "14px",
+                opacity: ".4",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                paddingLeft: "3px",
+              }}
+            >
+              Your tasks will appear here{" "}
+            </span>
+          )}
+
+          {/* Por Corregir el condicional*/}
         </div>
-      </div>
+
+
+        {taskDtArr.length > 2 ?
+          <span className={styles.AboutListBtn}>{taskDtArr.length} elementos en tu lista</span>
+          : null}
+
+
+      </div >
     </div >
   );
 };

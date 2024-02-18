@@ -1,5 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useState, useContext } from "react";
+import { AppContext } from "@/Context/store"
 import styles from "@/styles/componentes/web/dashboardTemplate2.module.css";
 import SidebarMain from "./Sidebar/sidebarMain";
 import Header from "@/components/web/header/header";
@@ -51,10 +53,11 @@ const DashboardTemplate2 = () => {
   const [ifOpenRegister, setIfOpenRegister] = useState(false);
   const [ifOpenUserMenu, setIfOpenUserMenu] = useState(false);
   const [ifOpenSidebar, setIfOpenSidebar] = useState(false);
-  const [userLog, setUserLog] = useState(null);
   const [userData, setUserData] = useState(null);
 
-  const [idUserLog, setIdUserLog] = useState("");
+  const { userLog, setUserLog } = useContext(AppContext);
+
+  const {idUserLog, setIdUserLog} = useContext(AppContext);
   const [imgProfile, setImgProfile] = useState(null);
 
   /*Functions Setting Pomodoro*/

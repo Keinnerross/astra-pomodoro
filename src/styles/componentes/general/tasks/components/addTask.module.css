@@ -1,0 +1,21 @@
+.addTaskInput {
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.addTaskInput:focus {
+    opacity: 0.7;
+    border-bottom: 1px solid white;
+    width: 80%;
+    /* El elemento ocupará el 50% del contenedor */
+    box-sizing: border-box;
+}
+
+.addTaskInput::placeholder {
+    color: white;
+}
+
+.addTaskSection {
+    width: 100%;
+    padding-top: 10px;
+}

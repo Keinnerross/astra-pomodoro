@@ -56,7 +56,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 20px 0 0;
-  cursor: context-menu !important;
+  cursor: pointer;
   /* background-color: aliceblue; */
   height: 95%;
 }
@@ -97,7 +97,9 @@
   height: 18px;
   width: 324px;
   border-radius: 7px 7px 0 0;
+  cursor: grab;
   background-color: var(--blackSecundary);
+  cursor: grab;
 }
 
 .textListIfEmply {

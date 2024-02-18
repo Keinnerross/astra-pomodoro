@@ -14,19 +14,19 @@ const Task = ({
   idUser,
   deleteTask,
   numberTheme,
+  showDragDots,
+  elementsColor
 }) => {
-  const themeSelect = themes(1)[numberTheme];
 
   const configTheme = {
-    themeColor: "fff",
-    iconSize: 25,
-    iconColor: "fff",
+    color: elementsColor == "white" ? "#fff" : "#000",
+    iconSize: 15,
   };
   /*Los temas estan puestos aqui para poder testear los estilos, sin embargo hay que ponerlos de forma atomatica relacionadose con la sidebar */
   /**Funcion para actualizar el Nombre de una tarea */
 
   /*Funcion para acutalizar nombre de la tarea */
-  const updateName = async (idList, idTarea, newTaskName) => {
+  const updateName = async (idList, idTarea, newTaskName,) => {
     try {
       const task = doc(db, "users", idUser, "lists", idList, "tasks", idTarea);
       await updateDoc(task, {
@@ -63,13 +63,14 @@ const Task = ({
   return (
     <div className={styles.taskContainer}>
       <div className={styles.taskTitleSection}>
-        <div className={styles.dragButtonContainer}>
+        {showDragDots ? <div className={styles.dragButtonContainer}>
           <MdDragIndicator
             className={styles.dragButton}
-            fill={configTheme.iconColor}
-            size={15}
+            fill={configTheme.color}
+            size={configTheme.iconSize}
           />
-        </div>
+        </div> : null}
+
 
         <div className={styles.checkTaskContainer}>
           <input
@@ -77,6 +78,7 @@ const Task = ({
             type="checkbox"
             id={idTask}
             onChange={() => handleCheck(idUser, idList, idTask)}
+            style={{ color: configTheme.color }}
           />
           <label htmlFor={idTask}></label>
           <div className={styles.settingTaskCard}></div>
@@ -89,14 +91,14 @@ const Task = ({
         /> */}
         <input
           className={styles.inputTitleTask}
-          style={{ color: configTheme.iconColor }}
+          style={{ color: configTheme.color }}
           defaultValue={title}
           onChange={handleInputName}
         />
       </div>
       <span
         className={styles.deleteTaskBtn}
-        style={{ color: configTheme.iconColor }}
+        style={{ color: configTheme.color }}
         onClick={() => deleteTask(idList, idTask)}
       >
         x
