@@ -92,9 +92,7 @@ export const deleteList = async (id, ifUserLog, userId) => {
             } else {
                 const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
                 const updateArray = storedArray.filter((lists) => lists.id !== id);
-
                 localStorage.setItem("lists", JSON.stringify(updateArray));
-                newGetData();
 
             }
         } catch (err) {

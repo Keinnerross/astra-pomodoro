@@ -16,12 +16,18 @@
   position: relative;
   z-index: 999;
 }
+
+
 .settingSection {
   width: 380px;
   height: 400px;
   background-color: rgb(255, 255, 255);
   border-radius: 7px 7px 0 0;
   padding: 25px;
+}
+
+.settingSection * {
+  color: black;
 }
 
 .titleCloseSetting {
@@ -38,6 +44,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .valuePomos {
   max-width: 90px;
 }
@@ -48,6 +55,7 @@
   font-weight: 600;
   padding: 10px 0 5px 0;
 }
+
 .valuePomos input {
   max-width: 100%;
   background-color: rgba(211, 211, 211, 0.41);
@@ -60,9 +68,11 @@
   display: flex;
   justify-content: space-between;
 }
+
 .soundSection span {
   font-size: 1rem;
   font-weight: 600;
+  color: black;
 }
 
 .soundSection select {

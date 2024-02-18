@@ -1,7 +1,7 @@
 import styles from "@/styles/componentes/general/user/userMenu.module.css";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../../firebase";
-
+import React, { Fragment } from "react";
 import { RiAccountCircleFill, RiLogoutBoxFill } from "react-icons/ri";
 
 import { FaPaypal } from "react-icons/fa";
@@ -26,7 +26,7 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
   }, [userData]);
 
   return (
-    <>
+    <Fragment>
       <div
         className={isActive ? styles.userMenuMain : styles.hidden}
         onClick={() => toggleMenu()}
@@ -39,11 +39,10 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
               <div
                 className={styles.userImg}
                 style={{
-                  backgroundImage: `url(${
-                    userGooglePhoto
+                  backgroundImage: `url(${userGooglePhoto
                       ? userGooglePhoto
                       : "https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg"
-                  })`,
+                    })`,
                 }}
               ></div>
             </div>
@@ -74,7 +73,7 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 

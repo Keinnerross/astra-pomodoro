@@ -17,6 +17,11 @@
   border-radius: 9px;
 }
 
+.userMenuContainer span {
+
+  color: var(--blackNoir);
+}
+
 .userMenuSection {
   padding: 20px 15px;
 }
@@ -44,8 +49,6 @@
 
 .infoUserContainer span {
   font-size: 14px;
-  color: var(--blackNoir);
-
 }
 
 .buttonSettingContainer {
