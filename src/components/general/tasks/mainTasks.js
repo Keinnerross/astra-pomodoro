@@ -100,17 +100,7 @@ const MainTasks = ({
     }
   };
 
-  /* Actualizar Nombre de lista*/
-  const updateList = useCallback(async (newNameList, idList) => {
-    try {
-      const docRef = doc(db, "users", userId, "lists", idList);
-      await updateDoc(docRef, {
-        listName: newNameList, // Agregamos la tarea a la lista
-      });
-    } catch (e) {
-      console.log("Algo salió mal", e);
-    }
-  });
+
 
 
 
@@ -283,7 +273,7 @@ const MainTasks = ({
                                   listName={item.listName}
                                   idList={item.id}
                                   tasksDt={item.tasks}
-                                  updateList={updateList}
+                                  // updateList={updateList }
                                   deleteLista={deleteRender}
                                   data-id={item.id}
                                   getData={ListsServices.newGetData}

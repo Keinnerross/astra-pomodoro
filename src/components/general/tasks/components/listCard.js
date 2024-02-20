@@ -262,7 +262,7 @@ const ListCard = ({
 
 
         {taskDtArr.length > 2 ?
-          <span className={styles.AboutListBtn}>{taskDtArr.length} elementos en tu lista</span>
+          <span className={styles.AboutListBtn}>{taskDtArr.length - 3} elementos más en tu lista</span>
           : null}
 
 

@@ -102,3 +102,17 @@ export const deleteList = async (id, ifUserLog, userId) => {
         return;
     }
 };
+
+
+/* Actualizar Nombre de lista*/
+export const updateList = async (userId, newNameList, idList) => {
+    try {
+        const docRef = doc(db, "users", userId, "lists", idList);
+        await updateDoc(docRef, {
+            listName: newNameList, // Agregamos la tarea a la lista
+        });
+        alert("xd")
+    } catch (e) {
+        console.log("Algo salió mal", e);
+    }
+};

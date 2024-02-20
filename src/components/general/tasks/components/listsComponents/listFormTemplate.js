@@ -1,11 +1,32 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useState, useContext } from "react"
 import DragTasks from "../tasksComponents/dragTasks"
+import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
+import { AppContext } from "@/Context/store";
 
 const ListFormTemplate = ({ list, }) => {
+
+
+    const { idUserLog, setIdUserLog } = useContext(AppContext);
+
+
+    const handleInputChange = (e) => {
+        const { value } = e.target;
+        ListsServices.updateList(idUserLog, value, list.id);
+
+    };
+
+
+
+
     return (<Fragment>
         {list ? (
             <Fragment>
-                <input value={list.listName} />
+                <input
+                    defaultValue={list.listName}
+                    onChange={handleInputChange}
+                />
+
+
                 <DragTasks taskDataArray={list.tasks} idList={list.id} />
             </Fragment>
         ) :

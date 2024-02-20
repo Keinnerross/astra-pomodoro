@@ -39,7 +39,7 @@ const Task = ({
   /*Funcion para manejar el valor del input de la tarea, su titulo. */
   const handleInputName = (e) => {
     const { value } = e.target;
-    updateName(idList, idTask, value);
+    // updateName(idList, idTask, value);
   };
 
   /**Funcion para actualizar el completado de la tarea */
