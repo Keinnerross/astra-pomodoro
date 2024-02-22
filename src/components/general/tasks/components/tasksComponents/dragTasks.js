@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Task from "../taskComponent";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
 import { AppContext } from "@/Context/store"
 import AddTask from "./AddTask";
 import { v4 as uuidv4 } from "uuid";
@@ -135,57 +135,64 @@ const DragTasks = ({ taskDataArray, idList }) => {
 
 
     return (
-        <DragDropContext onDragEnd={dragEnd}>
-            <Droppable droppableId="tasksArr">
-                {(provided) => (
-                    <div
-                        // className={styles.taskRenderContainer}
-                        // style={{ height: hightValue }}F
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                    >
-                        {
-                            taskDtArr.length > 0 ? (
-                                taskDtArr.map((task, i) => (
-                                    <Draggable
-                                        key={task.taskId}
-                                        draggableId={task.taskId}
-                                        index={i}
-                                    >
-                                        {(provided) => (
-                                            <div
-                                                // className={styles.taskRenderSection}
-                                                /*DIV SIN STYLOS*/
-                                                {...provided.draggableProps}
-                                                ref={provided.innerRef}
-                                                {...provided.dragHandleProps}
-                                            >
-                                                <Task
-                                                    style={{ color: "#fff" }}
-                                                    idTask={task.taskId}
-                                                    title={task.taskName}
-                                                    ifDone={task.done}
-                                                    idList={idList}
-                                                    key={task.taskId}
-                                                    // deleteTask={deleteTask} Funcion para eliminar tarea
-                                                    // numberTheme={numberTheme} Esto se debe eliminar
-                                                    idUser={idUserLog}
-                                                    showDragDots={true}
-                                                />
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))
-                            ) : (
+        <Fragment>
+            <DragDropContext onDragEnd={dragEnd}>
+                <Droppable droppableId="tasksArr">
+                    {(provided) => (
+                        <div
+                            // className={styles.taskRenderContainer}
+                            // style={{ height: hightValue }}F
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                        >
+                            {
 
-                                <AddTask idList={idList} addNewTask={addNewTask()} />
+                                taskDtArr.length > 0 ? (
 
-                            )}
-                    </div>
-                )}
-            </Droppable>
-        </DragDropContext>
-    )
+                                    taskDtArr.map((task, i) => (
+                                        <Draggable
+                                            key={task.taskId}
+                                            draggableId={task.taskId}
+                                            index={i}
+                                        >
+                                            {(provided) => (
+                                                <div
+                                                    // className={styles.taskRenderSection}
+                                                    /*DIV SIN STYLOS*/
+                                                    {...provided.draggableProps}
+                                                    ref={provided.innerRef}
+                                                    {...provided.dragHandleProps}
+                                                >
+                                                    <Task
+                                                        style={{ color: "#fff" }}
+                                                        idTask={task.taskId}
+                                                        title={task.taskName}
+                                                        ifDone={task.done}
+                                                        idList={idList}
+                                                        key={task.taskId}
+                                                        // deleteTask={deleteTask} Funcion para eliminar tarea
+                                                        // numberTheme={numberTheme} Esto se debe eliminar
+                                                        idUser={idUserLog}
+                                                        showDragDots={true}
+                                                    />
+
+                                                </div>
+
+                                            )}
+
+                                        </Draggable>
+
+                                    ))
+
+
+                                )
+                                    : <AddTask idList={idList} addNewTask={addNewTask()} />
+                            }
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext >
+        </Fragment>)
 }
 
 export default DragTasks;

@@ -16,7 +16,7 @@ const ListFormTemplate = ({ list, }) => {
     };
 
 
-
+    ///AQUI DEBE HACERSE LA CONFIGURACION DE LA CREACION DE LAS TAREAS Y EL MANEJO DE LOS ESTADOS////
 
     return (<Fragment>
         {list ? (
@@ -33,7 +33,7 @@ const ListFormTemplate = ({ list, }) => {
             <Fragment>
                 <input placeholder="Titulo"
                     value={""} />
-                <DragTasks taskDataArray={[]} idList={""} />
+                <DragTasks taskDataArray={null} idList={null} />
             </Fragment>}
 
 
