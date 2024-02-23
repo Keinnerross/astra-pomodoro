@@ -105,13 +105,25 @@ export const deleteList = async (id, ifUserLog, userId) => {
 
 
 /* Actualizar Nombre de lista*/
-export const updateList = async (userId, newNameList, idList) => {
+export const updateList = async (userId, userLog, newNameList, idList, newlistArray) => {
     try {
-        const docRef = doc(db, "users", userId, "lists", idList);
-        await updateDoc(docRef, {
-            listName: newNameList, // Agregamos la tarea a la lista
-        });
-        alert("xd")
+
+        if (userLog) {
+            const docRef = doc(db, "users", userId, "lists", idList);
+            await updateDoc(docRef, {
+                listName: newNameList, // Agregamos la tarea a la lista
+            });
+
+        } else {
+
+            localStorage.setItem("lists", JSON.stringify(newlistArray));
+        }
+
+
+
+
+
+
     } catch (e) {
         console.log("Algo salió mal", e);
     }
@@ -122,7 +134,7 @@ export const updateList = async (userId, newNameList, idList) => {
 
 /*Ordenar lista Guardado DB
  */
-const pushOrderData = async (newOrder, ifUserLog) => {
+const pushOrderData = async (newOrder, ifUserLog, userId) => {
     try {
         if (newOrder) {
             if (ifUserLog) {
@@ -145,7 +157,7 @@ const pushOrderData = async (newOrder, ifUserLog) => {
 };
 
 /*Creación de Lista */
-export const addList = async (values, lists, ifUserLog) => {
+export const addList = async (values, lists, ifUserLog, userId) => {
     try {
         /*Este condicional es temporal, lo ideal sería dividir en guardado un para la base de datos y el otro desde el frente con localStorage*/
 
@@ -184,7 +196,7 @@ export const addList = async (values, lists, ifUserLog) => {
                 order: 0,
                 tasks: [],
             });
-            pushOrderData(newOrder, ifUserLog);
+            pushOrderData(newOrder, ifUserLog, userId);
         } else {
             /*LocalStorage */
             const existingArray = JSON.parse(localStorage.getItem("lists")) || [];

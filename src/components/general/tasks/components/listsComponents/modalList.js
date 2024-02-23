@@ -9,8 +9,7 @@ import { AppContext } from "@/Context/store";
 
 const ModalList = ({ isActive, handleModal, listSelect }) => {
 
-    const { lists, setLists } = useContext(AppContext);
-    const { userLog } = useContext(AppContext);
+    const { lists, setLists, userLog, idUserLog } = useContext(AppContext);
     const [tempTitleValue, setTemTitleValue] = useState("")
 
     const saveTitleList = (titleList) => {
@@ -18,9 +17,11 @@ const ModalList = ({ isActive, handleModal, listSelect }) => {
     }
 
     const saveListWithHandleModal = async () => {
-        const newLists = await ListsServices.addList(tempTitleValue, lists, userLog)
-        setLists(newLists)
         handleModal()
+        
+        const newLists = await ListsServices.addList(tempTitleValue, lists, userLog, idUserLog)
+        setLists(newLists)
+
     }
 
 

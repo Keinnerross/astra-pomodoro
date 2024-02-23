@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from "react"
+import React, { Fragment, useState, useContext, useEffect } from "react"
 import DragTasks from "../tasksComponents/dragTasks"
 import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
 import { AppContext } from "@/Context/store";
@@ -6,15 +6,40 @@ import NewListForm from "./NewListForm";
 const ListFormTemplate = ({ list, saveTitleList }) => {
 
 
-    const { idUserLog, setIdUserLog } = useContext(AppContext);
+    const { idUserLog } = useContext(AppContext);
+    const { userLog } = useContext(AppContext);
+    const { setLists } = useContext(AppContext);
+
+    const [listTitle, setListTitle] = useState("")
 
 
-
-    const handleInputChange = (e) => {
+    const handleInputChange = (e, idList) => {
         const { value } = e.target;
-        ListsServices.updateList(idUserLog, value, list.id);
+
+        setLists(prevLists => {
+            const updateList = prevLists.map(listItem => {
+                if (listItem.id === idList) {
+                    return { ...listItem, listName: value };
+                }
+                return listItem
+            });
+
+            setListTitle(value)
+            ListsServices.updateList(idUserLog, userLog, listTitle, list.id, updateList);
+
+            return updateList;
+        })
+
 
     };
+
+
+    useEffect(() => {
+        setListTitle(list.listName)
+
+
+    }, [list,])
+
 
 
     ///AQUI DEBE HACERSE LA CONFIGURACION DE LA CREACION DE LAS TAREAS Y EL MANEJO DE LOS ESTADOS////
@@ -23,8 +48,8 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
         {list ? (
             <Fragment>
                 <input
-                    defaultValue={list.listName}
-                    onChange={handleInputChange}
+                    defaultValue={listTitle}
+                    onChange={(e) => handleInputChange(e, list.id)}
                 />
 
 
