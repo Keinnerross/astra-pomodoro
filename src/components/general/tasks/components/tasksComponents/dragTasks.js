@@ -147,7 +147,7 @@ const DragTasks = ({ taskDataArray, idList }) => {
                         >
                             {
 
-                                taskDtArr.length > 0 ? (
+                                taskDtArr.length >= 1 ? (
 
                                     taskDtArr.map((task, i) => (
                                         <Draggable
@@ -186,12 +186,13 @@ const DragTasks = ({ taskDataArray, idList }) => {
 
 
                                 )
-                                    : <AddTask idList={idList} addNewTask={addNewTask()} />
+                                    : null
                             }
                         </div>
                     )}
                 </Droppable>
             </DragDropContext >
+            <AddTask idList={idList} addNewTask={addNewTask} />
         </Fragment>)
 }
 

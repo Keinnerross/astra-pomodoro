@@ -1,6 +1,5 @@
 import styles from "@/styles/componentes/general/tasks/components/addTask.module.css";
 import React, { useState, useRef } from "react";
-import { addNewTask } from "./services/tasksBookServices"
 
 
 const AddTask = ({ idList, addNewTask }) => {

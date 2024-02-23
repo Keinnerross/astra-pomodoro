@@ -49,56 +49,6 @@ const MainTasks = ({
 
 
 
-  /*Creación de Lista */
-  const addList = async (values) => {
-    try {
-      /*Este condicional es temporal, lo ideal sería dividir en guardado un para la base de datos y el otro desde el frente con localStorage*/
-
-      const idList = uuidv4();
-
-      const newList = {
-        listName: values,
-        order: 0,
-        tasks: [],
-        id: idList /*Id*/,
-      };
-
-      /*Funcion para ordenar los valores de Orden de las listas */
-      const newDataList = [newList, ...lists];
-
-      const newOrder = [];
-      /*ordenar Posiciones */
-      newDataList.forEach((list, i) => {
-        list.order = i;
-        newOrder.push(list);
-      });
-
-      /*Render Front */
-      setLists(newOrder);
-      /*Guardado en la DB */
-      if (ifUserLog) {
-        const docRef = doc(db, "users", userId);
-        const listColl = collection(docRef, "lists");
-        const listDocRef = doc(listColl, idList);
-
-        await setDoc(listDocRef, {
-          listName: values,
-          order: 0,
-          tasks: [],
-        });
-        pushOrderData(newOrder);
-      } else {
-        /*LocalStorage */
-        const existingArray = JSON.parse(localStorage.getItem("lists")) || [];
-        existingArray.push(newList);
-
-        localStorage.setItem("lists", JSON.stringify(existingArray));
-        pushOrderData(newOrder);
-      }
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
 
 
 
