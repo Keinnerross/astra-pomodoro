@@ -25,7 +25,7 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
             });
 
             setListTitle(value)
-            ListsServices.updateList(idUserLog, userLog, listTitle, list.id, updateList);
+            ListsServices.updateList(idUserLog, userLog, value, list.id, updateList);
 
             return updateList;
         })

@@ -74,7 +74,6 @@ const DragTasks = ({ taskDataArray, idList }) => {
 
     useEffect(() => {
         setTaskDtArr(taskDataArray)
-        console.log(taskDtArr)
     }, [taskDataArray])
 
 
