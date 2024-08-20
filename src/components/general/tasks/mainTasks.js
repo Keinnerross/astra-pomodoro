@@ -35,6 +35,12 @@ import { IoIosAddCircle } from "react-icons/io";
 import ModalList from "./components/listsComponents/modalList";
 import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
 
+
+
+// Este es el documento principal donde se encuentran todas las listas y hay ciertas funciones desde las listas hacia abajo segun jerarquía.
+
+
+
 const MainTasks = ({
   numberTheme,
   themeOpacity,
@@ -47,34 +53,26 @@ const MainTasks = ({
   const { lists, setLists } = useContext(AppContext);
   const { userLog, idUserLog } = useContext(AppContext);
 
+  const [ifModalAddTask, setIfModalAddtask] = useState(false)
+  const [listSelect, setListSelect] = useState("")
 
 
 
+  const fetchData = async () => {
+    try {
+      const lists = await ListsServices.newGetData();
+      setLists(lists)
+      console.log("ejecutao")
+    } catch (error) {
+    }
+  };
 
 
 
-
-
-
+  // fetchData
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const lists = await ListsServices.newGetData();
-        setLists(lists)
-      } catch (error) {
-        console.log(e)
-      }
-    };
-
     fetchData();
   }, []);
-
-
-
-
-
-
-
 
   /*Funcion de orden dnd para las listas: */
 
@@ -130,10 +128,6 @@ const MainTasks = ({
   };
 
 
-  const [ifModalAddTask, setIfModalAddtask] = useState(false)
-  const [listSelect, setListSelect] = useState("")
-
-
 
   const handleModalList = (listData) => {
     setIfModalAddtask(!ifModalAddTask)
@@ -145,6 +139,8 @@ const MainTasks = ({
     setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
   }
 
+
+
   return (
 
 
@@ -155,6 +151,7 @@ const MainTasks = ({
         isActive={ifModalAddTask}
         handleModal={() => handleModalList(false)}
         listSelect={listSelect}
+        fetchData={fetchData}
       />
 
 
@@ -223,7 +220,6 @@ const MainTasks = ({
                                   listName={item.listName}
                                   idList={item.id}
                                   tasksDt={item.tasks}
-                                  // updateList={updateList }
                                   deleteLista={deleteRender}
                                   data-id={item.id}
                                   getData={ListsServices.newGetData}

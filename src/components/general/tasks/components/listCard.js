@@ -53,10 +53,7 @@ const ListCard = ({
     updateList(value, idList);
   };
 
-  /*Funcion de input del titulo de la Tarea */
 
-
-  /*Función Agregar nueva tarea. */
 
 
   /*Funcion para eliminar una tarea */
@@ -148,7 +145,6 @@ const ListCard = ({
     return result;
   };
 
-  const hightValue = `${34 * taskDtArr.length}px`;
 
   const dragEnd = (result) => {
     const { source, destination } = result;
@@ -237,9 +233,7 @@ const ListCard = ({
                 showDragDots={false}
                 elementsColor={"white"}
               />
-              // </div>
-              // )}
-              // </Draggable>
+
             ))
           ) : (
             <span

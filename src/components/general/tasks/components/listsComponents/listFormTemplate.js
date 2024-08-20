@@ -11,18 +11,22 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
     const { setLists } = useContext(AppContext);
 
     const [listTitle, setListTitle] = useState("")
+    const [listTasks, setListTasks] = useState([])
 
 
     const handleInputChange = (e, idList) => {
         const { value } = e.target;
 
         setLists(prevLists => {
+
             const updateList = prevLists.map(listItem => {
                 if (listItem.id === idList) {
+
                     return { ...listItem, listName: value };
                 }
                 return listItem
             });
+
 
             setListTitle(value)
             ListsServices.updateList(idUserLog, userLog, value, list.id, updateList);
@@ -36,13 +40,18 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
 
     useEffect(() => {
         setListTitle(list.listName)
-
-
-    }, [list,])
+    }, [list])
 
 
 
     ///AQUI DEBE HACERSE LA CONFIGURACION DE LA CREACION DE LAS TAREAS Y EL MANEJO DE LOS ESTADOS////
+
+
+
+
+
+
+
 
     return (<Fragment>
         {list ? (
@@ -51,6 +60,10 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
                     defaultValue={listTitle}
                     onChange={(e) => handleInputChange(e, list.id)}
                 />
+
+
+
+
 
 
                 <DragTasks taskDataArray={list.tasks} idList={list.id} />

@@ -18,10 +18,12 @@ const NewListForm = ({ saveTitleList }) => {
 
     return (
         <Fragment>
-            <input placeholder="Titulo"
-                defaultValue={titleList}
-                onChange={(e) => createLists(e)} />
-            <DragTasks taskDataArray={[]} idList={"001"} />
+            <form onSubmit={(e) => e.preventDefault()}>
+                <input placeholder="Titulo"
+                    defaultValue={titleList}
+                    onChange={(e) => createLists(e)} />
+                <DragTasks taskDataArray={[]} idList={"001"} />
+            </form>
         </Fragment>
 
     )

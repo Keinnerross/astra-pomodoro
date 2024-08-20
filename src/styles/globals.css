@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --blackBackground: #13161C;
   --blackSecundary: #1E2229;

@@ -27,6 +27,9 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/sortablejs": "^1.15.1"
+    "@types/sortablejs": "^1.15.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10"
   }
 }

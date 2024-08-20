@@ -4,41 +4,29 @@ import { useEffect, useState, useContext, Fragment } from "react";
 import { AppContext } from "@/Context/store"
 import AddTask from "./AddTask";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "../../../../../../firebase";
-import {
-    doc,
-    setDoc,
-    collection,
-    updateDoc,
-} from "firebase/firestore";
-import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
+import * as TaskServices from "@/components/general/tasks/components/tasksComponents/services/tasksBookServices";
+
+
+
+
+
+
+// Este archivo contiene toda la logica de las tareas, su función para agregar una, la funcion para ordenarla entre las listas cuando se hace drag and drop y otras funciones más. se vincula a travez de props con el archivo addTask.js que es el que maneja el formulario y dispara ciertas funciones como la de agregar una tarea.
+
+// De igual forma retorna las tareas existentes dentro de la lista que se está consultando.
+
 
 
 const DragTasks = ({ taskDataArray, idList }) => {
 
+
+    // taskDataArray es la info de las tareas que se obtiene desde las listas
+    // taskDtArr es un estado que en un principio se actualiza con la info del seridor es decir de taskDataArray
+
+
     const [taskDtArr, setTaskDtArr] = useState([]);
     const { idUserLog } = useContext(AppContext);
 
-    const pushOrderData = async (newOrder) => {
-        if (idUserLog) {
-            if (newOrder) {
-                newOrder.map(async (task, i) => {
-                    const docRef = doc(
-                        db,
-                        "users",
-                        idUserLog,
-                        "lists",
-                        idList,
-                        "tasks",
-                        task.taskId
-                    );
-                    await updateDoc(docRef, {
-                        order: i,
-                    });
-                });
-            }
-        }
-    };
 
 
     const reorder = (list, startIndex, endIndex) => {
@@ -68,23 +56,29 @@ const DragTasks = ({ taskDataArray, idList }) => {
                 (newTasksOrder = reorder(prevTask, source.index, destination.index))
         );
 
-        pushOrderData(newTasksOrder);
+        TaskServices.pushOrderData(newTasksOrder, idUserLog, idList);
     };
 
 
     useEffect(() => {
         setTaskDtArr(taskDataArray)
-    }, [taskDataArray])
+    }, [])
 
 
 
 
-    const addNewTask = async (idList, tasksName) => {
+
+
+
+    const addNewTask = async (idList, value) => {
         try {
+
+
+            // Esto se hace desde el frente y no espera ninguna petición.
             const taskId = uuidv4();
 
             const newTask = {
-                taskName: tasksName,
+                taskName: value,
                 done: false,
                 order: 0,
                 taskId: taskId,
@@ -97,53 +91,28 @@ const DragTasks = ({ taskDataArray, idList }) => {
                 list.order = i;
                 newOrder.push(list);
             });
-
-            /*Renderizado desde el Frente */
             setTaskDtArr(newOrder);
+            await TaskServices.addNewTask(idList, idUserLog, newTask, newDataTask);
 
-            /*Guardar tareas en la db */
-            if (idUserLog) {
-                const listDoc = doc(db, "users", idUserLog, "lists", idList);
-                const taskColl = collection(listDoc, "tasks");
-                const taskDocRef = doc(taskColl, taskId);
 
-                await setDoc(taskDocRef, {
-                    taskName: tasksName,
-                    done: false,
-                    order: 0,
-                });
-
-                pushOrderData(newDataTask);
-            } else {
-                const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
-                const updatedArray = storedArray.map((list) => {
-                    if (list.id === idList) {
-                        return { ...list, tasks: newOrder };
-                    } else {
-                        return list;
-                    }
-                });
-                localStorage.setItem("lists", JSON.stringify(updatedArray));
-                ListsServices.newGetData();
-            }
-        } catch (e) {
-            console.log("Algo salió mal", e);
+        } catch (error) {
+            console.log(error)
         }
-    };
-
-
+    }
 
     return (
         <Fragment>
+            <AddTask idList={idList} addNewTask={addNewTask} />
+
             <DragDropContext onDragEnd={dragEnd}>
                 <Droppable droppableId="tasksArr">
                     {(provided) => (
                         <div
-                            // className={styles.taskRenderContainer}
-                            // style={{ height: hightValue }}F
+
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
+
                             {
 
                                 taskDtArr.length >= 1 ? (
@@ -156,8 +125,7 @@ const DragTasks = ({ taskDataArray, idList }) => {
                                         >
                                             {(provided) => (
                                                 <div
-                                                    // className={styles.taskRenderSection}
-                                                    /*DIV SIN STYLOS*/
+
                                                     {...provided.draggableProps}
                                                     ref={provided.innerRef}
                                                     {...provided.dragHandleProps}
@@ -191,7 +159,6 @@ const DragTasks = ({ taskDataArray, idList }) => {
                     )}
                 </Droppable>
             </DragDropContext >
-            <AddTask idList={idList} addNewTask={addNewTask} />
         </Fragment>)
 }
 

@@ -13,9 +13,38 @@ import {
     setDoc,
 } from "firebase/firestore";
 import { db } from "../../../../../../../firebase";
+import { v4 as uuidv4 } from "uuid";
 
 
 
+
+
+/****************/
+/*Función ordenar tareas */
+/**************/
+
+export const pushOrderData = async (newOrder, idUserLog, idList) => {
+
+
+    if (idUserLog) {
+        if (newOrder) {
+            newOrder.map(async (task, i) => {
+                const docRef = doc(
+                    db,
+                    "users",
+                    idUserLog,
+                    "lists",
+                    idList,
+                    "tasks",
+                    task.taskId
+                );
+                await updateDoc(docRef, {
+                    order: i,
+                });
+            });
+        }
+    }
+};
 
 
 
@@ -25,40 +54,27 @@ import { db } from "../../../../../../../firebase";
 /*Add New Task */
 /**************/
 
-export const addNewTask = async (idList, tasksName) => {
+export const addNewTask = async (idList, idUserLog, newTask, newDataTask) => {
+
     try {
-        const taskId = uuidv4();
 
-        const newTask = {
-            taskName: tasksName,
-            done: false,
-            order: 0,
-            taskId: taskId,
-        };
 
-        const newDataTask = [...taskDtArr, newTask];
-        const newOrder = [];
 
-        newDataTask.forEach((list, i) => {
-            list.order = i;
-            newOrder.push(list);
-        });
+        // Esta es la verdadera petición Asincrona
 
-        /*Renderizado desde el Frente */
-        setTaskDtArr(newOrder);
         /*Guardar tareas en la db */
-        if (userId) {
-            const listDoc = doc(db, "users", userId, "lists", idList);
+        if (idUserLog) {
+            const listDoc = doc(db, "users", idUserLog, "lists", idList);
             const taskColl = collection(listDoc, "tasks");
-            const taskDocRef = doc(taskColl, taskId);
+            const taskDocRef = doc(taskColl, newTask.taskId);
 
             await setDoc(taskDocRef, {
-                taskName: tasksName,
+                taskName: newTask.taskName,
                 done: false,
                 order: 0,
             });
 
-            pushOrderData(newDataTask);
+            pushOrderData(newDataTask, idUserLog, idList);
         } else {
             const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
             const updatedArray = storedArray.map((list) => {
@@ -71,7 +87,11 @@ export const addNewTask = async (idList, tasksName) => {
             localStorage.setItem("lists", JSON.stringify(updatedArray));
             newGetData();
         }
+
+
     } catch (e) {
         console.log("Algo salió mal", e);
     }
 };
+
+
