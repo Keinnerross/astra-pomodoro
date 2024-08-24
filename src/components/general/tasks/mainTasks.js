@@ -29,7 +29,6 @@ import {
 import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
-
 import UserLogin from "../user/login";
 import { IoIosAddCircle } from "react-icons/io";
 import ModalList from "./components/listsComponents/modalList";
@@ -50,9 +49,8 @@ const MainTasks = ({
 
 }) => {
 
-  const { lists, setLists } = useContext(AppContext);
-  const { userLog, idUserLog } = useContext(AppContext);
 
+  const { lists, setLists, userLog, idUserLog } = useContext(AppContext);
   const [ifModalAddTask, setIfModalAddtask] = useState(false)
   const [listSelect, setListSelect] = useState("")
 
@@ -129,15 +127,47 @@ const MainTasks = ({
 
 
 
-  const handleModalList = (listData) => {
-    setIfModalAddtask(!ifModalAddTask)
-    setListSelect(listData ? listData : false)
+  // Este es el control de crear una lista desde el boton
+  const handleModalList = async (listData) => {
+    if (listData === false) {
+      setIfModalAddtask(!ifModalAddTask)
+      const idList = uuidv4();
+
+
+      const newLists = await ListsServices.addList("", lists, userLog, idUserLog, idList)
+
+      const newListAdd = newLists.find(item => item.id === idList);
+      console.log(newListAdd);
+
+      setListSelect(newListAdd)
+
+      setLists(newLists)
+    }
+
   }
+
+  // Este es el control de ver una lista en el modal presionando la lista
+
+  const verListaCreada = async (listData) => {
+    setIfModalAddtask(!ifModalAddTask)
+
+    setListSelect(listData ? listData : false)
+
+  }
+  const handleModalActiveList = () => {
+    setIfModalAddtask(false)
+
+
+
+  }
+
+
 
   const deleteRender = (idList) => {
     ListsServices.deleteList(idList, userLog, idUserLog)
     setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
   }
+
 
 
 
@@ -149,7 +179,7 @@ const MainTasks = ({
     <Fragment>
       <ModalList
         isActive={ifModalAddTask}
-        handleModal={() => handleModalList(false)}
+        handleModal={handleModalActiveList}
         listSelect={listSelect}
         fetchData={fetchData}
       />
@@ -163,6 +193,8 @@ const MainTasks = ({
             <h3>My lists</h3>
             <span>Difine what you want to achive</span>
           </div>
+
+          {/* // Botón que activa la creación de una Lista */}
 
           <div className={styles.addListBtnContainer} onClick={() => handleModalList(false)}>
             <IoIosAddCircle size={38} fill="#fff" />
@@ -208,7 +240,7 @@ const MainTasks = ({
 
                               <div
                                 className={styles.listSectionItem}
-                                onClick={() => handleModalList(item)}
+                                onClick={() => verListaCreada(item)}
                                 {...provided.draggableProps}
                                 ref={provided.innerRef}
                               >

@@ -2,7 +2,7 @@ const { Fragment, useState, useContext, useEffect } = require("react")
 import styles from "@/styles/componentes/general/tasks/components/modalAddTask.module.css"
 import ListFormTemplate from "./listFormTemplate"
 import DragTasks from "../tasksComponents/dragTasks"
-import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
+// import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
 import { AppContext } from "@/Context/store";
 
 
@@ -18,9 +18,6 @@ const ModalList = ({ isActive, handleModal, listSelect, fetchData }) => {
 
     const saveListWithHandleModal = async () => {
         handleModal()
-
-        const newLists = await ListsServices.addList(tempTitleValue, lists, userLog, idUserLog)
-        setLists(newLists)
 
     }
 
@@ -49,13 +46,9 @@ const ModalList = ({ isActive, handleModal, listSelect, fetchData }) => {
                 <form className={isActive ? styles.ModalAddTaskContainer : styles.hidden}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {listSelect ? (
 
-                        <ListFormTemplate list={listSelect} />
-                    )
-                        :
-                        <ListFormTemplate list={false} saveTitleList={saveTitleList} />
-                    }
+
+                    <ListFormTemplate list={listSelect} isActive={isActive} saveTitleList={saveTitleList} />
 
 
                 </form>

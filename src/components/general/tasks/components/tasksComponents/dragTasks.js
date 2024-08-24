@@ -17,7 +17,7 @@ import * as TaskServices from "@/components/general/tasks/components/tasksCompon
 
 
 
-const DragTasks = ({ taskDataArray, idList }) => {
+const DragTasks = ({ isActive, taskDataArray, idList }) => {
 
 
     // taskDataArray es la info de las tareas que se obtiene desde las listas
@@ -61,13 +61,15 @@ const DragTasks = ({ taskDataArray, idList }) => {
 
 
     useEffect(() => {
-        setTaskDtArr(taskDataArray)
-    }, [])
+        if (taskDataArray === undefined || taskDataArray.length === 0) {
+            setTaskDtArr([]);
+        } else {
+            setTaskDtArr(taskDataArray);
+        }
+    }, [taskDataArray]);
 
 
-
-
-
+    console.log(taskDataArray, taskDtArr, isActive);
 
 
     const addNewTask = async (idList, value) => {
@@ -115,6 +117,7 @@ const DragTasks = ({ taskDataArray, idList }) => {
 
                             {
 
+
                                 taskDtArr.length >= 1 ? (
 
                                     taskDtArr.map((task, i) => (
@@ -154,6 +157,8 @@ const DragTasks = ({ taskDataArray, idList }) => {
 
                                 )
                                     : null
+
+
                             }
                         </div>
                     )}

@@ -17,7 +17,6 @@ import {
     onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
 } from "firebase/auth";
 import { auth } from "../../../../../../../firebase";
-import { v4 as uuidv4 } from "uuid";
 
 
 
@@ -157,11 +156,10 @@ const pushOrderData = async (newOrder, ifUserLog, userId) => {
 };
 
 /*Creación de Lista */
-export const addList = async (values, lists, ifUserLog, userId) => {
+export const addList = async (values, lists, ifUserLog, userId, idList) => {
     try {
         /*Este condicional es temporal, lo ideal sería dividir en guardado un para la base de datos y el otro desde el frente con localStorage*/
 
-        const idList = uuidv4();
 
         const newList = {
             listName: values,

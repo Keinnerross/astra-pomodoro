@@ -2,8 +2,7 @@ import React, { Fragment, useState, useContext, useEffect } from "react"
 import DragTasks from "../tasksComponents/dragTasks"
 import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
 import { AppContext } from "@/Context/store";
-import NewListForm from "./NewListForm";
-const ListFormTemplate = ({ list, saveTitleList }) => {
+const ListFormTemplate = ({ list, saveTitleList, isActive }) => {
 
 
     const { idUserLog } = useContext(AppContext);
@@ -11,7 +10,7 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
     const { setLists } = useContext(AppContext);
 
     const [listTitle, setListTitle] = useState("")
-    const [listTasks, setListTasks] = useState([])
+
 
 
     const handleInputChange = (e, idList) => {
@@ -38,7 +37,9 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
     };
 
 
+
     useEffect(() => {
+
         setListTitle(list.listName)
     }, [list])
 
@@ -52,29 +53,21 @@ const ListFormTemplate = ({ list, saveTitleList }) => {
 
 
 
-
     return (<Fragment>
-        {list ? (
-            <Fragment>
-                <input
-                    defaultValue={listTitle}
-                    onChange={(e) => handleInputChange(e, list.id)}
-                />
+
+        <input
+            defaultValue={listTitle}
+            onChange={(e) => handleInputChange(e, list.id)}
+        />
 
 
 
 
 
 
-                <DragTasks taskDataArray={list.tasks} idList={list.id} />
-            </Fragment>
-        ) :
-
-            <NewListForm saveTitleList={saveTitleList} />}
-
-
-
+        <DragTasks taskDataArray={list.tasks} isActive={isActive} idList={list.id} />
     </Fragment>
+
     )
 }
 
