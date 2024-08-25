@@ -17,7 +17,7 @@ import * as TaskServices from "@/components/general/Lists/components/tasksCompon
 
 
 
-const DragTasks = ({ idList, taskDtArr, handleTaskListChange }) => {
+const DragTasks = ({ idList, taskDtArr, handleTaskListChange, modal }) => {
 
 
     // taskDataArray es la info de las tareas que se obtiene desde las listas
@@ -227,7 +227,6 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange }) => {
                                                     {...provided.dragHandleProps}
                                                 >
                                                     <Task
-                                                        style={{ color: "#fff" }}
                                                         idTask={task.taskId}
                                                         title={task.taskName}
                                                         ifDone={task.done}

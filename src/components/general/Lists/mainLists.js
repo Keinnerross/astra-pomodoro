@@ -149,9 +149,14 @@ const MainLists = ({
 
 
   const deleteRender = async (idList) => {
-    setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
-    await ListsServices.deleteList(idList, userLog, idUserLog)
+    const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
 
+    if (confirmation === true) {
+      setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
+      await ListsServices.deleteList(idList, userLog, idUserLog)
+    } else {
+      return
+    }
   }
 
 
@@ -222,7 +227,7 @@ const MainLists = ({
                                 ></div>
                                 <ListCard
                                   key={item.id}
-                                  listObj={item}                                 
+                                  listObj={item}
                                   deleteLista={deleteRender}
                                 />
                               </div>

@@ -81,27 +81,21 @@ export const newGetData = async () => {
 /*Función Borrar lista */
 
 export const deleteList = async (id, ifUserLog, userId) => {
-    const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
 
-    if (confirmation) {
-        try {
-            if (ifUserLog) {
-                const dc = doc(db, "users", userId, "lists", id);
-                await deleteDoc(dc);
-            } else {
-                const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
-                const updateArray = storedArray.filter((lists) => lists.id !== id);
-                localStorage.setItem("lists", JSON.stringify(updateArray));
+    try {
+        if (ifUserLog) {
+            const dc = doc(db, "users", userId, "lists", id);
+            await deleteDoc(dc);
+        } else {
+            const storedArray = JSON.parse(localStorage.getItem("lists")) || [];
+            const updateArray = storedArray.filter((lists) => lists.id !== id);
+            localStorage.setItem("lists", JSON.stringify(updateArray));
 
-            }
-        } catch (err) {
-            console.log(err);
         }
-    } else {
-        return;
+    } catch (err) {
+        console.log(err);
     }
-};
-
+}
 
 /* Actualizar Nombre de lista*/
 export const updateList = async (userId, userLog, newListName, idList) => {
@@ -118,7 +112,7 @@ export const updateList = async (userId, userLog, newListName, idList) => {
             const newListChanged = storedArray.map((list) => {
                 if (list.id === idList) {
                     return { ...list, listName: newListName }
-                }else{
+                } else {
 
                     return list;
 

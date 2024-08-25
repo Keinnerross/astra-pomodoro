@@ -8,7 +8,7 @@ import * as ListsServices from "@/components/general/Lists/components/addListFor
 
 
 
-const ListCard = ({ listObj, deleteLista}) => {
+const ListCard = ({ listObj, deleteLista }) => {
 
 
   /*Configuracion Btns */
@@ -80,7 +80,7 @@ const ListCard = ({ listObj, deleteLista}) => {
         <div className={styles.taskCardSection}>
           <div className={styles.titleListSection}>
 
-            <input className={styles.inputTextList}
+            <input className="text-white"
               defaultValue={listName}
               onChange={(e) => handleListNameChange(e)}
 

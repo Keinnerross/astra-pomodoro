@@ -25,6 +25,7 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
         inputPassword
       );
       modalRest();
+      window.location.reload();
     } catch (e) {
       setTextErrorLog("Hubo un error al iniciar sessión");
     }
@@ -58,7 +59,7 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
         email: userData.email,
       });
     }
-
+    window.location.reload();
     modalRest();
   };
 

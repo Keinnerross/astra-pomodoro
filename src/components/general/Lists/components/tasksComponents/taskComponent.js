@@ -19,14 +19,14 @@ const Task = ({
 }) => {
 
   const configTheme = {
-    color: elementsColor == "white" ? "#fff" : "#000",
+    color: elementsColor == "#fff",
     iconSize: 15,
   };
   /*Los temas estan puestos aqui para poder testear los estilos, sin embargo hay que ponerlos de forma atomatica relacionadose con la sidebar */
   /**Funcion para actualizar el Nombre de una tarea */
 
   /*Funcion para acutalizar nombre de la tarea */
- 
+
 
 
   /**Funcion para actualizar el completado de la tarea */
@@ -50,7 +50,7 @@ const Task = ({
         {showDragDots ? <div className={styles.dragButtonContainer}>
           <MdDragIndicator
             className={styles.dragButton}
-            fill={configTheme.color}
+            fill="white"
             size={configTheme.iconSize}
           />
         </div> : null}
@@ -69,8 +69,7 @@ const Task = ({
         </div>
 
         <input
-          className={styles.inputTitleTask}
-          style={{ color: configTheme.color }}
+          className="text-white"
           defaultValue={title}
           onChange={(e) => updateNameTask(e, idList, idTask)}
         />
