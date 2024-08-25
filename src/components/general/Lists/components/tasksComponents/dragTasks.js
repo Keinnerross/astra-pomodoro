@@ -1,10 +1,10 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import Task from "../taskComponent";
+import Task from "./taskComponent";
 import { useEffect, useState, useContext, Fragment } from "react";
 import { AppContext } from "@/Context/store"
 import AddTask from "./AddTask";
 import { v4 as uuidv4 } from "uuid";
-import * as TaskServices from "@/components/general/tasks/components/tasksComponents/services/tasksBookServices";
+import * as TaskServices from "@/components/general/Lists/components/tasksComponents/services/tasksBookServices";
 
 
 
@@ -17,15 +17,22 @@ import * as TaskServices from "@/components/general/tasks/components/tasksCompon
 
 
 
-const DragTasks = ({ isActive, taskDataArray, idList }) => {
+const DragTasks = ({ idList, taskDtArr, handleTaskListChange }) => {
 
 
     // taskDataArray es la info de las tareas que se obtiene desde las listas
     // taskDtArr es un estado que en un principio se actualiza con la info del seridor es decir de taskDataArray
 
+    // useEffect(() => {
+    //     if (taskDataArray === undefined || taskDataArray.length === 0) {
+    //         setTaskDtArr([]);
+    //     } else {
+    //         setTaskDtArr(taskDataArray);
+    //     }
+    // }, [taskDataArray]);
 
-    const [taskDtArr, setTaskDtArr] = useState([]);
-    const { idUserLog } = useContext(AppContext);
+
+    const { lists, setLists, userLog, idUserLog } = useContext(AppContext);
 
 
 
@@ -39,6 +46,7 @@ const DragTasks = ({ isActive, taskDataArray, idList }) => {
 
 
     const dragEnd = (result) => {
+
         const { source, destination } = result;
         if (!destination) {
             return;
@@ -50,26 +58,22 @@ const DragTasks = ({ isActive, taskDataArray, idList }) => {
             return;
         }
         let newTasksOrder;
+        newTasksOrder = reorder(taskDtArr, source.index, destination.index)
+        console.log(newTasksOrder);
 
-        setTaskDtArr(
-            (prevTask) =>
-                (newTasksOrder = reorder(prevTask, source.index, destination.index))
-        );
+        handleTaskListChange(newTasksOrder);
+        console.log(idList)
+        if (idList) {
+            TaskServices.pushOrderData(newTasksOrder, idUserLog, idList);
 
-        TaskServices.pushOrderData(newTasksOrder, idUserLog, idList);
+        }
+
+
     };
 
 
-    useEffect(() => {
-        if (taskDataArray === undefined || taskDataArray.length === 0) {
-            setTaskDtArr([]);
-        } else {
-            setTaskDtArr(taskDataArray);
-        }
-    }, [taskDataArray]);
 
 
-    console.log(taskDataArray, taskDtArr, isActive);
 
 
     const addNewTask = async (idList, value) => {
@@ -93,8 +97,15 @@ const DragTasks = ({ isActive, taskDataArray, idList }) => {
                 list.order = i;
                 newOrder.push(list);
             });
-            setTaskDtArr(newOrder);
-            await TaskServices.addNewTask(idList, idUserLog, newTask, newDataTask);
+
+            handleTaskListChange(newOrder);
+
+            if (idList) {
+                await TaskServices.addNewTask(idList, idUserLog, newTask, newDataTask);
+
+            }
+
+
 
 
         } catch (error) {
@@ -102,9 +113,91 @@ const DragTasks = ({ isActive, taskDataArray, idList }) => {
         }
     }
 
+    const handleCheck = async (idUser, idList, idTask, check) => {
+        try {
+            const newTaskArray = taskDtArr.map((task) => {
+                if (task.taskId === idTask) {
+                    return {
+                        ...task,
+                        done: check,
+                    }
+                }
+                return task
+            })
+
+            //Es Necesario Guardar las tareas dentro del estado que corresponda para poder generar un correcto guardado cuando se haga el dragEnd, esa funcion para arrastrar y soltar.
+            const newListSaveCheckTask = lists.map((list) => {
+                if (list.id === idList) {
+                    return {
+                        ...list,
+                        tasks: newTaskArray,
+                    }
+                }
+                return list
+
+            })
+            setLists(newListSaveCheckTask);
+            handleTaskListChange(newTaskArray);
+
+            if (idList) {
+                TaskServices.updateCheckTask(idUser, idList, idTask, check)
+            }
+            //DB SAVE
+
+
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const deleteTask = async (idList, idTask) => {
+        try {
+
+            const newTaskArray = taskDtArr.filter((task) => task.taskId !== idTask)
+            handleTaskListChange(newTaskArray);
+
+            if (idList) {
+                TaskServices.deleteTask(idUserLog, idList, idTask, newTaskArray)
+            }
+
+
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const updateNameTask = async (e, idList, idTask) => {
+        try {
+            const { value } = e.target
+            const newArray = taskDtArr.map((task) => {
+                if (task.taskId === idTask) {
+                    return {
+                        ...task,
+                        taskName: value,
+                    }
+                }
+                return task
+            })
+            handleTaskListChange(newArray);
+
+
+
+            if (idList) {
+                TaskServices.updateNameTask(idUserLog, idList, idTask, value)
+            }
+
+
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+
+
+
+
     return (
         <Fragment>
-            <AddTask idList={idList} addNewTask={addNewTask} />
 
             <DragDropContext onDragEnd={dragEnd}>
                 <Droppable droppableId="tasksArr">
@@ -140,10 +233,11 @@ const DragTasks = ({ isActive, taskDataArray, idList }) => {
                                                         ifDone={task.done}
                                                         idList={idList}
                                                         key={task.taskId}
-                                                        // deleteTask={deleteTask} Funcion para eliminar tarea
-                                                        // numberTheme={numberTheme} Esto se debe eliminar
+                                                        handleCheck={handleCheck}
+                                                        deleteTask={deleteTask}
                                                         idUser={idUserLog}
                                                         showDragDots={true}
+                                                        updateNameTask={updateNameTask}
                                                     />
 
                                                 </div>
@@ -164,6 +258,8 @@ const DragTasks = ({ isActive, taskDataArray, idList }) => {
                     )}
                 </Droppable>
             </DragDropContext >
+            <AddTask idList={idList} addNewTask={addNewTask} />
+
         </Fragment>)
 }
 

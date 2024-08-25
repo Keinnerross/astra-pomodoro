@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styles from "@/styles/componentes/general/tasks/components/listSettingMenu.module.css";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiArchiveIn } from "react-icons/bi";
-import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
+import * as ListsServices from "@/components/general/Lists/components/addListFormComponents/listsServices/listsServices";
 import { AppContext } from "@/Context/store";
 
 const ListSettingMenu = ({ active, deleteList, idList, handleModal }) => {

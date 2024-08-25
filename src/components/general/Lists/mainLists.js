@@ -11,7 +11,6 @@ import React, {
 import { AppContext } from "@/Context/store";
 import styles from "@/styles/componentes/general/tasks/mainTasks.module.css";
 import ListCard from "./components/listCard";
-import AddListCard from "./components/addListCard";
 import {
   collection,
   doc,
@@ -28,11 +27,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
 import UserLogin from "../user/login";
 import { IoIosAddCircle } from "react-icons/io";
-import ModalList from "./components/listsComponents/modalList";
-import * as ListsServices from "@/components/general/tasks/components/listsComponents/listsServices/listsServices";
+import ModalList from "./components/addListFormComponents/modalAddList";
+import * as ListsServices from "@/components/general/Lists/components/addListFormComponents/listsServices/listsServices";
 
 
 
@@ -40,10 +38,8 @@ import * as ListsServices from "@/components/general/tasks/components/listsCompo
 
 
 
-const MainTasks = ({
-  numberTheme,
-  themeOpacity,
-  bgTheme,
+const MainLists = ({
+
   ifUserLog,
   userId,
 
@@ -51,8 +47,7 @@ const MainTasks = ({
 
 
   const { lists, setLists, userLog, idUserLog } = useContext(AppContext);
-  const [ifModalAddTask, setIfModalAddtask] = useState(false)
-  const [listSelect, setListSelect] = useState("")
+  const [isActiveModalList, setIsActiveModalList] = useState(false)
 
 
 
@@ -60,7 +55,7 @@ const MainTasks = ({
     try {
       const lists = await ListsServices.newGetData();
       setLists(lists)
-      console.log("ejecutao")
+      console.log("fechDta")
     } catch (error) {
     }
   };
@@ -104,7 +99,7 @@ const MainTasks = ({
     return result;
   };
 
-  const dragEnd = (result) => {
+  const dragEnd = async (result) => {
     const { source, destination } = result;
     if (!destination) {
       return;
@@ -117,55 +112,46 @@ const MainTasks = ({
     }
     let newOrder;
 
+    console.log(lists)
     setLists(
       (prevListArr) =>
         (newOrder = reorder(prevListArr, source.index, destination.index))
     );
-
     pushOrderData(newOrder);
   };
 
 
 
-  // Este es el control de crear una lista desde el boton
-  const handleModalList = async (listData) => {
-    if (listData === false) {
-      setIfModalAddtask(!ifModalAddTask)
-      const idList = uuidv4();
 
 
-      const newLists = await ListsServices.addList("", lists, userLog, idUserLog, idList)
+  const handleModal = () => {
 
-      const newListAdd = newLists.find(item => item.id === idList);
-      console.log(newListAdd);
-
-      setListSelect(newListAdd)
-
-      setLists(newLists)
-    }
+    setIsActiveModalList(!isActiveModalList)
 
   }
 
-  // Este es el control de ver una lista en el modal presionando la lista
+  const saveNewList = async (newList, tasksList) => {
 
-  const verListaCreada = async (listData) => {
-    setIfModalAddtask(!ifModalAddTask)
+    setIsActiveModalList(!isActiveModalList)
+    setLists((prev) => [newList, ...prev]);
 
-    setListSelect(listData ? listData : false)
-
-  }
-  const handleModalActiveList = () => {
-    setIfModalAddtask(false)
-
-
+    await ListsServices.addNewList(newList, lists, tasksList, ifUserLog, userId);
 
   }
 
 
 
-  const deleteRender = (idList) => {
-    ListsServices.deleteList(idList, userLog, idUserLog)
+
+
+
+
+
+
+
+  const deleteRender = async (idList) => {
     setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
+    await ListsServices.deleteList(idList, userLog, idUserLog)
+
   }
 
 
@@ -178,9 +164,8 @@ const MainTasks = ({
 
     <Fragment>
       <ModalList
-        isActive={ifModalAddTask}
-        handleModal={handleModalActiveList}
-        listSelect={listSelect}
+        isActive={isActiveModalList}
+        saveNewList={saveNewList}
         fetchData={fetchData}
       />
 
@@ -194,20 +179,16 @@ const MainTasks = ({
             <span>Difine what you want to achive</span>
           </div>
 
-          {/* // Botón que activa la creación de una Lista */}
-
-          <div className={styles.addListBtnContainer} onClick={() => handleModalList(false)}>
+          {/* //Button that activates the modal for creating a List */}
+          <div className={styles.addListBtnContainer} onClick={() => handleModal()}>
             <IoIosAddCircle size={38} fill="#fff" />
           </div>
 
 
 
         </div>
-        <div
-          className={styles.mainTasksSection}
-        >
+        <div className={styles.mainTasksSection}>
           <div className={styles.listContainer}>
-            {" "}
             {/*Contenedor que tiene el over y tamaño de la lista */}
             <DragDropContext onDragEnd={dragEnd}>
               <Droppable droppableId="listArr" direction="horizontal">
@@ -217,13 +198,6 @@ const MainTasks = ({
                     ref={provided.innerRef}
                     className={styles.listSection}
 
-                  //Esto debería ser un carousel.
-                  // style={
-                  //   lists.length > 0
-                  //     ? { overflowX: "scroll" }
-                  //     : { overflow: "none" }
-                  // }
-                  // onWheel={handleWheel} Por corregir
                   >
                     {lists.length > 0 ? (
                       lists.map((item, i) => (
@@ -240,7 +214,6 @@ const MainTasks = ({
 
                               <div
                                 className={styles.listSectionItem}
-                                onClick={() => verListaCreada(item)}
                                 {...provided.draggableProps}
                                 ref={provided.innerRef}
                               >
@@ -249,16 +222,8 @@ const MainTasks = ({
                                 ></div>
                                 <ListCard
                                   key={item.id}
-                                  listName={item.listName}
-                                  idList={item.id}
-                                  tasksDt={item.tasks}
+                                  listObj={item}                                 
                                   deleteLista={deleteRender}
-                                  data-id={item.id}
-                                  getData={ListsServices.newGetData}
-                                  numberTheme={numberTheme}
-                                  themeOpacity={themeOpacity}
-                                  userId={userId}
-                                // newGetData={newGetData}
                                 />
                               </div>
                             </Fragment>
@@ -282,4 +247,4 @@ const MainTasks = ({
   );
 };
 
-export default MainTasks;
+export default MainLists;

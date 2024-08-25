@@ -6,11 +6,9 @@ import ButtonsPomo from "./components/buttonsPomodoro";
 import PomoTimer from "./components/pomodoroTimer";
 import PhrasesGenerator from "./components/phrasesGenerator";
 import ProgressBar from "./components/progressBar";
-import { themes } from "../userTemplates/mainUserTemplates";
 
-const MainPomodoro = ({ settingConfig, ifOpen, numberTheme, themeOpacity }) => {
+const MainPomodoro = ({ settingConfig, ifOpen}) => {
   /*Configuración del Tema */
-  const themeSelect = themes(themeOpacity)[numberTheme];
 
   const configTheme = {
     themeColor: "transparent",

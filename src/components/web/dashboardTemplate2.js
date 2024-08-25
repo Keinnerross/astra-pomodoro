@@ -8,7 +8,7 @@ import Header from "@/components/web/header/header";
 import MainPomodoro from "../general/pomodoro/mainPomodoro";
 import SettingsPomodoro from "../general/pomodoro/settingsPomodoro";
 import WhatIsPomodoro from "@/components/web/SidebarNav/components/whatIsPomodoro";
-import MainTasks from "../general/tasks/mainTasks";
+import MainTasks from "../general/Lists/mainLists";
 import UserLogin from "@/components/general/user/login";
 import UserRegister from "../general/user/register";
 import UserMenu from "../general/user/userMenu";
