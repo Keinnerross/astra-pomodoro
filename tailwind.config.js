@@ -9,7 +9,19 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        blackPrimary: '#13161C',
+        blackSecundary: '#1E2229',
+        blackNoir: '#0C0C0C',
+        greyFocus: '#2D323A',
+        auxGrey: '#a1a1aa',
+        
+      },
+      boxShadow: {
+        'border-inset': 'inset 0 0 0 2px #000',
+      },
+    },
   },
   plugins: [],
 }

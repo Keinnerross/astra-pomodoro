@@ -17,23 +17,14 @@ import * as TaskServices from "@/components/general/Lists/components/tasksCompon
 
 
 
-const DragTasks = ({ idList, taskDtArr, handleTaskListChange, modal }) => {
+const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive, isModal }) => {
 
 
     // taskDataArray es la info de las tareas que se obtiene desde las listas
     // taskDtArr es un estado que en un principio se actualiza con la info del seridor es decir de taskDataArray
 
-    // useEffect(() => {
-    //     if (taskDataArray === undefined || taskDataArray.length === 0) {
-    //         setTaskDtArr([]);
-    //     } else {
-    //         setTaskDtArr(taskDataArray);
-    //     }
-    // }, [taskDataArray]);
-
 
     const { lists, setLists, userLog, idUserLog } = useContext(AppContext);
-
 
 
     const reorder = (list, startIndex, endIndex) => {
@@ -197,7 +188,7 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, modal }) => {
 
 
     return (
-        <Fragment>
+        <div className={isAccordionActive ? "" : "hidden"}>
 
             <DragDropContext onDragEnd={dragEnd}>
                 <Droppable droppableId="tasksArr">
@@ -259,7 +250,7 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, modal }) => {
             </DragDropContext >
             <AddTask idList={idList} addNewTask={addNewTask} />
 
-        </Fragment>)
+        </div>)
 }
 
 export default DragTasks;

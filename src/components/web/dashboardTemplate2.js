@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
 import { AppContext } from "@/Context/store"
-import styles from "@/styles/componentes/web/dashboardTemplate2.module.css";
 import SidebarMain from "./Sidebar/sidebarMain";
 import Header from "@/components/web/header/header";
 import MainPomodoro from "../general/pomodoro/mainPomodoro";
@@ -12,7 +11,6 @@ import MainTasks from "../general/Lists/mainLists";
 import UserLogin from "@/components/general/user/login";
 import UserRegister from "../general/user/register";
 import UserMenu from "../general/user/userMenu";
-import SelectTheme from "./SidebarNav/components/selectTheme";
 
 import {
   collection,
@@ -57,7 +55,7 @@ const DashboardTemplate2 = () => {
 
   const { userLog, setUserLog } = useContext(AppContext);
 
-  const {idUserLog, setIdUserLog} = useContext(AppContext);
+  const { idUserLog, setIdUserLog } = useContext(AppContext);
   const [imgProfile, setImgProfile] = useState(null);
 
   /*Functions Setting Pomodoro*/
@@ -140,18 +138,8 @@ const DashboardTemplate2 = () => {
 
 
   return (
-    <>
-      {/*//////////////////////////////////////////////
-// Modales, menús y ventanas.
-//////////////////////////////////////////////*/}
+    <Fragment>
 
-      {/* <SelectTheme
-        isActive={activeBrush}
-
-        handleClose={ifActiveBrush}
-      />
-
-      <WhatIsPomodoro ifOpen={ifOpenHelp} toggleInfoPomo={ifActiveHelp} /> */}
 
       <UserLogin
         isActive={ifOpenLogin}
@@ -185,11 +173,11 @@ const DashboardTemplate2 = () => {
 //////////////////////////////////////////////*/}
 
       <div
-        className={styles.bgDashboard}
+        className="bg-blackPrimary min-h-[100vh]"
       >
 
 
-        <div className={styles.HeaderContainer}>
+        <div >
           <Header
             activeLogin={ifActiveLogin}
             imgProfile={imgProfile}
@@ -197,18 +185,16 @@ const DashboardTemplate2 = () => {
             toggleSidebar={toggleSidebar}
           />
         </div>
-
-        <div className={styles.dashboardContainer}>
-          <div className={styles.dashboardSection}>
-            <div className={styles.pomodoroContainer}>
+        <div class="flex flex-col">
+          <div >
+            <div >
               <MainPomodoro
-                numberTheme={themeSelected}
                 ifOpen={ifOpenPomo}
                 settingConfig={settingResult}
                 themeOpacity={opacityValue}
               />
             </div>
-            <div className={styles.listsViewContainer}>
+            <div >
               <MainTasks
                 ifUserLog={userLog}
                 userId={idUserLog}
@@ -217,7 +203,7 @@ const DashboardTemplate2 = () => {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 

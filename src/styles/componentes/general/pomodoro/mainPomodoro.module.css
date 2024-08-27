@@ -1,6 +1,6 @@
 .pomodoroMainContainer {
   min-width: 500px;
-  height: 260px;
+  /* height: 260px; */
   border-radius: 9px;
   display: flex;
   flex-direction: column;
@@ -11,6 +11,6 @@
 
 @media (max-height: 700px) {
   .pomodoroMainContainer {
-    height: 200px;
+    /* height: 200px; */
   }
 }

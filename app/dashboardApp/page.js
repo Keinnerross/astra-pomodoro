@@ -8,7 +8,7 @@ const DashboardApp = () => {
 
   return (
     <Provider>
-      <DashboardTemplate2 />;
+      <DashboardTemplate2 />
     </Provider>
   )
 };

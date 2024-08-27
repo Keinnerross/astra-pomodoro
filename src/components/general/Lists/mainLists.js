@@ -9,7 +9,6 @@ import React, {
   useContext,
 } from "react";
 import { AppContext } from "@/Context/store";
-import styles from "@/styles/componentes/general/tasks/mainTasks.module.css";
 import ListCard from "./components/listCard";
 import {
   collection,
@@ -27,7 +26,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import UserLogin from "../user/login";
 import { IoIosAddCircle } from "react-icons/io";
 import ModalList from "./components/addListFormComponents/modalAddList";
 import * as ListsServices from "@/components/general/Lists/components/addListFormComponents/listsServices/listsServices";
@@ -174,40 +172,38 @@ const MainLists = ({
         fetchData={fetchData}
       />
 
+      <div className="flex justify-center">
+        <div className="flex flex-col w-[50%]">
 
-      <div className={styles.mainTasksContainer}>
+          <div className="flex justify-between pt-[25px] ">
 
-        <div className={styles.mainTaskTitleSection}>
+            <div >
+              <h3>My lists</h3>
+              <span>Difine what you want to achive</span>
+            </div>
 
-          <div className={styles.MainTaskGroupColumn}>
-            <h3>My lists</h3>
-            <span>Difine what you want to achive</span>
-          </div>
-
-          {/* //Button that activates the modal for creating a List */}
-          <div className={styles.addListBtnContainer} onClick={() => handleModal()}>
-            <IoIosAddCircle size={38} fill="#fff" />
-          </div>
+            {/* //Button that activates the modal for creating a List */}
+            <div onClick={() => handleModal()}>
+              <IoIosAddCircle size={38} fill="#fff" />
+            </div>
 
 
 
-        </div>
-        <div className={styles.mainTasksSection}>
-          <div className={styles.listContainer}>
-            {/*Contenedor que tiene el over y tamaño de la lista */}
+          </div >
+          <div className="flex flex-col">
             <DragDropContext onDragEnd={dragEnd}>
-              <Droppable droppableId="listArr" direction="horizontal">
+              <Droppable droppableId="listArr"  >
                 {(provided) => (
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className={styles.listSection}
+                    class="flex flex-col"
 
                   >
                     {lists.length > 0 ? (
                       lists.map((item, i) => (
                         <Draggable
-                          className={styles.dragableItem}
+
                           key={item.id}
                           draggableId={item.id.toString()}
                           index={i}
@@ -218,11 +214,11 @@ const MainLists = ({
 
 
                               <div
-                                className={styles.listSectionItem}
+                                className="my-[10px]"
                                 {...provided.draggableProps}
                                 ref={provided.innerRef}
                               >
-                                <div className={styles.dragControlContainer}
+                                <div className="py-[7px] bg-blackSecundary rounded-t-[10px] "
                                   {...provided.dragHandleProps}
                                 ></div>
                                 <ListCard
@@ -237,7 +233,7 @@ const MainLists = ({
                         </Draggable>
                       ))
                     ) : (
-                      <h4 className={styles.textListIfEmply}>
+                      <h4 >
                         Your lists will appear here
                       </h4>
                     )}
@@ -247,7 +243,7 @@ const MainLists = ({
             </DragDropContext>
           </div>
         </div>
-      </div>
+      </div >
     </Fragment >
   );
 };
