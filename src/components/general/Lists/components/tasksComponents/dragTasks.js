@@ -246,7 +246,7 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
                     )}
                 </Droppable>
             </DragDropContext >
-            <AddTask idList={idList} addNewTask={addNewTask} />
+            <AddTask idList={idList} addNewTask={addNewTask} isModal={isModal} />
 
         </div >)
 }

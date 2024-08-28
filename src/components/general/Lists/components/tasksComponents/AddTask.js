@@ -2,7 +2,7 @@ import styles from "@/styles/componentes/general/tasks/components/addTask.module
 import React, { useState, useRef } from "react";
 
 
-const AddTask = ({ idList, addNewTask }) => {
+const AddTask = ({ idList, addNewTask, isModal }) => {
 
     const [values, setValues] = useState("");
 
@@ -18,7 +18,7 @@ const AddTask = ({ idList, addNewTask }) => {
         <div className={styles.addTaskSection}>
 
             <input
-                className="color-slate-900 text-[14px] cursor-pointer"
+                className={`${isModal ? "text-slate-900" : "text-white"} text-[14px] cursor-pointer`}
                 placeholder="+ Add new task"
                 onChange={handleInputTask}
                 ref={inputAddTaskRef}
