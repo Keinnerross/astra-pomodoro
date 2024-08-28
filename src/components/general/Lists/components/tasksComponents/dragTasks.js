@@ -188,7 +188,7 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
 
 
     return (
-        <div className={isAccordionActive ? "" : "hidden"}>
+        <div className={`transition-all duration-1000 ${isAccordionActive ? '' : 'hidden'}`}>
 
             <DragDropContext onDragEnd={dragEnd}>
                 <Droppable droppableId="tasksArr">
@@ -197,6 +197,7 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
 
                             {...provided.droppableProps}
                             ref={provided.innerRef}
+                            className="transition-all duration-1000"
                         >
 
                             {
@@ -238,19 +239,16 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
 
                                     ))
 
-
-                                )
-                                    : null
-
-
-                            }
+                            )
+                            : null}
+                             {provided.placeholder} 
                         </div>
                     )}
                 </Droppable>
             </DragDropContext >
             <AddTask idList={idList} addNewTask={addNewTask} />
 
-        </div>)
+        </div >)
 }
 
 export default DragTasks;

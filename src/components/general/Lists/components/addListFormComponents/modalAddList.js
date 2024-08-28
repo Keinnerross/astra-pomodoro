@@ -8,7 +8,6 @@ import { AppContext } from "@/Context/store";
 
 const ModalAddList = ({ isActive, saveNewList }) => {
 
-    // const { lists, setLists, userLog, idUserLog } = useContext(AppContext);
 
     // Modal List States
     const [listTitle, setListTitle] = useState("")
@@ -30,9 +29,6 @@ const ModalAddList = ({ isActive, saveNewList }) => {
     const inputTitleListRef = useRef(null);
 
     const saveListWithHandleModal = async () => {
-        setListTitle("")
-        setTasksList([])
-        inputTitleListRef.current.value = "";
 
         const idList = uuidv4();
 
@@ -43,11 +39,24 @@ const ModalAddList = ({ isActive, saveNewList }) => {
             id: idList
         };
 
-        saveNewList(newList, tasksList)
+        if (listTitle.trim() === '') {
+            alert("You need to name your List");
+        } else {
+            saveNewList(newList, tasksList)
+            setListTitle("")
+            setTasksList([])
+            inputTitleListRef.current.value = "";
+        }
 
 
 
     }
+
+
+    useEffect(() => {
+
+        isActive ? inputTitleListRef.current.focus() : null
+    }, [isActive])
 
 
 
@@ -66,7 +75,7 @@ const ModalAddList = ({ isActive, saveNewList }) => {
                     onClick={(e) => e.stopPropagation()}
                 >
 
-                    <ListFormTemplate handleTitleChange={handleTitleChange} handleTaskListChange={handleTaskListChange} taskDtArr={tasksList} ref={inputTitleListRef} />
+                    <ListFormTemplate isActive={isActive} handleTitleChange={handleTitleChange} handleTaskListChange={handleTaskListChange} taskDtArr={tasksList} ref={inputTitleListRef} />
 
 
                 </form>

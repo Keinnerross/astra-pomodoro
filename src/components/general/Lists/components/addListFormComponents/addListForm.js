@@ -1,8 +1,11 @@
-import React, { Fragment, forwardRef, useContext, useEffect, useRef } from "react"
+import React, { Fragment, forwardRef, useEffect, useRef } from "react"
 import DragTasks from "../tasksComponents/dragTasks"
 
 
-const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskDtArr }, ref) => {
+const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskDtArr, isActive }, ref) => {
+
+
+
 
 
     return (<Fragment>

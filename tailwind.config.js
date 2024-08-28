@@ -3,8 +3,8 @@ module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
+    "./components/**/*/*.{js,ts,jsx,tsx,mdx}",
+
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -16,10 +16,24 @@ module.exports = {
         blackNoir: '#0C0C0C',
         greyFocus: '#2D323A',
         auxGrey: '#a1a1aa',
-        
+
       },
       boxShadow: {
         'border-inset': 'inset 0 0 0 2px #000',
+      },
+      keyframes: {
+        'slide-down': {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '100%': { transform: 'translateY(-100%)', opacity: '0' },
+        },
+      },
+      animation: {
+        'slide-down': 'slide-down 0.5s ease-out forwards',
+        'slide-up': 'slide-up 0.5s ease-in forwards',
       },
     },
   },

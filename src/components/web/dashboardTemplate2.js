@@ -173,7 +173,7 @@ const DashboardTemplate2 = () => {
 //////////////////////////////////////////////*/}
 
       <div
-        className="bg-blackPrimary min-h-[100vh]"
+        className="bg-blackPrimary min-h-[100vh] pb-[50px]"
       >
 
 
@@ -203,6 +203,7 @@ const DashboardTemplate2 = () => {
           </div>
         </div>
       </div>
+      <WhatIsPomodoro/>
     </Fragment>
   );
 };

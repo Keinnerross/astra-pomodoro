@@ -4,11 +4,11 @@ const WhatIsPomodoro = ({ ifOpen, toggleInfoPomo }) => {
   return (
     <>
       <div
-        className={ifOpen ? styles.helpPomodoroContainer : styles.hidden}
+        className="flex flex-col justify-center"
         onClick={() => toggleInfoPomo()}
       >
         <div
-          className={styles.helpPomodoroSection}
+          className="w-[75%] text-slate-900"
           onClick={(e) => e.stopPropagation()}
         >
           <h2>What Is Pomodoro?🍅</h2>

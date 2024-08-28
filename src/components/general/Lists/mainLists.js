@@ -237,6 +237,8 @@ const MainLists = ({
                         Your lists will appear here
                       </h4>
                     )}
+                    {provided.placeholder}
+
                   </div>
                 )}
               </Droppable>
