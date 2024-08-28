@@ -203,7 +203,7 @@ const DashboardTemplate2 = () => {
           </div>
         </div>
       </div>
-      <WhatIsPomodoro/>
+      {/* <WhatIsPomodoro/> */}
     </Fragment>
   );
 };

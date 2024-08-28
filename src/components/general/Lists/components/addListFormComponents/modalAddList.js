@@ -36,7 +36,8 @@ const ModalAddList = ({ isActive, saveNewList }) => {
             listName: listTitle,
             order: 0,
             tasks: tasksList,
-            id: idList
+            id: idList,
+            iconChoosed: Math.floor(Math.random() * 10)
         };
 
         if (listTitle.trim() === '') {

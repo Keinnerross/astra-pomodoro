@@ -250,6 +250,7 @@ export const addNewList = async (newList, lists, tasksList, ifUserLog, userId, i
                 listName: newList.listName,
                 order: 0,
                 tasks: [],
+                iconChoosed: newList.iconChoosed
             });
 
             const tasksColl = collection(listDocRef, "tasks");

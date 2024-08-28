@@ -16,7 +16,7 @@ const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskD
                 onChange={(e) => handleTitleChange(e)}
                 ref={ref}
             />
-            <DragTasks isAccordionActive={true} idList={false} handleTaskListChange={handleTaskListChange} taskDtArr={taskDtArr} />
+            <DragTasks isAccordionActive={true} idList={false} handleTaskListChange={handleTaskListChange} taskDtArr={taskDtArr} isModal={true} />
         </form>
 
 

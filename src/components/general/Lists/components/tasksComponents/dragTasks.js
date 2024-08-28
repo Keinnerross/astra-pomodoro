@@ -213,12 +213,12 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
                                         >
                                             {(provided) => (
                                                 <div
-
                                                     {...provided.draggableProps}
                                                     ref={provided.innerRef}
                                                     {...provided.dragHandleProps}
                                                 >
                                                     <Task
+                                                        isModal={isModal}
                                                         idTask={task.taskId}
                                                         title={task.taskName}
                                                         ifDone={task.done}
@@ -239,9 +239,9 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
 
                                     ))
 
-                            )
-                            : null}
-                             {provided.placeholder} 
+                                )
+                                    : null}
+                            {provided.placeholder}
                         </div>
                     )}
                 </Droppable>

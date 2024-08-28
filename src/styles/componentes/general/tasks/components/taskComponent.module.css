@@ -42,14 +42,16 @@
 }
 
 .deleteTaskBtn {
-  display: none;
+  opacity: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+
 }
 
 .taskContainer:hover>.deleteTaskBtn {
-  display: inline;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 500;
+  opacity: 1;
+ 
 }
 
 .checkTaskContainer {
