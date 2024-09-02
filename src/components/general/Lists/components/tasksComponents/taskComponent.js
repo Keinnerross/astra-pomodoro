@@ -36,7 +36,7 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
   /* Funcion para el chek de completado, ((((no implementado ))))*/
 
   return (
-    <div className={styles.taskContainer}>
+    <div className={`${styles.taskContainer} w-[100%]`}>
       <div className={styles.taskTitleSection}>
         <div className={styles.dragButtonContainer}>
           <MdDragIndicator
@@ -46,8 +46,8 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
           />
         </div>
 
-
-        <div className={styles.checkTaskContainer}>
+        {/*  */}
+        <div className={check ? styles.checkTaskContainerActive : styles.checkTaskContainer}>
           <input
             defaultChecked={check}
             type="checkbox"
@@ -61,7 +61,7 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
         </div>
 
         <input
-          className={isModal ? "text-slate-900" : "text-white"}
+          className={isModal ? "text-slate-900 w-[100%]" : "text-white w-[100%]"}
           defaultValue={title}
           onChange={(e) => updateNameTask(e, idList, idTask)}
         />
