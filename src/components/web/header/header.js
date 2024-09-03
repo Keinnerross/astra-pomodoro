@@ -32,10 +32,10 @@ const Header = ({ theme, activeLogin, imgProfile, userLog, toggleSidebar }) => {
   const handleNotiActive = () => {
     setNotiActive(!notiActive);
   };
-
+  // className={styles.headerSection}
   return (
-    <div className={styles.headerContainer}>
-      <div className={styles.headerSection}>
+    <div className="w-full flex justify-center">
+      <div className="flex w-[95%] justify-between py-[15px] border-b-solid border-b-[1px] border-b-greyFocus ">
         <Notifications isActive={notiActive} handleActive={handleNotiActive} />
         <div className={styles.elementsHeaderSection}>
           <div className={styles.iconContainer}>

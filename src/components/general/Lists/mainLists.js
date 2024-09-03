@@ -173,17 +173,19 @@ const MainLists = ({
       />
 
       <div className="flex justify-center">
-        <div className="flex flex-col w-[50%]">
+        <div className="flex flex-col w-full">
 
           <div className="flex justify-between pt-[25px] ">
 
             <div >
-              <h3>My lists</h3>
-              <span>Difine what you want to achive</span>
+              <h3 className="text-[22px] font-semibold">My lists</h3>
+              <span className="text-[18px]">Difine what you want to achive</span>
             </div>
 
             {/* //Button that activates the modal for creating a List */}
-            <div onClick={() => handleModal()}>
+            <div 
+            className="cursor-pointer"
+            onClick={() => handleModal()}>
               <IoIosAddCircle size={38} fill="#fff" />
             </div>
 

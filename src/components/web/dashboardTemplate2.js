@@ -6,11 +6,11 @@ import SidebarMain from "./Sidebar/sidebarMain";
 import Header from "@/components/web/header/header";
 import MainPomodoro from "../general/pomodoro/mainPomodoro";
 import SettingsPomodoro from "../general/pomodoro/settingsPomodoro";
-import WhatIsPomodoro from "@/components/web/SidebarNav/components/whatIsPomodoro";
 import MainTasks from "../general/Lists/mainLists";
 import UserLogin from "@/components/general/user/login";
 import UserRegister from "../general/user/register";
 import UserMenu from "../general/user/userMenu";
+import WhatIsPomodoro from "../general/whatIsPomodoro";
 
 import {
   collection,
@@ -34,6 +34,7 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../../../firebase";
+import Footer from "./footer/footer";
 
 const DashboardTemplate2 = () => {
   const [settingPomoOpen, setSettingPomoOpen] = useState(false);
@@ -42,11 +43,8 @@ const DashboardTemplate2 = () => {
     short: 5,
     long: 15,
   });
-  const [themeSelected, setThemeSelected] = useState(1);
   const [opacityValue, setOpacityValue] = useState(0.5);
-  const [wallpaperSelected, setWallpaperSelected] = useState(4);
-  const [activeBrush, setActiveBrush] = useState(false);
-  const [ifOpenHelp, setIfOpenHelp] = useState(false);
+
   const [ifOpenLogin, setIfOpenLogin] = useState(false);
   const [ifOpenRegister, setIfOpenRegister] = useState(false);
   const [ifOpenUserMenu, setIfOpenUserMenu] = useState(false);
@@ -77,17 +75,6 @@ const DashboardTemplate2 = () => {
   const toggleSidebar = () => {
     setIfOpenSidebar(!ifOpenSidebar)
   }
-
-
-  // /*Brush */
-  // const ifActiveBrush = () => {
-  //   setActiveBrush(!activeBrush);
-  // };
-
-  // const ifActiveHelp = () => {
-  //   setIfOpenHelp(!ifOpenHelp);
-  // };
-
 
   /*Login/Register Controles */
 
@@ -137,6 +124,11 @@ const DashboardTemplate2 = () => {
 
 
 
+
+
+  const withContent = 70; //Equivale al porcentaje total para la pantalla
+
+
   return (
     <Fragment>
 
@@ -173,38 +165,39 @@ const DashboardTemplate2 = () => {
 //////////////////////////////////////////////*/}
 
       <div
-        className="bg-blackPrimary min-h-[100vh] pb-[50px]"
+        className="bg-blackPrimary min-h-[100vh] flex  flex-col items-center pb-[50px]"
       >
 
 
-        <div >
-          <Header
-            activeLogin={ifActiveLogin}
-            imgProfile={imgProfile}
-            userLog={userLog}
-            toggleSidebar={toggleSidebar}
-          />
-        </div>
-        <div class="flex flex-col">
-          <div >
-            <div className="pt-[20px]">
-              <MainPomodoro
-                ifOpen={ifOpenPomo}
-                settingConfig={settingResult}
-                themeOpacity={opacityValue}
-              />
-            </div>
-            <div >
-              <MainTasks
-                ifUserLog={userLog}
-                userId={idUserLog}
-              />
-            </div>
+        <Header
+          activeLogin={ifActiveLogin}
+          imgProfile={imgProfile}
+          userLog={userLog}
+          toggleSidebar={toggleSidebar}
+        />
+
+
+        <div class="flex flex-col w-[55%]">
+          <div className="pt-[25px]">
+            <MainPomodoro
+              ifOpen={ifOpenPomo}
+              settingConfig={settingResult}
+              themeOpacity={opacityValue}
+            />
+
+            <MainTasks
+              ifUserLog={userLog}
+              userId={idUserLog}
+            />
           </div>
         </div>
+
       </div>
-      {/* <WhatIsPomodoro/> */}
-    </Fragment>
+      <WhatIsPomodoro />
+      <Footer />
+
+
+    </Fragment >
   );
 };
 

@@ -7,7 +7,7 @@ import PomoTimer from "./components/pomodoroTimer";
 import PhrasesGenerator from "./components/phrasesGenerator";
 import ProgressBar from "./components/progressBar";
 
-const MainPomodoro = ({ settingConfig, ifOpen}) => {
+const MainPomodoro = ({ settingConfig, ifOpen }) => {
   /*Configuración del Tema */
 
   const configTheme = {
@@ -130,12 +130,12 @@ const MainPomodoro = ({ settingConfig, ifOpen}) => {
 
   return (
     <div
-      className={styles.pomodoroMainContainer}
-      style={{ backgroundColor: configTheme.themeColor }}
+      className="flex flex-col items-center w-full"
     >
       <NavPomodoro updatePomoSession={updatePomoSession} sessionSelect={pomoSession} />
       <PomoTimer time={time} theme={configTheme} />
       <PhrasesGenerator />
+      {/* <ProgressBar /> */}
       <ButtonsPomo
         playPomo={playPomo}
         restPomo={restPomo}
