@@ -11,7 +11,7 @@ const Footer = () => {
 
 
     return (
-        <div className="flex justify-center bg-blackPrimary text-white py-[45px]">
+        <div className="flex justify-center bg-blackPrimary text-white py-[50px]">
             <div className="flex flex-col items-center gap-[18px] ">
                 <LogoSpartan />
 

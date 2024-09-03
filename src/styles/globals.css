@@ -7,6 +7,8 @@
   --blackSecundary: #1E2229;
   --blackNoir: #0C0C0C;
   --greyFocus: #2D323A;
+  --redMain: #D9212C,
+
 }
 
 html,
@@ -53,4 +55,32 @@ input {
 button {
   all: unset;
   cursor: pointer;
+}
+
+
+
+/*Scroll bar styles*/
+
+body::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+body::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-button:increment,
+body::-webkit-scrollbar-button {
+  display: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--blackSecundary);
+  border-radius: 20px;
+  border: 1px solid var(--redMain);
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--blackBackground); /* Cambia esto por el color que prefieras */
+
 }

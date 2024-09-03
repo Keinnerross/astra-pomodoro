@@ -23,6 +23,17 @@ module.exports = {
         'border-inset': 'inset 0 0 0 2px #000',
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+
+
+
         'slide-down': {
           '0%': { transform: 'translateY(-100%)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
@@ -35,6 +46,8 @@ module.exports = {
       animation: {
         'slide-down': 'slide-down 0.5s ease-out forwards',
         'slide-up': 'slide-up 0.5s ease-in forwards',
+        fadeIn: 'fadeIn 1s ease-in-out',
+        fadeOut: 'fadeOut 1s ease-in-out',
       },
     },
   },

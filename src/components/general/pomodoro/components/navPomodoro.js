@@ -9,19 +9,19 @@ const NavPomodoro = ({ updatePomoSession, sessionSelect }) => {
           className={sessionSelect == "Pomodoro" ? styles.navItemActive : styles.navItem}
           onClick={() => updatePomoSession("Pomodoro")}
         >
-          <span className={styles.navText}>pomodoro</span>
+          <span className={styles.navText}>Pomodoro</span>
         </button>
         <button
           className={sessionSelect == "Short" ? styles.navItemActive : styles.navItem}
           onClick={() => updatePomoSession("Short")}
         >
-          <span className={styles.navText}>short break</span>
+          <span className={styles.navText}>Short Break</span>
         </button>
         <button
           className={sessionSelect == "Long" ? styles.navItemActive : styles.navItem}
           onClick={() => updatePomoSession("Long")}
         >
-          <span className={styles.navText}>long break</span>
+          <span className={styles.navText}>Long Break</span>
         </button>
       </div>
 

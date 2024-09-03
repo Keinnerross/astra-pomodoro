@@ -135,7 +135,13 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
       <NavPomodoro updatePomoSession={updatePomoSession} sessionSelect={pomoSession} />
       <PomoTimer time={time} theme={configTheme} />
       <PhrasesGenerator />
-      {/* <ProgressBar /> */}
+      <ProgressBar
+        pomoSession={pomoSession}
+        pomoValue={pomoValue}
+        shortValue={shortValue}
+        longValue={longValue}
+        isActive={isActive}
+        time={time} />
       <ButtonsPomo
         playPomo={playPomo}
         restPomo={restPomo}
