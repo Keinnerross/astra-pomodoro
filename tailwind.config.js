@@ -16,6 +16,7 @@ module.exports = {
         blackNoir: '#0C0C0C',
         greyFocus: '#2D323A',
         auxGrey: '#a1a1aa',
+        redMain: '#D9212C',
 
       },
       boxShadow: {

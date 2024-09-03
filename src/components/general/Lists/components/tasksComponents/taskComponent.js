@@ -61,18 +61,18 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
         </div>
 
         <input
-          className={isModal ? "text-slate-900 w-[100%]" : "text-white w-[100%]"}
+          className={`${isModal ? "text-greyFocus w-[100%]" : "text-white w-[100%]"} ${check ? "line-through !text-auxGrey" : "no-decoration"} transition-1000`}
           defaultValue={title}
           onChange={(e) => updateNameTask(e, idList, idTask)}
         />
       </div>
+
       <span
-        className={`${isModal ? "text-slate-900" : "text-white", styles.deleteTaskBtn} `}
+        className={`${isModal ? styles.deleteTaskBtnModal : styles.deleteTaskBtn} py-[3px] px-[8px] rounded-[5px] ${isModal ? "hover:bg-slate-200" : ""}`}
         onClick={() => deleteTask(idList, idTask)}
       >
         x
       </span>
-
       {/* Este es el que causa el cambio de los margenes cuando se hace hover sobre la tarjeta de la tarea */}
     </div >
   );

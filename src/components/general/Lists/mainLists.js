@@ -27,7 +27,7 @@ import {
 import { db } from "../../../../firebase";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { IoIosAddCircle } from "react-icons/io";
-import ModalList from "./components/addListFormComponents/modalAddList";
+import ModalAddList from "./components/addListFormComponents/modalAddList";
 import * as ListsServices from "@/components/general/Lists/components/addListFormComponents/listsServices/listsServices";
 
 
@@ -166,10 +166,10 @@ const MainLists = ({
 
 
     <Fragment>
-      <ModalList
+      <ModalAddList
         isActive={isActiveModalList}
         saveNewList={saveNewList}
-        fetchData={fetchData}
+        cancelList={handleModal}
       />
 
       <div className="flex justify-center">
@@ -233,9 +233,11 @@ const MainLists = ({
                         </Draggable>
                       ))
                     ) : (
-                      <h4 >
-                        Your lists will appear here
-                      </h4>
+                      <div className="flex items-center justify-center h-[200px] text-[18px]">
+                        <h4 >
+                          Your lists will appear here ⚔️
+                        </h4>
+                      </div>
                     )}
                     {provided.placeholder}
 

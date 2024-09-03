@@ -19,7 +19,7 @@ const AddTask = ({ idList, addNewTask, isModal }) => {
 
             <input
                 className={`${isModal ? "text-slate-900" : "text-white"} text-[14px] cursor-pointer`}
-                placeholder="+ Add new task"
+                placeholder="+ Add a new task"
                 onChange={handleInputTask}
                 ref={inputAddTaskRef}
                 onKeyDown={(e) => {

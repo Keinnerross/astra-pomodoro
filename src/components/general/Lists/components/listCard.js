@@ -89,8 +89,10 @@ const ListCard = ({ listObj, deleteLista }) => {
                   onChange={(e) => handleListNameChange(e)}
                 />
                 {taskDtArr.length > 0 ?
-                  <span className="text-auxGrey text-[16  px]"> {taskDtArr.length} tareas en tu lista</span>
-                  : <span className="text-auxGrey text-[16  px]">List emply</span>}
+                  <span className="text-auxGrey text-[16px]">
+                    {taskDtArr.length === 1 ? `${taskDtArr.length} task in your list` :
+                      `${taskDtArr.length} tasks in your list`} </span>
+                  : <span className="text-auxGrey text-[16px]">List emply</span>}
               </div>
             </div>
 

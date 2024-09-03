@@ -16,7 +16,6 @@
 .ModalAddTaskContainer {
     width: 410px;
     height: 500px;
-    padding: 25px;
     background-color: white;
     display: flex;
     flex-direction: column;

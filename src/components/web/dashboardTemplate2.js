@@ -187,7 +187,7 @@ const DashboardTemplate2 = () => {
         </div>
         <div class="flex flex-col">
           <div >
-            <div >
+            <div className="pt-[20px]">
               <MainPomodoro
                 ifOpen={ifOpenPomo}
                 settingConfig={settingResult}

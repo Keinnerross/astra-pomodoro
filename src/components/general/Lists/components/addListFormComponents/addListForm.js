@@ -8,10 +8,13 @@ const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskD
 
 
 
-    return (<Fragment>
+    return (
 
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form 
+        className="p-[26px]"
+        onSubmit={(e) => e.preventDefault()}>
             <input
+            className="text-[22px] font-semibold text-greyFocus"
                 placeholder={"Name your list"}
                 onChange={(e) => handleTitleChange(e)}
                 ref={ref}
@@ -20,7 +23,6 @@ const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskD
         </form>
 
 
-    </Fragment>
 
     )
 })

@@ -41,7 +41,8 @@
   font-size: 0.9rem;
 }
 
-.deleteTaskBtn {
+.deleteTaskBtn,
+.deleteTaskBtnModal {
   opacity: 0;
   font-size: 1.1rem;
   font-weight: 500;
@@ -49,12 +50,17 @@
 
 }
 
-.taskContainer:hover>.deleteTaskBtn {
+.taskContainer:hover>.deleteTaskBtn,
+.taskContainer:hover>.deleteTaskBtnModal {
   opacity: 1;
- 
+
 }
 
-.checkTaskContainer, 
+.deleteTaskBtnModal{
+color: #2D323A;
+}
+
+.checkTaskContainer,
 .checkTaskContainerActive {
   display: flex;
   align-items: center;
@@ -64,7 +70,7 @@
   position: relative;
 }
 
-.checkTaskContainer input[type="checkbox"]+label::before, 
+.checkTaskContainer input[type="checkbox"]+label::before,
 .checkTaskContainerActive input[type="checkbox"]+label::before {
   content: "";
   width: 17px;
@@ -73,7 +79,7 @@
   border: 2px solid #ccc;
   background: #fff;
   cursor: pointer;
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
 
@@ -83,12 +89,12 @@
 }
 
 
-.checkTaskContainer input[type="checkbox"]:checked+label:before, 
+.checkTaskContainer input[type="checkbox"]:checked+label:before,
 .checkTaskContainerActive input[type="checkbox"]:checked+label:before {
   border-color: transparent;
 }
 
-.checkTaskContainer [type="checkbox"]:checked+label:after, 
+.checkTaskContainer [type="checkbox"]:checked+label:after,
 .checkTaskContainerActive [type="checkbox"]:checked+label:after {
   content: "";
   width: 10px;
@@ -107,7 +113,7 @@
 
 
 
-.checkTaskContainer input[type="checkbox"], 
+.checkTaskContainer input[type="checkbox"],
 .checkTaskContainerActive input[type="checkbox"] {
   display: none;
 }

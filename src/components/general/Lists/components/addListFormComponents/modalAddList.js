@@ -6,7 +6,7 @@ import { AppContext } from "@/Context/store";
 
 
 
-const ModalAddList = ({ isActive, saveNewList }) => {
+const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
 
 
     // Modal List States
@@ -67,22 +67,28 @@ const ModalAddList = ({ isActive, saveNewList }) => {
 
 
     return (
-        <Fragment>
-            <div className={isActive ? styles.ModalAddTaskBackdrop : styles.hidden}
-                onClick={() => saveListWithHandleModal()}>
+        <div className={`${isActive ? styles.ModalAddTaskBackdrop : styles.hidden}`}
+            onClick={() => saveListWithHandleModal()}>
 
 
-                <form className={isActive ? styles.ModalAddTaskContainer : styles.hidden}
-                    onClick={(e) => e.stopPropagation()}
-                >
+            <form className={`${styles.ModalAddTaskContainer} flex flex-col justify-between`}
+                onClick={(e) => e.stopPropagation()}
+            >
 
-                    <ListFormTemplate isActive={isActive} handleTitleChange={handleTitleChange} handleTaskListChange={handleTaskListChange} taskDtArr={tasksList} ref={inputTitleListRef} />
+                <ListFormTemplate isActive={isActive} handleTitleChange={handleTitleChange} handleTaskListChange={handleTaskListChange} taskDtArr={tasksList} ref={inputTitleListRef} />
+                <div className="w-[100%] h-[50px] p-[25px] bg-slate-200 flex justify-end items-center rounded-b-[7px]">
+                    <span 
+                    className="cursor-pointer p-[8px] font-semibold text-greyFocus rounded-[7px] hover:bg-slate-300"
+                    onClick={() => cancelList()}>
+                        Cancel
+                    </span>
+                </div>
+
+            </form>
 
 
-                </form>
 
-            </div>
-        </Fragment >
+        </div>
     )
 }
 
