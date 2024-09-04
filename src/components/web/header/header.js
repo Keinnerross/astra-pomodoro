@@ -39,14 +39,14 @@ const Header = ({ theme, activeLogin, imgProfile, userLog, toggleSidebar }) => {
         <Notifications isActive={notiActive} handleActive={handleNotiActive} />
         <div className={styles.elementsHeaderSection}>
           <div className={styles.iconContainer}>
-            <button
+            <div
               onClick={() => toggleSidebar()}
             >
               <AiOutlineMenu
                 size={settingIcons.size}
                 fill={settingIcons.color}
               />
-            </button>
+            </div>
           </div>
           <div className={styles.logoSection}>
             <LogoSpartan />

@@ -7,7 +7,7 @@ import PomoTimer from "./components/pomodoroTimer";
 import PhrasesGenerator from "./components/phrasesGenerator";
 import ProgressBar from "./components/progressBar";
 
-const MainPomodoro = ({ settingConfig, ifOpen }) => {
+const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   /*Configuración del Tema */
 
   const configTheme = {
@@ -61,12 +61,15 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
   useEffect(() => {
     if (pomoSession == "Pomodoro") {
       setTime(pomoValue * 60);
+      setIsActive(false);
       setBarValue(pomoValue);
     } else if (pomoSession == "Short") {
       setTime(shortValue * 60);
+      setIsActive(false);
       setBarValue(shortValue);
     } else if (pomoSession == "Long") {
       setTime(longValue * 60);
+      setIsActive(false);
       setBarValue(longValue);
     }
   }, [pomoSession, pomoValue, shortValue, longValue]);
@@ -74,25 +77,31 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
   /****Cycle Pomodoro Sessions */
 
   useEffect(() => {
-    if (time == 0 && pomoSession == "Pomodoro" && cyclePomo < 3) {
+    if (time <= 0 && pomoSession == "Pomodoro" && cyclePomo < 3) {
       setTime(shortValue * 60);
       setCyclePomo((cyclePomo) => cyclePomo + 1);
       setIsActive(false);
+      playSound();
       setPomoSession("Short");
-    } else if (time == 0 && pomoSession == "Short") {
+    } else if (time <= 0 && pomoSession == "Short") {
       setTime(pomoValue * 60);
       setIsActive(false);
       setPomoSession("Pomodoro");
-    } else if (time == 0 && pomoSession == "Pomodoro" && cyclePomo >= 3) {
+      playSound();
+
+    } else if (time <= 0 && pomoSession == "Pomodoro" && cyclePomo >= 3) {
       setTime(longValue * 60);
       setIsActive(false);
       setCyclePomo((cyclePomo) => cyclePomo + 1);
       setPomoSession("Long");
-    } else if (time == 0 && pomoSession == "Long") {
+      playSound();
+    } else if (time <= 0 && pomoSession == "Long") {
       setTime(pomoValue * 60);
       setIsActive(false);
       setPomoSession("Pomodoro");
       setCyclePomo(0);
+      playSound();
+
     } /*Faltan Agregar Algunos Condicionales. */
   }, [time]);
 
@@ -135,6 +144,7 @@ const MainPomodoro = ({ settingConfig, ifOpen }) => {
       <NavPomodoro updatePomoSession={updatePomoSession} sessionSelect={pomoSession} />
       <PomoTimer time={time} theme={configTheme} />
       <PhrasesGenerator />
+      {/* {cyclePomo} */}
       <ProgressBar
         pomoSession={pomoSession}
         pomoValue={pomoValue}

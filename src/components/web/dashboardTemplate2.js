@@ -124,9 +124,47 @@ const DashboardTemplate2 = () => {
 
 
 
+  /*Sounds */
+  const [selectedSoundPomo, setSelectedSoundPomo] = useState("epic2");
+  const [audio, setAudio] = useState(null);
 
 
-  const withContent = 70; //Equivale al porcentaje total para la pantalla
+  const sounds = {
+    clasic: '/sounds/Alarms/Clasic_alarm.wav',
+    epic1: '/sounds/Alarms/Epic_1.mp3',
+    epic2: '/sounds/Alarms/Epic_2.wav',
+    epic3: '/sounds/Alarms/Epic_short.wav',
+    skyrim: '/sounds/Alarms/Skyrim_completed.mp3',
+  };
+
+
+  // charged Sound
+  useEffect(() => {
+    if (selectedSoundPomo) {
+      setAudio(new Audio(sounds[selectedSoundPomo]));
+    }
+  }, [selectedSoundPomo]);
+
+
+
+  const handleSelectSound = (soundSelect) => {
+    setSelectedSoundPomo(soundSelect);
+    console.log(soundSelect)
+
+  }
+
+
+  // Play Sound
+  const playSound = () => {
+    console.log("audio")
+    try { audio.play(); }
+    catch (e) {
+      console.log(e)
+    }
+
+  };
+
+
 
 
   return (
@@ -155,6 +193,7 @@ const DashboardTemplate2 = () => {
         closeSetting={ifOpenPomo}
         ifOpen={settingPomoOpen}
         updateSetting={updateSetting}
+        handleSelectSound={handleSelectSound}
       />
 
       <SidebarMain ifOpen={ifOpenSidebar} toggleSidebar={toggleSidebar} />
@@ -183,8 +222,8 @@ const DashboardTemplate2 = () => {
               ifOpen={ifOpenPomo}
               settingConfig={settingResult}
               themeOpacity={opacityValue}
+              playSound={playSound}
             />
-
             <MainTasks
               ifUserLog={userLog}
               userId={idUserLog}

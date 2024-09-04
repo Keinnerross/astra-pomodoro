@@ -1,15 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/componentes/general/pomodoro/settingsPomodoro.module.css";
-const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting }) => {
+const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSound }) => {
+
   const [inputValues, setInputValues] = useState({
     pomodoro: 25,
     short: 5,
     long: 15,
   });
 
+  const selectSoundRef = useRef(null);
+
   useEffect(() => {
     updateSetting(inputValues);
+    if (selectSoundRef.current) {
+      const soundSelect = selectSoundRef.current.value;
+      handleSelectSound(soundSelect)
+
+    }
+
+
   }, []);
+
+
 
   return (
     <div
@@ -75,14 +87,17 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting }) => {
           <div className={styles.soundSection}>
             <span>Alarm Sound</span>
             <select
-              // selectedValue={changeSound}
-              // onValueChange={(value) => changeSound(value)}
+              onChange={(e) => handleSelectSound(e.target.value)}
               className={styles.picker}
+              defaultValue="epic2"
+              ref={selectSoundRef}
             >
-              <option label="Epic 1" value="1" />
-              <option label="Epic 2" value="2" />
-              <option label="Epic 3" value="3" />
-              <option label="Clasic Alarm" value="0" />
+
+              <option label="Epic 1" value="epic1" />
+              <option label="Epic 2" value="epic2" />
+              <option label="Epic Bum" value="epic3" />
+              <option label="Skyrim Completed" value="skyrim" />
+              <option label="Clasic Alarm" value="clasic" />
             </select>
           </div>
         </div>

@@ -7,14 +7,17 @@
     z-index: 99;
     backdrop-filter: blur(2px);
     background-color: rgba(0, 0, 0, 0.212);
+    overflow: hidden !important;
 }
 
 .sidebarContainer {
     background-color: var(--blackNoir);
     width: 20vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     z-index: 999;
+    overflow: hidden !important;
+
 
 }
 

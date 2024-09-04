@@ -4,7 +4,8 @@ import { GiSpartanHelmet, GiSandsOfTime, GiMeditation } from 'react-icons/gi';
 import { FaBullseye } from 'react-icons/fa';
 const WhatIsPomodoro = () => {
     return (
-        <div className="min-h-screen bg-blackSecundary text-white">
+        <div
+            id="whatIsPomodoro" className="min-h-screen bg-blackSecundary text-white">
             <Head>
                 <title>Método Pomodoro y Spartan Pomodoro</title>
                 <meta name="description" content="Aprende sobre el método Pomodoro y los beneficios de usar Spartan Pomodoro, una app con temática espartana." />

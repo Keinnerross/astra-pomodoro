@@ -84,3 +84,7 @@ body::-webkit-scrollbar-track {
   background-color: var(--blackBackground); /* Cambia esto por el color que prefieras */
 
 }
+
+html {
+  scroll-behavior: smooth;
+}
