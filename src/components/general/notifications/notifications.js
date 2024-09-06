@@ -24,8 +24,10 @@ const Notifications = ({ isActive, handleActive }) => {
           <h4 className={styles.headerNotifications}>Notifications</h4>
           <div className={styles.notiRenderContainer}>
             {noti ? (
-              noti.map((data) => (
-                <div className={styles.cardNotiContainer}>
+              noti.map((data, i) => (
+                <div 
+                key={i}
+                className={styles.cardNotiContainer}>
                   <div className={styles.cardNotiSection}>
                     <div className={styles.iconNoti}>
                       {data.type == 'info' ? (

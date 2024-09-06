@@ -18,7 +18,7 @@ const WhatIsPomodoro = () => {
                             ¿Qué es el Método Pomodoro?
                         </h1>
                         <p className='text-lg leading-relaxed'>
-                            El Método Pomodoro es una técnica de gestión del tiempo desarrollada por Francesco Cirillo a finales de los años 80. Se basa en la idea de dividir el trabajo en intervalos de tiempo fijos, generalmente de 25 minutos, conocidos como 'Pomodoros', seguidos de un breve descanso. Después de completar cuatro Pomodoros, se toma un descanso más largo. Este método promueve la concentración y reduce la fatiga mental, ayudando a mejorar la productividad y la eficiencia.
+                            El Método Pomodoro es una técnica de gestión del tiempo desarrollada por Francesco Cirillo a finales de los años 80. Se basa en la idea de dividir el trabajo en intervalos de tiempo fijos, generalmente de 25 minutos, conocidos como &apos;Pomodoros&apos;, seguidos de un breve descanso. Después de completar cuatro Pomodoros, se toma un descanso más largo. Este método promueve la concentración y reduce la fatiga mental, ayudando a mejorar la productividad y la eficiencia.
                         </p>
                     </section>
 

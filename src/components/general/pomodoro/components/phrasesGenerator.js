@@ -37,7 +37,7 @@ const PhrasesGenerator = () => {
     return (
         <div className='min-h-[80px]'>
             <span className={`${isFadingOut ? 'animate-fadeOut' : 'animate-fadeIn'} text-center md:text-left flex justify-center md>justify:start`}
-            >'{spartanPhrases[indexPhrase]}'</span>
+            >&apos;{spartanPhrases[indexPhrase]}&apos;</span>
         </div>
     )
 }
