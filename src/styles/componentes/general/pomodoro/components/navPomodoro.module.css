@@ -13,12 +13,11 @@
 .navPomoSection {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 50px;
   width: 100%;
 }
 
 .navText {
+  white-space: nowrap;
   font-size: 16px;
   font-weight: 500;
 }

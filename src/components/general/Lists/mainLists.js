@@ -179,7 +179,7 @@ const MainLists = ({
 
             <div >
               <h3 className="text-[22px] font-semibold">My lists</h3>
-              <span className="text-[18px]">Difine what you want to achive</span>
+              <span className="text-[14px] md:text-[18px]">Define what you want to achieve</span>
             </div>
 
             {/* //Button that activates the modal for creating a List */}

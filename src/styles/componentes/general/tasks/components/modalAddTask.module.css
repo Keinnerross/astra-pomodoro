@@ -14,12 +14,10 @@
 }
 
 .ModalAddTaskContainer {
-    width: 410px;
-    height: 500px;
+
     background-color: white;
     display: flex;
     flex-direction: column;
-    border-radius: 7px;
     top: 0;
     left: 0;
     z-index: 999;

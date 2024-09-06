@@ -38,15 +38,11 @@ const Header = ({ theme, activeLogin, imgProfile, userLog, toggleSidebar }) => {
       <div className="flex w-[95%] justify-between py-[15px] border-b-solid border-b-[1px] border-b-greyFocus ">
         <Notifications isActive={notiActive} handleActive={handleNotiActive} />
         <div className={styles.elementsHeaderSection}>
-          <div className={styles.iconContainer}>
-            <div
-              onClick={() => toggleSidebar()}
-            >
-              <AiOutlineMenu
-                size={settingIcons.size}
-                fill={settingIcons.color}
-              />
-            </div>
+          <div className={styles.iconContainer} onClick={() => toggleSidebar()}>
+            <AiOutlineMenu
+              size={settingIcons.size}
+              fill={settingIcons.color}
+            />
           </div>
           <div className={styles.logoSection}>
             <LogoSpartan />

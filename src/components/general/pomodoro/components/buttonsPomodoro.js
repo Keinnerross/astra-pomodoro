@@ -26,9 +26,9 @@ const ButtonsPomo = ({ playPomo, restPomo, stopPomo, ifActive, ifOpen }) => {
         onClick={() => playPomo()}
       >
         {ifActive ? (
-          <span >stop</span>
+          <span className="font-semibold">stop</span>
         ) : (
-          <span >start</span>
+          <span className="font-semibold">start</span>
 
         )}
       </button>

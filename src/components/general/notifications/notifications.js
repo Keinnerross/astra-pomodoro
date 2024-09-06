@@ -16,9 +16,10 @@ const Notifications = ({ isActive, handleActive }) => {
         onClick={() => handleActive()}
       ></div>
 
-      {/**Componente: */}
 
-      <div className={isActive ? styles.notificationContainer : styles.hidden}>
+
+      <div
+        className={`${isActive ? styles.notificationContainer : styles.hidden} w-full h-full absolute top-[70px] left-0 md:absolute md:w-[380px] md:h-[440px] md:rounded-[9px] md:top-[55px] md:left-auto md:right-[85px]`}>
         <div className={styles.notificationSection}>
           <h4 className={styles.headerNotifications}>Notifications</h4>
           <div className={styles.notiRenderContainer}>

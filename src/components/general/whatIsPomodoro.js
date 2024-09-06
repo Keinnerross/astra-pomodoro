@@ -11,10 +11,10 @@ const WhatIsPomodoro = () => {
                 <meta name="description" content="Aprende sobre el método Pomodoro y los beneficios de usar Spartan Pomodoro, una app con temática espartana." />
             </Head>
             <main className='flex flex-col items-center'>
-                <div className="w-[55%] pt-[100px] pb-12 px-6">
+                <div className=" md:w-[55%] pt-[50px] md:pt-[100px] pb-12 px-6">
                     <section className="mb-12">
-                        <h1 className="text-4xl font-bold mb-6 flex items-center">
-                            <GiSandsOfTime className="text-red-500 mr-3" />
+                        <h1 className="text-[32px] md:text-4xl font-bold mb-6 flex items-center">
+                            <GiSandsOfTime className="text-red-500 mr-3"/>
                             ¿Qué es el Método Pomodoro?
                         </h1>
                         <p className="text-lg leading-relaxed">

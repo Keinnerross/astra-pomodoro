@@ -54,7 +54,7 @@ const SidebarMain = ({ ifOpen, toggleSidebar }) => {
                             <ItemsSidebarCars title="What is Pomodoro?" Icon={MdHelp} />
                         </a>
 
-                        <Tooltip id="my-tooltip" place={"right"} style={{ backgroundColor: "#d9212c ", color: "white", borderRadius: "10px"}} effect="float" />
+                        <Tooltip id="my-tooltip" place={"right"} style={{ backgroundColor: "#d9212c ", color: "white", borderRadius: "10px" }} effect="float" events={['click']} />
 
                     </div>
 

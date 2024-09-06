@@ -17,23 +17,24 @@
 }
 
 .formContainer {
-  width: 410px;
-  height: 500px;
+  /* width: 410px; */
+  /* height: 500px; */
   padding: 25px;
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
+  /* border-radius: 9px; */
 }
-.formContainer > div {
+/* .formContainer > div {
   width: 100%;
   height: 400px;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
-}
+} */
 
 .formContainer div > input {
   width: 100%;

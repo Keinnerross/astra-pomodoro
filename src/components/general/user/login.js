@@ -72,70 +72,84 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
       }}
     >
       <form
-        className={styles.formContainer}
+        className={`bg-white flex flex-col items-center p-[25px] h-full w-full md:w-[410px] md:h-[500px] md:rounded-[9px] `}
         onSubmit={(e) => handleLoginData(e)}
         onClick={(e) => e.stopPropagation()}
       >
-        <h4> Login</h4>
+        <div
+          onClick={() => toggleLogin()}
+          className="w-full text-end !h-0 font-bold cursor-pointer flex justify-end">
+          <span className="text-slate-800 md:hidden ">X</span>
+        </div>
+        <h2 className="text-slate-800 text-[28px] font-bold pb-[55px] text-center pt-[40px] md:p-0"> Login</h2>
 
-        <div className={styles.formSection}>
-          <div>
+
+
+
+        <div className="w-full ">
+          <div className="w-full gap-[10px] flex flex-col">
             <label>Email</label>
             <input
+              className="bg-gray-200 p-[6px] rounded-[7px]"
               placeholder="email"
               type="text"
               onChange={(e) => setInputMail(e.target.value)}
             />
             <label>password</label>
             <input
+              className="bg-gray-200 p-[6px] rounded-[7px]"
               placeholder="password"
               type="password"
               onChange={(e) => setInputPassword(e.target.value)}
             />
-            <div className={styles.forgotBtnContainer}>
+            <div className="text-center pt-[10px]">
               <button className={styles.forgotBtn}>Forgot Password?</button>
             </div>
             <span
-              style={{
-                textAlign: "center",
-                fontSize: "15px",
-                color: "red",
-                fontStyle: "italic",
-              }}
+              className="text-center text-[15px] text-redMain italic"
             >
               {textErrorLog}
             </span>
           </div>
-          <button type="submit" className={styles.submitBtn}>
-            Login
-          </button>
-        </div>
-        <label>Do not have at account?</label>
-        <button
-          type="button"
-          onClick={() => {
-            registerActive();
-            setTextErrorLog("");
-          }}
-        >
-          Create account
-        </button>
-        <div className={styles.orContainer}>
-          <span>|</span>
-          <span>Or</span>
-          <span>|</span>
-        </div>
-        <button
-          type="button"
-          onClick={() => googleLogin()}
-          className={styles.googleBtn}
-        >
-          <FcGoogle /> Google
-        </button>
+          <div className="flex flex-col gap-[15px]">
+            <button
+              type="submit"
+              className="bg-slate-800 text-white rounded-[9px] w-full flex gap-[5px] justify-center py-[9px] items-center">
+              Login
+            </button>
 
-        <button type="button" onClick={() => toggleLogin()}>
-          back
-        </button>
+            <button
+              type="button"
+              onClick={() => googleLogin()}
+              className="bg-slate-200 rounded-[9px] w-full flex gap-[5px] justify-center py-[9px] items-center"
+            >
+              <FcGoogle /> Google
+            </button>
+          </div>
+        </div>
+
+        {/* <div className="flex flex-col items-center">
+          <span className="!text-slate-800">|</span>
+          <span className="!text-slate-800">Or</span>
+          <span className="!text-slate-800">|</span>
+        </div> */}
+        <div className="h-full flex flex-col justify-end items-center pb-[10px]">
+          <label>Do not have at account?</label>
+          <button
+            type="button"
+            onClick={() => {
+              registerActive();
+              setTextErrorLog("");
+            }}
+          >
+            Create account
+          </button>
+          {/* <button
+            className="hidden md:inline"
+            type="button" onClick={() => toggleLogin()}>
+            back
+          </button> */}
+        </div>
       </form>
     </div>
   );

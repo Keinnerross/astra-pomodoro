@@ -25,7 +25,7 @@ const ProgressBar = ({ isActive, pomoSession, pomoValue, shortValue, longValue, 
   // 
 
   return (
-    <div className={`${isActive ? "w-[70%] h-[12px] bg-greyFocus" : "w-[20%] bg-blackSecundary h-[10px]"}  my-[25px] rounded-[25px] overflow-hidden flex justify-center transition-all duration-[1.5s] `}>
+    <div className={`${isActive ? " w-[100%] md:w-[70%] h-[12px] bg-greyFocus" : "w-[20%] bg-blackSecundary h-[10px]"}  my-[25px] rounded-[25px] overflow-hidden flex justify-center transition-all duration-[1.5s] `}>
       <div
 
         // ""

@@ -65,21 +65,29 @@ const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
 
 
 
-
     return (
         <div className={`${isActive ? styles.ModalAddTaskBackdrop : styles.hidden}`}
-            onClick={() => saveListWithHandleModal()}>
+            onMouseDown={() => saveListWithHandleModal()}>
 
 
-            <form className={`${styles.ModalAddTaskContainer} flex flex-col justify-between`}
-                onClick={(e) => e.stopPropagation()}
+            <form className={`${styles.ModalAddTaskContainer} w-full h-full md:rounded-[9px] md:w-[410px] md:h-[500px] flex flex-col justify-between`}
+                onMouseDown={(e) => e.stopPropagation()}
             >
 
-                <ListFormTemplate isActive={isActive} handleTitleChange={handleTitleChange} handleTaskListChange={handleTaskListChange} taskDtArr={tasksList} ref={inputTitleListRef} />
+
+                <ListFormTemplate
+                    isActive={isActive}
+                    handleTitleChange={handleTitleChange} handleTaskListChange={handleTaskListChange}
+                    taskDtArr={tasksList}
+                    ref={inputTitleListRef}
+                    saveList={saveListWithHandleModal}
+                />
+
+
                 <div className="w-[100%] h-[50px] p-[25px] bg-slate-200 flex justify-end items-center rounded-b-[7px]">
-                    <span 
-                    className="cursor-pointer p-[8px] font-semibold text-greyFocus rounded-[7px] hover:bg-slate-300"
-                    onClick={() => cancelList()}>
+                    <span
+                        className="cursor-pointer p-[8px] font-semibold text-greyFocus rounded-[7px] hover:bg-slate-300"
+                        onClick={() => cancelList()}>
                         Cancel
                     </span>
                 </div>

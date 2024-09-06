@@ -27,6 +27,12 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   const [pomoSession, setPomoSession] = useState("Pomodoro");
   const [barValue, setBarValue] = useState();
   const [cyclePomo, setCyclePomo] = useState(0);
+  const [pomodoroCount, setPomodoroCount] = useState(0)
+  const [shotCount, setShortCount] = useState(0)
+  const [longCount, setLongCount] = useState(0)
+
+
+
 
   /*-------------------------*/
   /*   Pomodoro Functions   */
@@ -83,10 +89,15 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
       setIsActive(false);
       playSound();
       setPomoSession("Short");
+      setPomodoroCount((prev) => prev + 1);
+      playSound();
+
     } else if (time <= 0 && pomoSession == "Short") {
       setTime(pomoValue * 60);
       setIsActive(false);
       setPomoSession("Pomodoro");
+      setShortCount((prev) => prev + 1);
+
       playSound();
 
     } else if (time <= 0 && pomoSession == "Pomodoro" && cyclePomo >= 3) {
@@ -94,12 +105,15 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
       setIsActive(false);
       setCyclePomo((cyclePomo) => cyclePomo + 1);
       setPomoSession("Long");
+      setPomodoroCount((prev) => prev + 1);
+
       playSound();
     } else if (time <= 0 && pomoSession == "Long") {
       setTime(pomoValue * 60);
       setIsActive(false);
       setPomoSession("Pomodoro");
       setCyclePomo(0);
+      setLongCount((prev) => prev + 1);
       playSound();
 
     } /*Faltan Agregar Algunos Condicionales. */
@@ -118,14 +132,23 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   };
 
   const restPomo = () => {
-    setIsActive(false);
-    if (pomoSession == "Pomodoro") {
-      setTime(pomoValue * 60);
-    } else if (pomoSession == "Short") {
-      setTime(shortValue * 60);
-    } else if (pomoSession == "Long") {
-      setTime(longValue * 60);
-    }
+
+    const alertConfirm = confirm("Do you want rest time and counts?");
+    if (alertConfirm) {
+      setIsActive(false);
+      setPomodoroCount(0)
+      setShortCount(0)
+      setLongCount(0)
+
+      if (pomoSession == "Pomodoro") {
+        setTime(pomoValue * 60);
+      } else if (pomoSession == "Short") {
+        setTime(shortValue * 60);
+      } else if (pomoSession == "Long") {
+        setTime(longValue * 60);
+      }
+    } else { return; }
+
   };
 
   const stopPomo = () => {
@@ -141,10 +164,15 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
     <div
       className="flex flex-col items-center w-full"
     >
-      <NavPomodoro updatePomoSession={updatePomoSession} sessionSelect={pomoSession} />
+      <NavPomodoro
+        updatePomoSession={updatePomoSession}
+        sessionSelect={pomoSession}
+        pomoCount={pomodoroCount}
+        shortCount={shotCount}
+        longCount={longCount}
+      />
       <PomoTimer time={time} theme={configTheme} />
       <PhrasesGenerator />
-      {/* {cyclePomo} */}
       <ProgressBar
         pomoSession={pomoSession}
         pomoValue={pomoValue}

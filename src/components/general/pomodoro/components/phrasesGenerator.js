@@ -12,7 +12,7 @@ const PhrasesGenerator = () => {
         const intervalIndex = setInterval(() => {
             const newIndex = Math.floor(Math.random() * spartanPhrases.length);
             setIndexPhrase(newIndex);
-            setIsFadingOut(false); 
+            setIsFadingOut(false);
 
 
             setTimeout(() => {
@@ -35,8 +35,8 @@ const PhrasesGenerator = () => {
 
 
     return (
-        <div >
-            <span className={isFadingOut ? 'animate-fadeOut' : 'animate-fadeIn'}
+        <div className="min-h-[80px]">
+            <span className={`${isFadingOut ? 'animate-fadeOut' : 'animate-fadeIn'} text-center md:text-left flex justify-center md>justify:start`}
             >"{spartanPhrases[indexPhrase]}"</span>
         </div>
     )

@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { FcGoogle } from "react-icons/fc";
 
 const UserRegister = ({ isActive, handleActive, modalRest }) => {
   const [inputMail, setInputMail] = useState("");
@@ -99,6 +100,7 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
     modalRest();
   };
 
+
   return (
     <div
       className={isActive ? styles.registerContainer : styles.hidden}
@@ -108,49 +110,74 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
       }}
     >
       <form
-        className={styles.formContainer}
+        className="flex flex-col bg-white p-[25px] w-full h-full md:w-[410px] md:h-[500px] md:rounded-[9px]"
         onSubmit={(e) => handleRegisterData(e)}
         onClick={(e) => e.stopPropagation()}
       >
-        <h4> Register</h4>
+        <div className="fadeInQuick h-full">
+          <div
+            onClick={() => {
+              modalRest();
+              setValidEmail(null);
+            }}
+            className="text-end !h-0 font-bold cursor-pointer">
+            <span className="text-slate-800 md:hidden ">X</span>
+          </div>
+          <h2 className="text-slate-800 text-[28px] text-center font-bold pb-[65px] pt-[40px] md:p-0"> Register</h2>
 
-        <div>
-          <label>Email</label>
 
-          <input
-            placeholder="email"
-            type="text"
-            onChange={(e) => handleEmailChange(e)}
-          />
-          <p>{renderValidateEmail()}</p>
-          <label>password</label>
+          <div className="w-full gap-[10px] flex flex-col">
+            <label>Email</label>
+            <input
+              className="bg-gray-200 p-[6px] rounded-[7px]"
 
-          <input
-            placeholder="******"
-            type="password"
-            onChange={(e) => setInputPassword(e.target.value)}
-          />
+              placeholder="email"
+              type="text"
+              onChange={(e) => handleEmailChange(e)}
+            />
+            <span>{renderValidateEmail()}</span>
+            <label>password</label>
+            <input
+              className="bg-gray-200 p-[6px] rounded-[7px]"
+              placeholder="******"
+              type="password"
+              onChange={(e) => setInputPassword(e.target.value)}
+            />
+          </div>
 
           {registerError}
+          <div className="h-full flex flex-col gap-[15px] pt-[25px]">
+            <button
+              className="rounded-[9px] bg-slate-800 text-white cursor-pointer py-[9px] text-center "
+              type="submit">Register</button>
+
+            <button
+              type="button"
+              onClick={() => googleRegister()}
+              className="bg-slate-200 rounded-[9px] w-full flex gap-[5px] justify-center py-[9px] items-center"
+
+            >
+              <FcGoogle /> Google
+            </button>
+          </div>
+
+
         </div>
-        <button type="submit">Register</button>
 
-        <button type="button" onClick={() => googleRegister()}>
-          Google
-        </button>
-
-        <label>Do you have at account?</label>
-        <button
-          type="button"
-          onClick={() => {
-            setValidEmail(null);
-            handleActive();
-          }}
-        >
-          LogIn
-        </button>
-      </form>
-    </div>
+        <div className="h-full flex flex-col justify-end items-center pb-[10px]  text-slate-900">
+          <label >Do you have at account?</label>
+          <button
+            type="button"
+            onClick={() => {
+              setValidEmail(null);
+              handleActive();
+            }}
+          >
+            LogIn
+          </button>
+        </div>
+      </form >
+    </div >
   );
 };
 

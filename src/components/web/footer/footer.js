@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="flex flex-col items-center gap-[18px] ">
                 <LogoSpartan />
 
-                <ul className="flex gap-[50px] cursor-pointer">
+                <ul className="flex flex-wrap justify-center gap-[5px] md:gap-[50px] cursor-pointer">
                     <li className="cursor-pointer">Home</li>
                     <li className="cursor-pointer"><a>Privacy</a></li>
                     <li className="cursor-pointer"><a>Terms</a></li>

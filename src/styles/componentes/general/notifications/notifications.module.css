@@ -8,16 +8,13 @@
 }
 
 .notificationContainer {
-  width: 380px;
-  height: 440px;
-
-  position: absolute;
-  top: 50px;
-  right: 55px;
+  /* width: 380px; */
+  /* height: 440px; */
+  /* position: absolute; */
   background-color: white;
   min-width: 230px;
   z-index: 999;
-  border-radius: 9px;
+  /* border-radius: 9px; */
 }
 
 .notificationSection {

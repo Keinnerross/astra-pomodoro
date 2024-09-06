@@ -17,8 +17,8 @@
 }
 
 .formContainer {
-  width: 410px;
-  height: 500px;
+  /* width: 410px; */
+  /* height: 500px; */
   padding: 25px;
   background-color: white;
   display: flex;
@@ -26,7 +26,7 @@
 
   align-items: center;
   justify-content: center;
-  border-radius: 7px;
+  /* border-radius: 7px; */
 }
 .formContainer > div {
   width: 100%;
