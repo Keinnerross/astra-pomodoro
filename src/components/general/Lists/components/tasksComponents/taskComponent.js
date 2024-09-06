@@ -1,14 +1,14 @@
-import styles from "@/styles/componentes/general/tasks/components/taskComponent.module.css";
+import styles from '@/styles/componentes/general/tasks/components/taskComponent.module.css';
 
-import { db } from "../../../../../../firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { useState } from "react";
-import { MdDragIndicator } from "react-icons/md";
-import { BsThreeDotsVertical } from "react-icons";
+import { db } from '../../../../../../firebase';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { useState } from 'react';
+import { MdDragIndicator } from 'react-icons/md';
+import { BsThreeDotsVertical } from 'react-icons';
 const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots, handleCheck, updateNameTask, isModal }) => {
 
   const configIcons = {
-    color: isModal ? "black" : "white",
+    color: isModal ? 'black' : 'white',
     iconSize: 15,
   };
 
@@ -50,10 +50,10 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
         <div className={check ? styles.checkTaskContainerActive : styles.checkTaskContainer}>
           <input
             defaultChecked={check}
-            type="checkbox"
+            type='checkbox'
             id={idTask}
             onChange={(e) => handleRenderCheck(e)}
-            className={isModal ? "text-slate-900" : "text-white"}
+            className={isModal ? 'text-slate-900' : 'text-white'}
 
           />
           <label htmlFor={idTask}></label>
@@ -61,14 +61,14 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
         </div>
 
         <input
-          className={`${isModal ? "text-greyFocus w-[100%]" : "text-white w-[100%]"} ${check ? "line-through !text-auxGrey" : "no-decoration"} transition-1000`}
+          className={`${isModal ? 'text-greyFocus w-[100%]' : 'text-white w-[100%]'} ${check ? 'line-through !text-auxGrey' : 'no-decoration'} transition-1000`}
           defaultValue={title}
           onChange={(e) => updateNameTask(e, idList, idTask)}
         />
       </div>
 
       <span
-        className={`${isModal ? styles.deleteTaskBtnModal : styles.deleteTaskBtn} py-[3px] px-[8px] rounded-[5px] ${isModal ? "hover:bg-slate-200" : ""}`}
+        className={`${isModal ? styles.deleteTaskBtnModal : styles.deleteTaskBtn} py-[3px] px-[8px] rounded-[5px] ${isModal ? 'hover:bg-slate-200' : ''}`}
         onClick={() => deleteTask(idList, idTask)}
       >
         x

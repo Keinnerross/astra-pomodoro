@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
-import styles from "@/styles/componentes/general/pomodoro/mainPomodoro.module.css";
+import { useState, useEffect } from 'react';
+import styles from '@/styles/componentes/general/pomodoro/mainPomodoro.module.css';
 
-import NavPomodoro from "./components/navPomodoro";
-import ButtonsPomo from "./components/buttonsPomodoro";
-import PomoTimer from "./components/pomodoroTimer";
-import PhrasesGenerator from "./components/phrasesGenerator";
-import ProgressBar from "./components/progressBar";
+import NavPomodoro from './components/navPomodoro';
+import ButtonsPomo from './components/buttonsPomodoro';
+import PomoTimer from './components/pomodoroTimer';
+import PhrasesGenerator from './components/phrasesGenerator';
+import ProgressBar from './components/progressBar';
 
 const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   /*Configuración del Tema */
 
   const configTheme = {
-    themeColor: "transparent",
+    themeColor: 'transparent',
     iconSize: 25,
-    iconColor: "white",
+    iconColor: 'white',
   };
 
   /*Pomodoro Variables*/
@@ -24,7 +24,7 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   const [pomoValue, setPomoValue] = useState(25);
   const [shortValue, setShortValue] = useState(5);
   const [longValue, setLongValue] = useState(15);
-  const [pomoSession, setPomoSession] = useState("Pomodoro");
+  const [pomoSession, setPomoSession] = useState('Pomodoro');
   const [barValue, setBarValue] = useState();
   const [cyclePomo, setCyclePomo] = useState(0);
   const [pomodoroCount, setPomodoroCount] = useState(0)
@@ -57,7 +57,7 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
     } else {
       clearInterval(timeId);
     }
-    console.log("effect");
+    console.log('effect');
   }, [isActive]);
 
   /************** Navigation **************/
@@ -65,15 +65,15 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   /** Render Navigation **/
 
   useEffect(() => {
-    if (pomoSession == "Pomodoro") {
+    if (pomoSession == 'Pomodoro') {
       setTime(pomoValue * 60);
       setIsActive(false);
       setBarValue(pomoValue);
-    } else if (pomoSession == "Short") {
+    } else if (pomoSession == 'Short') {
       setTime(shortValue * 60);
       setIsActive(false);
       setBarValue(shortValue);
-    } else if (pomoSession == "Long") {
+    } else if (pomoSession == 'Long') {
       setTime(longValue * 60);
       setIsActive(false);
       setBarValue(longValue);
@@ -83,35 +83,35 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   /****Cycle Pomodoro Sessions */
 
   useEffect(() => {
-    if (time <= 0 && pomoSession == "Pomodoro" && cyclePomo < 3) {
+    if (time <= 0 && pomoSession == 'Pomodoro' && cyclePomo < 3) {
       setTime(shortValue * 60);
       setCyclePomo((cyclePomo) => cyclePomo + 1);
       setIsActive(false);
       playSound();
-      setPomoSession("Short");
+      setPomoSession('Short');
       setPomodoroCount((prev) => prev + 1);
       playSound();
 
-    } else if (time <= 0 && pomoSession == "Short") {
+    } else if (time <= 0 && pomoSession == 'Short') {
       setTime(pomoValue * 60);
       setIsActive(false);
-      setPomoSession("Pomodoro");
+      setPomoSession('Pomodoro');
       setShortCount((prev) => prev + 1);
 
       playSound();
 
-    } else if (time <= 0 && pomoSession == "Pomodoro" && cyclePomo >= 3) {
+    } else if (time <= 0 && pomoSession == 'Pomodoro' && cyclePomo >= 3) {
       setTime(longValue * 60);
       setIsActive(false);
       setCyclePomo((cyclePomo) => cyclePomo + 1);
-      setPomoSession("Long");
+      setPomoSession('Long');
       setPomodoroCount((prev) => prev + 1);
 
       playSound();
-    } else if (time <= 0 && pomoSession == "Long") {
+    } else if (time <= 0 && pomoSession == 'Long') {
       setTime(pomoValue * 60);
       setIsActive(false);
-      setPomoSession("Pomodoro");
+      setPomoSession('Pomodoro');
       setCyclePomo(0);
       setLongCount((prev) => prev + 1);
       playSound();
@@ -133,18 +133,18 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
 
   const restPomo = () => {
 
-    const alertConfirm = confirm("Do you want rest time and counts?");
+    const alertConfirm = confirm('Do you want rest time and counts?');
     if (alertConfirm) {
       setIsActive(false);
       setPomodoroCount(0)
       setShortCount(0)
       setLongCount(0)
 
-      if (pomoSession == "Pomodoro") {
+      if (pomoSession == 'Pomodoro') {
         setTime(pomoValue * 60);
-      } else if (pomoSession == "Short") {
+      } else if (pomoSession == 'Short') {
         setTime(shortValue * 60);
-      } else if (pomoSession == "Long") {
+      } else if (pomoSession == 'Long') {
         setTime(longValue * 60);
       }
     } else { return; }
@@ -162,7 +162,7 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
 
   return (
     <div
-      className="flex flex-col items-center w-full"
+      className='flex flex-col items-center w-full'
     >
       <NavPomodoro
         updatePomoSession={updatePomoSession}

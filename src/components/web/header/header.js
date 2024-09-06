@@ -1,20 +1,20 @@
-import styles from "@/styles/componentes/web/header/header.module.css";
-import Notifications from "../../general/notifications/notifications.js";
-import LogoSpartan from "@/components/general/brandComponents/logoComponent.js";
+import styles from '@/styles/componentes/web/header/header.module.css';
+import Notifications from '../../general/notifications/notifications.js';
+import LogoSpartan from '@/components/general/brandComponents/logoComponent.js';
 
-import { BiSearch, BiRefresh } from "react-icons/bi";
-import { IoMdNotifications } from "react-icons/io";
-import { AiOutlineMenu } from "react-icons/ai";
+import { BiSearch, BiRefresh } from 'react-icons/bi';
+import { IoMdNotifications } from 'react-icons/io';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 
 
-import { FaUserCircle } from "react-icons/fa";
-import { useState } from "react";
+import { FaUserCircle } from 'react-icons/fa';
+import { useState } from 'react';
 
 
 const settingIcons = {
   size: 28,
-  color: "#fff",
+  color: '#fff',
 }
 
 
@@ -34,8 +34,8 @@ const Header = ({ theme, activeLogin, imgProfile, userLog, toggleSidebar }) => {
   };
   // className={styles.headerSection}
   return (
-    <div className="w-full flex justify-center">
-      <div className="flex w-[95%] justify-between py-[15px] border-b-solid border-b-[1px] border-b-greyFocus ">
+    <div className='w-full flex justify-center'>
+      <div className='flex w-[95%] justify-between py-[15px] border-b-solid border-b-[1px] border-b-greyFocus '>
         <Notifications isActive={notiActive} handleActive={handleNotiActive} />
         <div className={styles.elementsHeaderSection}>
           <div className={styles.iconContainer} onClick={() => toggleSidebar()}>

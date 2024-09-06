@@ -1,5 +1,5 @@
-import { spartanPhrases } from "./dataPhrases"
-import React, { useEffect, useState } from "react";
+import { spartanPhrases } from './dataPhrases'
+import React, { useEffect, useState } from 'react';
 
 const PhrasesGenerator = () => {
 
@@ -27,7 +27,7 @@ const PhrasesGenerator = () => {
 
         // Cleanup interval on component unmount
         return () => clearInterval(intervalIndex);
-    }, [spartanPhrases.length]);
+    }, [spartanPhrases]);
 
 
 
@@ -35,9 +35,9 @@ const PhrasesGenerator = () => {
 
 
     return (
-        <div className="min-h-[80px]">
+        <div className='min-h-[80px]'>
             <span className={`${isFadingOut ? 'animate-fadeOut' : 'animate-fadeIn'} text-center md:text-left flex justify-center md>justify:start`}
-            >"{spartanPhrases[indexPhrase]}"</span>
+            >'{spartanPhrases[indexPhrase]}'</span>
         </div>
     )
 }

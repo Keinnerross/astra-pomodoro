@@ -1,10 +1,10 @@
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import Task from "./taskComponent";
-import { useEffect, useState, useContext, Fragment } from "react";
-import { AppContext } from "@/Context/store"
-import AddTask from "./AddTask";
-import { v4 as uuidv4 } from "uuid";
-import * as TaskServices from "@/components/general/Lists/components/tasksComponents/services/tasksBookServices";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import Task from './taskComponent';
+import { useEffect, useState, useContext, Fragment } from 'react';
+import { AppContext } from '@/Context/store'
+import AddTask from './AddTask';
+import { v4 as uuidv4 } from 'uuid';
+import * as TaskServices from '@/components/general/Lists/components/tasksComponents/services/tasksBookServices';
 
 
 
@@ -191,13 +191,13 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
         <div className={`transition-all duration-1000 ${isAccordionActive ? '' : 'hidden'}`}>
 
             <DragDropContext onDragEnd={dragEnd}>
-                <Droppable droppableId="tasksArr">
+                <Droppable droppableId='tasksArr'>
                     {(provided) => (
                         <div
 
                             {...provided.droppableProps}
                             ref={provided.innerRef}
-                            className="transition-all duration-1000"
+                            className='transition-all duration-1000'
                         >
 
                             {

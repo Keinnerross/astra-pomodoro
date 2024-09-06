@@ -1,7 +1,7 @@
-import styles from "../../../styles/componentes/general/notifications/notifications.module.css";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import { GiAstronautHelmet } from "react-icons/gi";
+import styles from '../../../styles/componentes/general/notifications/notifications.module.css';
+import { IoIosNotificationsOutline } from 'react-icons/io';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { GiAstronautHelmet } from 'react-icons/gi';
 
 const noti = false;
 
@@ -28,7 +28,7 @@ const Notifications = ({ isActive, handleActive }) => {
                 <div className={styles.cardNotiContainer}>
                   <div className={styles.cardNotiSection}>
                     <div className={styles.iconNoti}>
-                      {data.type == "info" ? (
+                      {data.type == 'info' ? (
                         <AiOutlineInfoCircle size={38} />
                       ) : (
                         <GiAstronautHelmet size={38} />
@@ -45,7 +45,7 @@ const Notifications = ({ isActive, handleActive }) => {
               ))
             ) : (
               <div className={styles.notiMessageIfEmply}>
-                <IoIosNotificationsOutline size={88} fill="gray" />
+                <IoIosNotificationsOutline size={88} fill='gray' />
                 <h5>Your notifications will be saved here</h5>
                 <span>News, updates or new notification mechanics.</span>
               </div>

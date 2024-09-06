@@ -7,9 +7,9 @@ import React, {
   forwardRef,
   Fragment,
   useContext,
-} from "react";
-import { AppContext } from "@/Context/store";
-import ListCard from "./components/listCard";
+} from 'react';
+import { AppContext } from '@/Context/store';
+import ListCard from './components/listCard';
 import {
   collection,
   doc,
@@ -23,12 +23,12 @@ import {
   orderBy,
   query,
   setDoc,
-} from "firebase/firestore";
-import { db } from "../../../../firebase";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { IoIosAddCircle } from "react-icons/io";
-import ModalAddList from "./components/addListFormComponents/modalAddList";
-import * as ListsServices from "@/components/general/Lists/components/addListFormComponents/listsServices/listsServices";
+} from 'firebase/firestore';
+import { db } from '../../../../firebase';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { IoIosAddCircle } from 'react-icons/io';
+import ModalAddList from './components/addListFormComponents/modalAddList';
+import * as ListsServices from '@/components/general/Lists/components/addListFormComponents/listsServices/listsServices';
 
 
 
@@ -53,7 +53,7 @@ const MainLists = ({
     try {
       const lists = await ListsServices.newGetData();
       setLists(lists)
-      console.log("fechDta")
+      console.log('fechDta')
     } catch (error) {
     }
   };
@@ -72,7 +72,7 @@ const MainLists = ({
       if (newOrder) {
         if (ifUserLog) {
           await newOrder.map(async (list, i) => {
-            const docRef = doc(db, "users", userId, "lists", list.id);
+            const docRef = doc(db, 'users', userId, 'lists', list.id);
             await updateDoc(docRef, {
               order: i, //
             });
@@ -81,11 +81,11 @@ const MainLists = ({
           const updatedArray = newOrder.map((list, i) => {
             return { ...list, order: i };
           });
-          localStorage.setItem("lists", JSON.stringify(updatedArray));
+          localStorage.setItem('lists', JSON.stringify(updatedArray));
         }
       }
     } catch (e) {
-      console.log(e + "FAIL");
+      console.log(e + 'FAIL');
     }
   };
 
@@ -147,7 +147,7 @@ const MainLists = ({
 
 
   const deleteRender = async (idList) => {
-    const confirmation = confirm("¿Estás seguro de eliminar esta lista?");
+    const confirmation = confirm('¿Estás seguro de eliminar esta lista?');
 
     if (confirmation === true) {
       setLists((prevLists) => prevLists.filter((list) => list.id !== idList));
@@ -172,34 +172,34 @@ const MainLists = ({
         cancelList={handleModal}
       />
 
-      <div className="flex justify-center">
-        <div className="flex flex-col w-full">
+      <div className='flex justify-center'>
+        <div className='flex flex-col w-full'>
 
-          <div className="flex justify-between pt-[25px] ">
+          <div className='flex justify-between pt-[25px] '>
 
             <div >
-              <h3 className="text-[22px] font-semibold">My lists</h3>
-              <span className="text-[14px] md:text-[18px]">Define what you want to achieve</span>
+              <h3 className='text-[22px] font-semibold'>My lists</h3>
+              <span className='text-[14px] md:text-[18px]'>Define what you want to achieve</span>
             </div>
 
             {/* //Button that activates the modal for creating a List */}
             <div 
-            className="cursor-pointer"
+            className='cursor-pointer'
             onClick={() => handleModal()}>
-              <IoIosAddCircle size={38} fill="#fff" />
+              <IoIosAddCircle size={38} fill='#fff' />
             </div>
 
 
 
           </div >
-          <div className="flex flex-col">
+          <div className='flex flex-col'>
             <DragDropContext onDragEnd={dragEnd}>
-              <Droppable droppableId="listArr"  >
+              <Droppable droppableId='listArr'  >
                 {(provided) => (
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    class="flex flex-col"
+                    class='flex flex-col'
 
                   >
                     {lists.length > 0 ? (
@@ -216,11 +216,11 @@ const MainLists = ({
 
 
                               <div
-                                className="my-[10px]"
+                                className='my-[10px]'
                                 {...provided.draggableProps}
                                 ref={provided.innerRef}
                               >
-                                <div className="py-[7px] bg-blackSecundary rounded-t-[10px] "
+                                <div className='py-[7px] bg-blackSecundary rounded-t-[10px] '
                                   {...provided.dragHandleProps}
                                 ></div>
                                 <ListCard
@@ -235,7 +235,7 @@ const MainLists = ({
                         </Draggable>
                       ))
                     ) : (
-                      <div className="flex items-center justify-center h-[200px] text-[18px]">
+                      <div className='flex items-center justify-center h-[200px] text-[18px]'>
                         <h4 >
                           Your lists will appear here ⚔️
                         </h4>

@@ -1,12 +1,12 @@
-import styles from "@/styles/componentes/general/pomodoro/components/buttonsPomodoro.module.css";
-import { BsFillPlayFill, BsFillStopFill } from "react-icons/bs";
-import { AiFillSetting } from "react-icons/ai";
-import { FaPause } from "react-icons/fa";
-import { MdOutlineRestartAlt } from "react-icons/md";
+import styles from '@/styles/componentes/general/pomodoro/components/buttonsPomodoro.module.css';
+import { BsFillPlayFill, BsFillStopFill } from 'react-icons/bs';
+import { AiFillSetting } from 'react-icons/ai';
+import { FaPause } from 'react-icons/fa';
+import { MdOutlineRestartAlt } from 'react-icons/md';
 
 const icons = {
   size: 30,
-  color: "white",
+  color: 'white',
 };
 
 const ButtonsPomo = ({ playPomo, restPomo, stopPomo, ifActive, ifOpen }) => {
@@ -26,9 +26,9 @@ const ButtonsPomo = ({ playPomo, restPomo, stopPomo, ifActive, ifOpen }) => {
         onClick={() => playPomo()}
       >
         {ifActive ? (
-          <span className="font-semibold">stop</span>
+          <span className='font-semibold'>stop</span>
         ) : (
-          <span className="font-semibold">start</span>
+          <span className='font-semibold'>start</span>
 
         )}
       </button>
@@ -40,7 +40,7 @@ const ButtonsPomo = ({ playPomo, restPomo, stopPomo, ifActive, ifOpen }) => {
         </button>
 
         <button className={styles.settingPomoButton} onClick={() => ifOpen(true)}>
-          <AiFillSetting size={icons.size} fill={"white"} />
+          <AiFillSetting size={icons.size} fill={'white'} />
         </button>
       </div>
     </div>

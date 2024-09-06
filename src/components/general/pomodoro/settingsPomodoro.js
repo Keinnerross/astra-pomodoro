@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "@/styles/componentes/general/pomodoro/settingsPomodoro.module.css";
+import { useEffect, useRef, useState } from 'react';
+import styles from '@/styles/componentes/general/pomodoro/settingsPomodoro.module.css';
 const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSound }) => {
 
   const [inputValues, setInputValues] = useState({
@@ -48,7 +48,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
               <p>Pomodoro</p>
               <input
                 className={styles.input}
-                type="number"
+                type='number'
                 defaultValue={25}
                 onChange={(e) => {
                   setInputValues({
@@ -63,7 +63,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
               <input
                 defaultValue={5}
                 className={styles.input}
-                type="number"
+                type='number'
                 onChange={(e) => {
                   setInputValues({ ...inputValues, short: e.target.value });
                 }}
@@ -74,7 +74,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
               <input
                 defaultValue={15}
                 className={styles.input}
-                type="number"
+                type='number'
                 onChange={(e) => {
                   setInputValues({ ...inputValues, long: e.target.value });
                 }}
@@ -89,15 +89,15 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
             <select
               onChange={(e) => handleSelectSound(e.target.value)}
               className={styles.picker}
-              defaultValue="epic2"
+              defaultValue='epic2'
               ref={selectSoundRef}
             >
 
-              <option label="Epic 1" value="epic1" />
-              <option label="Epic 2" value="epic2" />
-              <option label="Epic Bum" value="epic3" />
-              <option label="Skyrim Completed" value="skyrim" />
-              <option label="Clasic Alarm" value="clasic" />
+              <option label='Epic 1' value='epic1' />
+              <option label='Epic 2' value='epic2' />
+              <option label='Epic Bum' value='epic3' />
+              <option label='Skyrim Completed' value='skyrim' />
+              <option label='Clasic Alarm' value='clasic' />
             </select>
           </div>
         </div>

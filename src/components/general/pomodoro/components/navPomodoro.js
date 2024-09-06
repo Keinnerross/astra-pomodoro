@@ -1,5 +1,5 @@
 
-import styles from "@/styles/componentes/general/pomodoro/components/navPomodoro.module.css";
+import styles from '@/styles/componentes/general/pomodoro/components/navPomodoro.module.css';
 
 const NavPomodoro = ({ updatePomoSession, sessionSelect, pomoCount, shortCount, longCount }) => {
   return (
@@ -8,26 +8,26 @@ const NavPomodoro = ({ updatePomoSession, sessionSelect, pomoCount, shortCount, 
 
 
         <button
-          className={`${sessionSelect == "Pomodoro" ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
-          onClick={() => updatePomoSession("Pomodoro")}
+          className={`${sessionSelect == 'Pomodoro' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
+          onClick={() => updatePomoSession('Pomodoro')}
         >
-          <span className="font-semibold">{pomoCount} </span>
+          <span className='font-semibold'>{pomoCount} </span>
           <span className={`${styles.navText} `}>Pomodoro</span>
         </button>
 
 
         <button
-          className={`${sessionSelect == "Short" ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
-          onClick={() => updatePomoSession("Short")}
+          className={`${sessionSelect == 'Short' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
+          onClick={() => updatePomoSession('Short')}
         >
-          <span className="font-semibold">{shortCount} </span>
+          <span className='font-semibold'>{shortCount} </span>
           <span className={styles.navText}>Short Break</span>
         </button>
         <button
-          className={`${sessionSelect == "Long" ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
-          onClick={() => updatePomoSession("Long")}
+          className={`${sessionSelect == 'Long' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
+          onClick={() => updatePomoSession('Long')}
         >
-          <span className="font-semibold">{longCount} </span>
+          <span className='font-semibold'>{longCount} </span>
           <span className={styles.navText}>Long Break</span>
         </button>
       </div>

@@ -1,4 +1,4 @@
-import styles from "@/styles/componentes/general/brandComponents/logoSpartan.module.css"
+import styles from '@/styles/componentes/general/brandComponents/logoSpartan.module.css'
 
 
 const LogoSpartan = () => {

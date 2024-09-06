@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useContext, Fragment } from "react";
-import { AppContext } from "@/Context/store"
-import SidebarMain from "./Sidebar/sidebarMain";
-import Header from "@/components/web/header/header";
-import MainPomodoro from "../general/pomodoro/mainPomodoro";
-import SettingsPomodoro from "../general/pomodoro/settingsPomodoro";
-import MainTasks from "../general/Lists/mainLists";
-import UserLogin from "@/components/general/user/login";
-import UserRegister from "../general/user/register";
-import UserMenu from "../general/user/userMenu";
-import WhatIsPomodoro from "../general/whatIsPomodoro";
+import { useEffect, useState, useContext, Fragment } from 'react';
+import { AppContext } from '@/Context/store'
+import SidebarMain from './Sidebar/sidebarMain';
+import Header from '@/components/web/header/header';
+import MainPomodoro from '../general/pomodoro/mainPomodoro';
+import SettingsPomodoro from '../general/pomodoro/settingsPomodoro';
+import MainTasks from '../general/Lists/mainLists';
+import UserLogin from '@/components/general/user/login';
+import UserRegister from '../general/user/register';
+import UserMenu from '../general/user/userMenu';
+import WhatIsPomodoro from '../general/whatIsPomodoro';
 
 import {
   collection,
@@ -26,15 +26,15 @@ import {
   orderBy,
   query,
   setDoc,
-} from "firebase/firestore";
-import { db } from "../../../firebase";
+} from 'firebase/firestore';
+import { db } from '../../../firebase';
 
 import {
   onAuthStateChanged, //*Esto identifica si la autentificacion ha cambiado.//
-} from "firebase/auth";
+} from 'firebase/auth';
 
-import { auth } from "../../../firebase";
-import Footer from "./footer/footer";
+import { auth } from '../../../firebase';
+import Footer from './footer/footer';
 
 const DashboardTemplate2 = () => {
   const [settingPomoOpen, setSettingPomoOpen] = useState(false);
@@ -110,14 +110,14 @@ const DashboardTemplate2 = () => {
         setImgProfile(
           user.photoURL
             ? user.photoURL
-            : "https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg"
+            : 'https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg'
         );
         setUserData(user);
-        console.log("Usuario Logueado");
+        console.log('Usuario Logueado');
       } else {
         setUserLog(false);
 
-        console.log("Usuario sin inicial session");
+        console.log('Usuario sin inicial session');
       }
     });
   }, []);
@@ -125,7 +125,7 @@ const DashboardTemplate2 = () => {
 
 
   /*Sounds */
-  const [selectedSoundPomo, setSelectedSoundPomo] = useState("epic2");
+  const [selectedSoundPomo, setSelectedSoundPomo] = useState('epic2');
   const [audio, setAudio] = useState(null);
 
 
@@ -156,7 +156,7 @@ const DashboardTemplate2 = () => {
 
   // Play Sound
   const playSound = () => {
-    console.log("audio")
+    console.log('audio')
     try { audio.play(); }
     catch (e) {
       console.log(e)
@@ -204,7 +204,7 @@ const DashboardTemplate2 = () => {
 //////////////////////////////////////////////*/}
 
       <div
-        className="bg-blackPrimary min-h-[100vh] flex  flex-col items-center pb-[50px]"
+        className='bg-blackPrimary min-h-[100vh] flex  flex-col items-center pb-[50px]'
       >
 
 
@@ -216,8 +216,8 @@ const DashboardTemplate2 = () => {
         />
 
 
-        <div class="flex flex-col w-[75%] md:w-[55%]">
-          <div className="pt-[25px]">
+        <div class='flex flex-col w-[75%] md:w-[55%]'>
+          <div className='pt-[25px]'>
             <MainPomodoro
               ifOpen={ifOpenPomo}
               settingConfig={settingResult}
