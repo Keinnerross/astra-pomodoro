@@ -1,5 +1,4 @@
 import styles from '@/styles/componentes/general/pomodoro/components/pomodoroTimer.module.css';
-import { useEffect } from 'react';
 
 const PomoTimer = ({ time, theme }) => {
   const showTime = (time) => {
@@ -17,8 +16,7 @@ const PomoTimer = ({ time, theme }) => {
   return (
     <div className={styles.pomodoroContainer}>
       <span
-        className={styles.pomoTimeContainer}
-        style={{ color: theme.iconColor }}
+        className={`${styles.pomoTimeContainer}`}
       >
         {showTime(time)}
       </span>

@@ -53,7 +53,7 @@ const MainLists = ({
     try {
       const lists = await ListsServices.newGetData();
       setLists(lists)
-      console.log('fechDta')
+      // console.log('fechDta')
     } catch (error) {
     }
   };
@@ -64,7 +64,7 @@ const MainLists = ({
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchData]);
+  }, []);
 
   /*Funcion de orden dnd para las listas: */
 
@@ -111,7 +111,6 @@ const MainLists = ({
     }
     let newOrder;
 
-    console.log(lists)
     setLists(
       (prevListArr) =>
         (newOrder = reorder(prevListArr, source.index, destination.index))

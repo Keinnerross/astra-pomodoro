@@ -1,7 +1,5 @@
 import "@/styles/globals.css";
-import { Inter } from "next/font/google";
-import { Poppins } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+import { Poppins, Montserrat } from "next/font/google";
 
 
 
@@ -9,6 +7,12 @@ const poppins = Poppins({
   weight: ['200', '300', '400', '500', '600', '700', '800', '900'],  // Puedes configurar los pesos
   subsets: ['latin'],      // Subconjuntos de caracteres
 });
+
+const montserrat = Montserrat({
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],  // Puedes configurar los pesos
+  subsets: ['latin'],      // Subconjuntos de caracteres
+});
+
 
 
 
@@ -32,7 +36,7 @@ export default function RootLayout({ children }) {
         />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></link>
       </head> */}
-      <body className={poppins.className}>{children}</body>
+      <body className={`${montserrat.className} ${poppins.className}`}>{children}</body>
     </html>
   );
 }
