@@ -120,6 +120,7 @@ const DashboardTemplate2 = () => {
         console.log('Usuario sin inicial session');
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

@@ -117,6 +117,7 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
       playSound();
 
     } /*Faltan Agregar Algunos Condicionales. */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   /* Update Pomodoro Session */

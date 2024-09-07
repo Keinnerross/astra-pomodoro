@@ -1,6 +1,6 @@
 import React, { Fragment, forwardRef, useEffect, useRef } from "react"
 import DragTasks from "../tasksComponents/dragTasks"
-import { IoMdArrowRoundBack  } from "react-icons/io";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskDtArr, saveList }, ref) => {
 
@@ -14,7 +14,7 @@ const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskD
             <div
                 onClick={() => saveList()}
                 className="w-full text-end pb-[15px] font-bold cursor-pointer flex justify-start">
-                <span className="text-slate-800 md:hidden "><IoMdArrowRoundBack  /></span>
+                <span className="text-slate-800 md:hidden "><IoMdArrowRoundBack /></span>
             </div>
             <form
                 onSubmit={(e) => e.preventDefault()}>
@@ -33,9 +33,7 @@ const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskD
 })
 
 
-/*List es false
 
-*/
-
+AddListForm.displayName = 'AddListForm';
 
 export default AddListForm;

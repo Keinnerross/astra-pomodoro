@@ -17,7 +17,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
       handleSelectSound(soundSelect)
 
     }
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, []);
 

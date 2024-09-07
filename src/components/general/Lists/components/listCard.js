@@ -38,6 +38,7 @@ const ListCard = ({ listObj, deleteLista }) => {
     setTaskDtArr(listObj.tasks);
     setThisList(listObj);
     setListName(listObj.listName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
