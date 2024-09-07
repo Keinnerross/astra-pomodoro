@@ -70,7 +70,7 @@ const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
             onMouseDown={() => saveListWithHandleModal()}>
 
 
-            <form className={`${styles.ModalAddTaskContainer} w-full h-full md:rounded-[9px] md:w-[410px] md:h-[500px] flex flex-col justify-between`}
+            <div className={`${styles.ModalAddTaskContainer} w-full h-full md:rounded-[9px] md:w-[410px] md:h-[500px] flex flex-col justify-between`}
                 onMouseDown={(e) => e.stopPropagation()}
             >
 
@@ -92,7 +92,7 @@ const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
                     </span>
                 </div>
 
-            </form>
+            </div>
 
 
 

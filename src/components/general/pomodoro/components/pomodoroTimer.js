@@ -1,26 +1,32 @@
+import { useEffect } from 'react';
 import styles from '@/styles/componentes/general/pomodoro/components/pomodoroTimer.module.css';
 
-const PomoTimer = ({ time, theme }) => {
+
+const PomoTimer = ({ time }) => {
   const showTime = (time) => {
     const min = parseInt(time / 60);
     const sec = parseInt(time % 60);
     return `${min < 10 ? '0' + min : min}:${sec < 10 ? '0' + sec : sec}`;
   };
 
-  /*Generación de Título dinámico*/
-  (() => {
+
+  useEffect(() => {
     document.title = `${showTime(time)} - Focus Warrior! `;
-  })();
-  /**/
+  }, [time]);
+
 
   return (
-    <div className={styles.pomodoroContainer}>
-      <span
-        className={`${styles.pomoTimeContainer}`}
-      >
-        {showTime(time)}
-      </span>
-    </div>
+
+     
+
+
+      <div className={styles.pomodoroContainer}>
+        <span
+          className={`${styles.pomoTimeContainer}`}
+        >
+          {showTime(time)}
+        </span>
+      </div>
   );
 };
 

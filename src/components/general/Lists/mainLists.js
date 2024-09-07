@@ -199,7 +199,7 @@ const MainLists = ({
                   <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    class='flex flex-col'
+                    className='flex flex-col'
 
                   >
                     {lists.length > 0 ? (
