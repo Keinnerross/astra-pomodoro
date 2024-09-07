@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, Fragment } from 'react';
+import { useEffect, useState, useContext, Fragment, useRef } from 'react';
 import styles from '@/styles/componentes/general/tasks/components/listCard.module.css';
 import ListSettingMenu from './listSettingMenu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -55,7 +55,8 @@ const ListCard = ({ listObj, deleteLista }) => {
   }
 
   const handleListNameChange = (e) => {
-    const { value } = e.target;
+    const value = e.currentTarget.textContent;
+    console.log(value)
     setListName(value);
     ListsServices.updateList(idUserLog, userLog, value, listObj.id)
   }
@@ -65,12 +66,22 @@ const ListCard = ({ listObj, deleteLista }) => {
   }
 
 
+  const refTitleList = useRef(null)
+
+  useEffect(() => {
+    if (refTitleList.current) {
+      refTitleList.current.textContent = listName;
+    }
+  }, [listName]);
+
+
+
 
 
 
 
   return (
-    <div className={`bg-blackSecundary rounded-b-[10px] p-[10px] relative`}>
+    <div className={`bg-blackSecundary rounded-b-[10px] p-[10px] relative `}>
       {/**** Menu Flotante*****/}
       <ListSettingMenu
         active={settingActive}
@@ -81,39 +92,43 @@ const ListCard = ({ listObj, deleteLista }) => {
 
       <Fragment>
         <div className='flex flex-col transition-all duration-1000'>
-          <div class='flex pb-[15px] px-[10px]'>
-            <div class='flex w-[100%]'>
+          <div className='flex pb-[15px] px-[10px] '>
+            <div className='flex w-[100%]'>
               <IconixList colorId={listObj.iconChoosed} />
-              <div class='pl-[15px] flex flex-col '>
-                <input className='text-white text-[30px] w-[100%] h-[28px] font-semibold'
-                  defaultValue={listName}
-                  onChange={(e) => handleListNameChange(e)}
-                />
+              <div className='pl-[15px] flex flex-col md:w-[87%] md:max-w-[87%] min-w-[61%] max-w-[61%]'>
+                <div
+                  contentEditable
+                  className=' md:w-[93%] md:max-w-[93%] min-h-[28px]overflow-wrap-break-word whitespace-pre-wrap text-white text-[20px] md:text-[30px] font-semibold focus:outline-none'
+                  onInput={handleListNameChange}
+                  suppressContentEditableWarning={true}
+                  ref={refTitleList}
+                ></div>
                 {taskDtArr.length > 0 ?
                   <span className='text-auxGrey text-[16px]'>
                     {taskDtArr.length === 1 ? `${taskDtArr.length} task in your list` :
                       `${taskDtArr.length} tasks in your list`} </span>
                   : <span className='text-auxGrey text-[16px]'>List emply</span>}
               </div>
+              <div className="flex justify-center ">
+                <div onClick={(e) => e.stopPropagation()}>
+                  <button
+                    className='p-[5px] rounded-[5px] hover:bg-greyFocus'
+                    onClick={() => toggleSettingList()}>
+                    <BsThreeDotsVertical fill={configTheme.iconColor} />
+                  </button>
+                </div>
+
+                <div onClick={(e) => e.stopPropagation()}>
+                  <button
+                    className='p-[5px] rounded-[5px] hover:bg-greyFocus'
+                    onClick={() => handleAccordionActive()}>
+                    <MdKeyboardArrowLeft fill={configTheme.iconColor} size={20} className={accordionActive ? '-rotate-90 transition-all duration-700' : 'transition-all duration-700'} />
+                  </button>
+                </div>
+              </div>
             </div>
 
 
-
-            <div onClick={(e) => e.stopPropagation()}>
-              <button
-                className='p-[5px] rounded-[5px] hover:bg-greyFocus'
-                onClick={() => toggleSettingList()}>
-                <BsThreeDotsVertical fill={configTheme.iconColor} />
-              </button>
-            </div>
-
-            <div onClick={(e) => e.stopPropagation()}>
-              <button
-                className='p-[5px] rounded-[5px] hover:bg-greyFocus'
-                onClick={() => handleAccordionActive()}>
-                <MdKeyboardArrowLeft fill={configTheme.iconColor} size={20} class={accordionActive ? '-rotate-90 transition-all duration-700' : 'transition-all duration-700'} />
-              </button>
-            </div>
 
           </div>
 

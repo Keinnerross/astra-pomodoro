@@ -159,7 +159,8 @@ const DragTasks = ({ idList, taskDtArr, handleTaskListChange, isAccordionActive,
 
     const updateNameTask = async (e, idList, idTask) => {
         try {
-            const { value } = e.target
+            const value = e.currentTarget.textContent;
+            console.log(value, idList, idTask)
             const newArray = taskDtArr.map((task) => {
                 if (task.taskId === idTask) {
                     return {

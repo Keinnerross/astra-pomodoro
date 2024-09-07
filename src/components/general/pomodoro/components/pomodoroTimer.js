@@ -17,16 +17,16 @@ const PomoTimer = ({ time }) => {
 
   return (
 
-     
 
 
-      <div className={styles.pomodoroContainer}>
-        <span
-          className={`${styles.pomoTimeContainer}`}
-        >
-          {showTime(time)}
-        </span>
-      </div>
+
+    <div className={styles.pomodoroContainer}>
+      <span
+        className={`${styles.pomoTimeContainer} text-[6.1rem]   md:text-[7.1rem] `}
+      >
+        {showTime(time)}
+      </span>
+    </div>
   );
 };
 

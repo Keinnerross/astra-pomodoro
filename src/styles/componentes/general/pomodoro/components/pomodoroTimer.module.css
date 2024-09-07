@@ -3,7 +3,6 @@
 }
 
 .pomoTimeContainer {
-  font-size: 7.1rem;
   font-weight: 800;
   font-family: "Montserrat", sans-serif;
 
@@ -13,8 +12,3 @@
   font-size: 0.9rem;
 }
 
-@media (max-height: 700px) {
-  .pomoTimeContainer {
-    font-size: 7.1rem;
-  }
-}

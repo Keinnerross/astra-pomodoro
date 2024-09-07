@@ -8,28 +8,27 @@ const NavPomodoro = ({ updatePomoSession, sessionSelect, pomoCount, shortCount, 
 
 
         <button
-          className={`${sessionSelect == 'Pomodoro' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
+          className={`${sessionSelect == 'Pomodoro' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block text-[13px] md:text-[16px]`}
           onClick={() => updatePomoSession('Pomodoro')}
         >
-          <span className='font-semibold'>{pomoCount} </span>
-          <span className={`${styles.navText} `}>Pomodoro</span>
+          <span className='font-semibold text-[13px] md:text-[16px] '>{pomoCount} </span>
+          <span className={`${styles.navText} text-[13px] md:text-[16px]`}>Pomodoro</span>
         </button>
 
-
         <button
-          className={`${sessionSelect == 'Short' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
+          className={`${sessionSelect == 'Short' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block text-[13px] md:text-[16px]`}
           onClick={() => updatePomoSession('Short')}
         >
-          <span className='font-semibold'>{shortCount} </span>
-          <span className={styles.navText}>Short Break</span>
+          <span className='font-semibold text-[13px] md:text-[16px] '>{shortCount} </span>
+          <span className={`${styles.navText} text-[13px] md:text-[16px]`}>Short Break</span>
         </button>
-        <button
-          className={`${sessionSelect == 'Long' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block`}
+        <div
+          className={`${sessionSelect == 'Long' ? styles.navItemActive : styles.navItem} flex flex-col-reverse items-center md:inline-block `}
           onClick={() => updatePomoSession('Long')}
         >
-          <span className='font-semibold'>{longCount} </span>
-          <span className={styles.navText}>Long Break</span>
-        </button>
+          <span className='font-semibold text-[13px] md:text-[16px] '>{longCount} </span>
+          <span className={`${styles.navText} text-[13px] md:text-[16px]`}>Long Break</span>
+        </div>
       </div>
 
     </div >

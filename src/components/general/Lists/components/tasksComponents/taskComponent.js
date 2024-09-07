@@ -1,10 +1,6 @@
 import styles from '@/styles/componentes/general/tasks/components/taskComponent.module.css';
-
-import { db } from '../../../../../../firebase';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { MdDragIndicator } from 'react-icons/md';
-import { BsThreeDotsVertical } from 'react-icons';
 const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots, handleCheck, updateNameTask, isModal }) => {
 
   const configIcons = {
@@ -30,6 +26,15 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
     handleCheck(idUser, idList, idTask, checked)
 
   }
+
+
+  const refTitle = useRef(null)
+
+  useEffect(() => {
+    if (refTitle.current) {
+      refTitle.current.textContent = title;
+    }
+  }, [title]);
 
 
 
@@ -60,11 +65,17 @@ const Task = ({ title, ifDone, idTask, idList, idUser, deleteTask, showDragDots,
           <div className={styles.settingTaskCard}></div>
         </div>
 
-        <input
-          className={`${isModal ? 'text-greyFocus w-[100%]' : 'text-white w-[100%]'} ${check ? 'line-through !text-auxGrey' : 'no-decoration'} transition-1000`}
-          defaultValue={title}
-          onChange={(e) => updateNameTask(e, idList, idTask)}
-        />
+        <div
+          ref={refTitle}
+          contentEditable
+          className={`${isModal ? ' bg-transparent !text-greyFocus w-[100%]' : 'text-white w-[100%]'} ${check ? 'line-through !text-auxGrey' : 'no-decoration'} overflow-wrap-break-word whitespace-pre-wrap  focus:outline-none transition-1000 min-w-[80%] w-[80px] max-w-[80%] md:min-w-[90%] md:w-[90px] md:max-w-[90%]`}
+          onInput={(e) => updateNameTask(e, idList, idTask)}
+          suppressContentEditableWarning={true}
+        ></div>
+
+
+
+
       </div>
 
       <span

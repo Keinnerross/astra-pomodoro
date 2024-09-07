@@ -43,7 +43,6 @@
 }
 
 .userHeaderSection {
-  padding-left: 40px;
   display: flex;
   flex-direction: row;
 }

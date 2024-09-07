@@ -19,10 +19,8 @@
 
 
 .settingSection {
-  width: 380px;
-  height: 400px;
+
   background-color: rgb(255, 255, 255);
-  border-radius: 7px 7px 0 0;
   padding: 25px;
 }
 

@@ -18,7 +18,7 @@ const AddTask = ({ idList, addNewTask, isModal }) => {
         <div className={styles.addTaskSection}>
 
             <input
-                className={`${isModal ? 'text-slate-900' : 'text-white'} text-[14px] cursor-pointer`}
+                className={`${isModal ? 'text-slate-900' : 'text-white'} text-[14px] cursor-pointer w-[95%]`}
                 placeholder='+ Add a new task'
                 onChange={handleInputTask}
                 ref={inputAddTaskRef}

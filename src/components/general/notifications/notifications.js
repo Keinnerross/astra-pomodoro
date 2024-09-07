@@ -19,15 +19,20 @@ const Notifications = ({ isActive, handleActive }) => {
 
 
       <div
-        className={`${isActive ? styles.notificationContainer : styles.hidden} w-full h-full absolute top-[70px] left-0 md:absolute md:w-[380px] md:h-[440px] md:rounded-[9px] md:top-[55px] md:left-auto md:right-[85px]`}>
+        className={`${isActive ? styles.notificationContainer : styles.hidden} w-full h-full fixed top-0 left-0 md:absolute md:w-[380px] md:h-[440px] md:rounded-[9px] md:top-[55px] md:left-auto md:right-[85px]`}>
         <div className={styles.notificationSection}>
+          <div
+            onClick={() => { handleActive() }}
+            className='text-end !h-0 font-bold cursor-pointer p-[25px]'>
+            <span className='text-slate-800 md:hidden '>X</span>
+          </div>
           <h4 className={styles.headerNotifications}>Notifications</h4>
           <div className={styles.notiRenderContainer}>
             {noti ? (
               noti.map((data, i) => (
-                <div 
-                key={i}
-                className={styles.cardNotiContainer}>
+                <div
+                  key={i}
+                  className={styles.cardNotiContainer}>
                   <div className={styles.cardNotiSection}>
                     <div className={styles.iconNoti}>
                       {data.type == 'info' ? (

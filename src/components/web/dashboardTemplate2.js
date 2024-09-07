@@ -217,7 +217,7 @@ const DashboardTemplate2 = () => {
         />
 
 
-        <div className='flex flex-col w-[75%] md:w-[55%]'>
+        <div className='flex flex-col w-[85%] md:w-[55%]'>
           <div className='pt-[25px]'>
             <MainPomodoro
               ifOpen={ifOpenPomo}

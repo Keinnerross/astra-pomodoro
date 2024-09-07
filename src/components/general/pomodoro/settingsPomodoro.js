@@ -17,7 +17,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
       handleSelectSound(soundSelect)
 
     }
-// eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
   }, []);
 
@@ -28,11 +28,16 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
       className={ifOpen ? styles.settingMain : styles.hidden}
       onMouseDown={() => closeSetting()}
     >
+    
+
+
       <div
-        className={styles.settingContainer}
+        className={`${styles.settingContainer}`}
         onMouseDown={(e) => e.stopPropagation()}
       >
-        <div className={styles.settingSection}>
+       
+        <div className={`${styles.settingSection} w-[100vw] h-[91vh] md:w-[380px] md:h-[420px] md:rounded-t-[9px]`}>
+
           <div className={styles.titleCloseSetting}>
             <p>Settings</p>
             <button onClick={() => closeSetting(false)}>

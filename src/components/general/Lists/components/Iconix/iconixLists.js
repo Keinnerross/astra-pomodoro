@@ -21,7 +21,7 @@ const IconixList = ({ colorId }) => {
 
     return (
         <div
-            className={`rounded-[10px] w-[52px] bg-center bg-no-repeat bg-cover h-[54px] min-w-[54px] shadow-border-inset border-[#ffd100]`}
+            className={` w-[44px] h-[44px] min-w-[44px] md:w-[54px] md:h-[54px] md:min-w-[54px] rounded-[10px]  bg-center bg-no-repeat bg-cover shadow-border-inset border-[#ffd100]`}
             style={{ backgroundImage: `url('${url}')`, border: `3px solid ${colorChoosed}`, }}
         ></div>
     )

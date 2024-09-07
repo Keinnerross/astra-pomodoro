@@ -19,7 +19,7 @@ body {
 }
 
 body {
-  font-family: "Poppins", sans-serif ;
+  font-family: "Poppins", sans-serif;
 }
 
 a {
@@ -51,6 +51,8 @@ input {
   font-family: "Poppins", sans-serif;
 }
 
+
+
 button {
   all: unset;
   cursor: pointer;
@@ -80,7 +82,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-track {
-  background-color: var(--blackBackground); /* Cambia esto por el color que prefieras */
+  background-color: var(--blackBackground);
+  /* Cambia esto por el color que prefieras */
 
 }
 
