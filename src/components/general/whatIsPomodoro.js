@@ -14,18 +14,19 @@ const WhatIsPomodoro = () => {
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 668) {
-                setIconSize(80); // Tamaño para pantallas pequeñas
+                setIconSize(80);
             } else {
-                setIconSize(20); // Tamaño para pantallas grandes
+                setIconSize(20); 
             }
-        }; // Configura el tamaño inicial del ícono
+        }; 
         handleResize();
 
-        // Añade un listener para redimensionar la ventana
         window.addEventListener('resize', handleResize);
 
-        // Limpia el listener cuando el componente se desmonte
         return () => window.removeEventListener('resize', handleResize);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, []);
 
 
@@ -80,13 +81,13 @@ const WhatIsPomodoro = () => {
 
                     <section>
                         <h2 className='text-3xl font-semibold mb-4 flex items-center'>
-                            <GiSpartanHelmet 
-                              size={iconSize}
-                              className='text-red-500 mr-3' />
+                            <GiSpartanHelmet
+                                size={iconSize}
+                                className='text-red-500 mr-3' />
                             Why use Spartan Pomodoro?
                         </h2>
                         <p className='text-lg leading-relaxed'>
-                            Spartan Pomodoro is an app designed for those who seek discipline and determination in their time management. With a Spartan theme, this app not only helps you follow the Pomodoro Method, but also inspires you to maintain a steady and focused approach, like a true Spartan. It's ideal for those who want to improve their productivity and achieve their goals with a warrior mindset.
+                            Spartan Pomodoro is an app designed for those who seek discipline and determination in their time management. With a Spartan theme, this app not only helps you follow the Pomodoro Method, but also inspires you to maintain a steady and focused approach, like a true Spartan. It&apos;s ideal for those who want to improve their productivity and achieve their goals with a warrior mindset.
                         </p>
                     </section>
                 </div>

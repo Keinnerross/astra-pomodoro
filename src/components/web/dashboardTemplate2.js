@@ -145,6 +145,8 @@ const DashboardTemplate2 = () => {
       setAudio(new Audio(sounds[selectedSoundPomo]));
 
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [selectedSoundPomo]);
 
 
