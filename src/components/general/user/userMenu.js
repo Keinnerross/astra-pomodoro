@@ -12,7 +12,7 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
 
   const logOut = async (tkn) => {
     await signOut(tkn);
-    location.reload();
+    window.location.reload();
   };
 
   const iconSetting = {
