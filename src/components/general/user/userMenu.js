@@ -19,9 +19,14 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
     size: 20,
   };
 
+  const [username, setUserName] = useState("")
+    ;
   useEffect(() => {
     if (userData) {
       setUserGooglePhoto(userData.photoURL);
+      const email = userData.email;
+      const username = email.split('@')[0];
+      setUserName(username)
     }
   }, [userData]);
 
@@ -48,7 +53,7 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
               ></div>
             </div>
             <div className={styles.infoUserContainer}>
-              <h4>{userGooglePhoto ? userData.displayName : `User009`}</h4>
+              <h4>{userGooglePhoto ? userData.displayName : username}</h4>
               <span>{userData ? userData.email : ''}</span>
             </div>
           </div>
