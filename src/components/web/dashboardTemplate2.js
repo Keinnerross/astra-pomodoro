@@ -146,7 +146,6 @@ const DashboardTemplate2 = () => {
 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
   }, [selectedSoundPomo]);
 
 
@@ -154,11 +153,10 @@ const DashboardTemplate2 = () => {
   const handleSelectSound = (soundSelect, firstCharge) => {
     setSelectedSoundPomo(soundSelect);
 
-    if (firstCharge === false) {
+    if (!firstCharge) {
       playSound(soundSelect);
     }
   }
-
 
 
   // Play Sound
