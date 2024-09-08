@@ -107,7 +107,7 @@ const ListCard = ({ listObj, deleteLista }) => {
                   <span className='text-auxGrey text-[16px]'>
                     {taskDtArr.length === 1 ? `${taskDtArr.length} task in your list` :
                       `${taskDtArr.length} tasks in your list`} </span>
-                  : <span className='text-auxGrey text-[16px]'>List emply</span>}
+                  : <span className='text-auxGrey text-[16px]'>List empty</span>}
               </div>
               <div className="flex justify-center ">
                 <div onClick={(e) => e.stopPropagation()}>
