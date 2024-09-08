@@ -106,7 +106,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
             </select>
           </div>
         </div>
-        <div className={`!hidden md:block ${styles.footerSettingSection}`}>
+        <div className={`!hidden md:!flex ${styles.footerSettingSection}`}>
           <button onClick={() => updateSetting(inputValues)}>
             <span>Done</span>
           </button>
