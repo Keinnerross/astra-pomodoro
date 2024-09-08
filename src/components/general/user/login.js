@@ -72,7 +72,7 @@ const UserLogin = ({ isActive, toggleLogin, registerActive, modalRest }) => {
       }}
     >
       <form
-        className={`bg-white flex flex-col items-center p-[25px] h-full w-full md:w-[410px] md:h-[500px] md:rounded-[9px] `}
+        className={`bg-white flex flex-col items-center p-[25px] h-dvh w-full md:w-[410px] md:h-[500px] md:rounded-[9px] `}
         onSubmit={(e) => handleLoginData(e)}
         onClick={(e) => e.stopPropagation()}
       >

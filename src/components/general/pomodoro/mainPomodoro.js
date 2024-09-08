@@ -57,7 +57,6 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
     } else {
       clearInterval(timeId);
     }
-    console.log('effect');
   }, [isActive]);
 
   /************** Navigation **************/
@@ -127,6 +126,10 @@ const MainPomodoro = ({ settingConfig, ifOpen, playSound }) => {
   };
 
   /*********Buttons Functions ************/
+
+ 
+
+
 
   const playPomo = () => {
     setIsActive(!isActive);

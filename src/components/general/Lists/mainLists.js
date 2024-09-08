@@ -183,9 +183,9 @@ const MainLists = ({
             </div>
 
             {/* //Button that activates the modal for creating a List */}
-            <div 
-            className='cursor-pointer'
-            onClick={() => handleModal()}>
+            <div
+              className='cursor-pointer'
+              onClick={() => handleModal()}>
               <IoIosAddCircle size={38} fill='#fff' />
             </div>
 

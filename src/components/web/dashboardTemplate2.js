@@ -113,11 +113,11 @@ const DashboardTemplate2 = () => {
             : 'https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg'
         );
         setUserData(user);
-        console.log('Usuario Logueado');
+        // console.log('Usuario Logueado');
       } else {
         setUserLog(false);
 
-        console.log('Usuario sin inicial session');
+        // console.log('Usuario sin inicial session');
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -143,27 +143,38 @@ const DashboardTemplate2 = () => {
   useEffect(() => {
     if (selectedSoundPomo) {
       setAudio(new Audio(sounds[selectedSoundPomo]));
+
     }
   }, [selectedSoundPomo]);
 
 
 
-  const handleSelectSound = (soundSelect) => {
+  const handleSelectSound = (soundSelect, firstCharge) => {
     setSelectedSoundPomo(soundSelect);
-    console.log(soundSelect)
 
+    if (firstCharge === false) {
+      playSound(soundSelect);
+    }
   }
 
 
+
   // Play Sound
-  const playSound = () => {
-    console.log('audio')
-    try { audio.play(); }
+  const playSound = (audioTarget) => {
+    try {
+      if (audioTarget) {
+        const audioValue = new Audio(sounds[audioTarget]);
+        audioValue.play()
+      }
+      else { audio.play(); }
+
+    }
     catch (e) {
       console.log(e)
     }
 
   };
+
 
 
 

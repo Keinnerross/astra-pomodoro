@@ -14,7 +14,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
     updateSetting(inputValues);
     if (selectSoundRef.current) {
       const soundSelect = selectSoundRef.current.value;
-      handleSelectSound(soundSelect)
+      handleSelectSound(soundSelect, true)
 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,11 +36,11 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
         onMouseDown={(e) => e.stopPropagation()}
       >
        
-        <div className={`${styles.settingSection} w-[100vw] h-[91vh] md:w-[380px] md:h-[420px] md:rounded-t-[9px]`}>
+        <div className={`${styles.settingSection} w-[100vw] h-dvh md:w-[380px] md:h-[420px] md:rounded-t-[9px]`}>
 
           <div className={styles.titleCloseSetting}>
             <p>Settings</p>
-            <button onClick={() => closeSetting(false)}>
+            <button onClick={() => updateSetting(inputValues)}>
               <h2>x</h2>
             </button>
           </div>
@@ -106,7 +106,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
             </select>
           </div>
         </div>
-        <div className={styles.footerSettingSection}>
+        <div className={`!hidden md:block ${styles.footerSettingSection}`}>
           <button onClick={() => updateSetting(inputValues)}>
             <span>Done</span>
           </button>

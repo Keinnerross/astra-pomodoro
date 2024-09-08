@@ -110,7 +110,7 @@ const UserRegister = ({ isActive, handleActive, modalRest }) => {
       }}
     >
       <form
-        className='flex flex-col bg-white p-[25px] w-full h-full md:w-[410px] md:h-[500px] md:rounded-[9px]'
+        className='flex flex-col bg-white p-[25px] w-full h-dvh md:w-[410px] md:h-[500px] md:rounded-[9px]'
         onSubmit={(e) => handleRegisterData(e)}
         onClick={(e) => e.stopPropagation()}
       >

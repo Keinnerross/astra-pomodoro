@@ -32,7 +32,8 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
         onClick={() => toggleMenu()}
       ></div>
 
-      <div className={isActive ? styles.userMenuContainer : styles.hidden}>
+
+      <div className={`${isActive ? styles.userMenuContainer : styles.hidden} right-[30px] md:right-[40px]`}>
         <div className={styles.userMenuSection}>
           <div className={styles.userProfileSection}>
             <div className={styles.imgUserContainer}>
@@ -40,8 +41,8 @@ const UserMenu = ({ isActive, userData, toggleMenu }) => {
                 className={styles.userImg}
                 style={{
                   backgroundImage: `url(${userGooglePhoto
-                      ? userGooglePhoto
-                      : 'https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg'
+                    ? userGooglePhoto
+                    : 'https://i.pinimg.com/564x/e3/b4/35/e3b43543b36e3f8cf0a9f5ae652e799c.jpg'
                     })`,
                 }}
               ></div>

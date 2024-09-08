@@ -23,9 +23,9 @@ const SidebarMain = ({ ifOpen, toggleSidebar }) => {
             onClick={() => toggleSidebar()} >
         </div >
 
-        <div className={`${ifOpen ? 'w-[300px] h-full fixed bg-blackPrimary flex flex-col overflow-hidden z-[9999999]' : 'hidden'}`}>
+        <div className={`${ifOpen ? 'w-[300px] h-dvh fixed bg-blackPrimary flex flex-col overflow-hidden z-[9999999]' : 'hidden'}`}>
             <div className='flex flex-col h-full p-[20px]'>
-                <div className={styles.sidebarGroupRow}>
+                <div className={`${styles.sidebarGroupRow} justify-between `}>
                     <LogoSpartan />
                     <div className={styles.iconContainer}
                     >

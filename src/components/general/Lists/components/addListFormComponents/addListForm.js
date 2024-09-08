@@ -12,9 +12,10 @@ const AddListForm = forwardRef(({ handleTitleChange, handleTaskListChange, taskD
         <div className="flex flex-col p-[26px]">
 
             <div
-                onClick={() => saveList()}
                 className="w-full text-end pb-[15px] font-bold cursor-pointer flex justify-start">
-                <span className="text-slate-800 md:hidden "><IoMdArrowRoundBack /></span>
+                <span
+                    onClick={() => saveList()} 
+                    className="text-slate-800 md:hidden "><IoMdArrowRoundBack /></span>
             </div>
             <form
                 onSubmit={(e) => e.preventDefault()}>

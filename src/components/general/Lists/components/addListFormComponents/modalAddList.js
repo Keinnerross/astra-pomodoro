@@ -41,7 +41,7 @@ const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
         };
 
         if (listTitle.trim() === '') {
-            alert("You need to name your List");
+            cancelList();
         } else {
             saveNewList(newList, tasksList)
             setListTitle("")
@@ -70,7 +70,7 @@ const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
             onMouseDown={() => saveListWithHandleModal()}>
 
 
-            <div className={`${styles.ModalAddTaskContainer} w-full h-full md:rounded-[9px] md:w-[410px] md:h-[500px] flex flex-col justify-between`}
+            <div className={`${styles.ModalAddTaskContainer} w-full h-dvh md:rounded-[9px] md:w-[410px] md:h-[500px] flex flex-col justify-between`}
                 onMouseDown={(e) => e.stopPropagation()}
             >
 
@@ -86,7 +86,7 @@ const ModalAddList = ({ isActive, saveNewList, cancelList }) => {
 
                 <div className="w-[100%] h-[50px] p-[25px] bg-slate-200 flex justify-end items-center rounded-b-[7px]">
                     <span
-                        className="cursor-pointer p-[8px] font-semibold text-greyFocus rounded-[7px] hover:bg-slate-300"
+                        className="hidden md:block cursor-pointer p-[8px] font-semibold text-greyFocus rounded-[7px] hover:bg-slate-300"
                         onClick={() => cancelList()}>
                         Cancel
                     </span>
