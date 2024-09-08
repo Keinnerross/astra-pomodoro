@@ -36,7 +36,7 @@ const SettingsPomodoro = ({ updateSetting, ifOpen, closeSetting, handleSelectSou
         onMouseDown={(e) => e.stopPropagation()}
       >
        
-        <div className={`${styles.settingSection} w-[100vw] h-svh md:w-[380px] md:h-[420px] md:rounded-t-[9px]`}>
+        <div className={`${styles.settingSection} w-[100vw] h-screen md:w-[380px] md:h-[420px] md:rounded-t-[9px]`}>
 
           <div className={styles.titleCloseSetting}>
             <p>Settings</p>
